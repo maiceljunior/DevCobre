@@ -1,13 +1,13 @@
 import express from "express";
 import "reflect-metadata";
+import { appRoutes } from "./routes";
 import "express-async-errors";
+import handleError from "./middlewares/handleError";
 
 const app = express();
-
 app.use(express.json());
+appRoutes(app);
 
-const PORT = 3000;
+app.use(handleError);
 
-app.listen(PORT, () => {
-  console.log(`App is running!`);
-});
+export default app;

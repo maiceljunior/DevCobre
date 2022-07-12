@@ -3,14 +3,17 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --ignore-watch node_modules src/app.ts",
+    "dev": "ts-node-dev --ignore-watch node_modules src/server.ts",
     "typeorm": "typeorm-ts-node-commonjs",
-    "build": "tsc"
+    "test": "NODE_ENV=test jest",
+    "build": "tsc",
+    "start": "node dist/src/server.js"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.13",
     "@types/jest": "^28.1.4",
+    "@types/node": "^18.0.3",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/supertest": "^2.0.12",
     "@types/uuid": "^8.3.4",
