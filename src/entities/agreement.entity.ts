@@ -15,11 +15,11 @@ export class Agreement {
   date_agree: Date;
 
   @OneToOne(() => Debts, (debts) => debts.id, { eager: true })
-  debtsId: Debts;
+  debts_id: Debts;
 
   @OneToOne(() => Client, (client) => client.document)
-  clientDocument: Client;
+  client_document: Client;
 
   @OneToOne(() => FormOfPayment, (formOfPayment) => formOfPayment.id)
-  formOfPayment: FormOfPayment;
+  form_of_payment: FormOfPayment;
 }

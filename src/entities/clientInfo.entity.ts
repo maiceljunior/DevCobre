@@ -13,5 +13,5 @@ export class ClientInfo {
   email: string;
 
   @ManyToOne(() => Client, (client) => client.document)
-  clientDocument: Client;
+  client_document: Client;
 }

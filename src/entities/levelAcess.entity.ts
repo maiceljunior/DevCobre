@@ -1,14 +1,14 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Debts } from "./debt.entity";
+import { Employee } from "./employee.entity";
 
-@Entity("debts_type")
-export class Debts_type {
+@Entity()
+export class LevelAcess {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
   @Column({ length: 250 })
   name: string;
 
-  @OneToMany(() => Debts, (debts) => debts.debt_type)
-  debts: Debts[];
+  @OneToMany(() => Employee, (employee) => employee.id)
+  employees: Employee[];
 }

@@ -1,16 +1,10 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from "typeorm";
+import { Column, Entity, JoinColumn, OneToMany, PrimaryColumn } from "typeorm";
 import { ClientInfo } from "./clientInfo.entity";
 import { Debts } from "./debt.entity";
 
 @Entity("client")
 export class Client {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   document: number;
 
   @Column({ length: 250 })
@@ -24,5 +18,5 @@ export class Client {
 
   @OneToMany(() => ClientInfo, (clientInfo) => clientInfo.id)
   @JoinColumn()
-  client_info: ClientInfo;
+  client_info: ClientInfo[];
 }

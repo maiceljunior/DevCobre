@@ -12,6 +12,6 @@ export class Bank {
   @Column()
   status: boolean;
 
-  @OneToMany(() => Debts, (debts) => debts.id, { onDelete: "CASCADE" })
+  @OneToMany(() => Debts, (debts) => debts.id)
   debts: Debts[];
 }
