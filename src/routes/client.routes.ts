@@ -4,11 +4,11 @@ const clientRoutes = Router();
 
 clientRoutes.get("");
 clientRoutes.post("");
-// clientRoutes.patch("/:id");
-// clientRoutes.delete("/:id");
-// clientRoutes.get("/info/:id");
-// clientRoutes.post("/info/:id");
-// clientRoutes.patch("/info/:id");
-// clientRoutes.delete("/info/:id");
+// clientRoutes.patch("/:document");
+// clientRoutes.delete("/:document");
+// clientRoutes.get("/info/:document");
+// clientRoutes.post("/info/:document");
+// clientRoutes.patch("/info/:document");
+// clientRoutes.delete("/info/:document");
 
 export default clientRoutes;
