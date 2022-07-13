@@ -1,14 +1,19 @@
 import { Router } from "express";
 
-const employeeRoutes = Router();
+const routes = Router();
 
-employeeRoutes.get("");
-employeeRoutes.post("");
-// employeeRoutes.patch("/:id");
-// employeeRoutes.delete("/:id");
-// employeeRoutes.get("/info/:id");
-// employeeRoutes.post("/info/:id");
-// employeeRoutes.patch("/info/:id");
-// employeeRoutes.delete("/info/:id");
+export const employeeRoutes = () =>{
+    routes.get("");
+    routes.post("");
+    // routes.patch("/:id");
+    // routes.delete("/:id");
+    // routes.get("/info/:id");
+    // routes.post("/info/:id");
+    // routes.patch("/info/:id");
+    // routes.delete("/info/:id");
 
-export default employeeRoutes;
+    return routes
+
+};
+
+

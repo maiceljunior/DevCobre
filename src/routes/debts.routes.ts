@@ -1,14 +1,20 @@
 import { Router } from "express";
 
-const debtsRoutes = Router();
+const routes = Router();
 
-debtsRoutes.get("");
-debtsRoutes.post("");
-// debtsRoutes.patch("/:id");
-// debtsRoutes.delete("/:id");
-// debtsRoutes.get("/type/:id");
-// debtsRoutes.post("/type/:id");
-// debtsRoutes.patch("/type/:id");
-// debtsRoutes.delete("/type/:id");
+export const debtsRoutes = () =>{
+    routes.get("");
+    routes.post("");
+    // routes.patch("/:id");
+    // routes.delete("/:id");
+    // routes.get("/type/:id");
+    // routes.post("/type/:id");
+    // routes.patch("/type/:id");
+    // routes.delete("/type/:id");
 
-export default debtsRoutes;
+    return routes
+
+};
+
+
+

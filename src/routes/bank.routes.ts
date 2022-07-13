@@ -1,14 +1,19 @@
 import { Router } from "express";
 
-const bankRoutes = Router();
+const routes = Router();
 
-bankRoutes.get("");
-bankRoutes.post("");
-// bankRoutes.patch("/:id");
-// bankRoutes.delete("/:id");
-// bankRoutes.get("/contact/:id");
-// bankRoutes.post("/contact/:id");
-// bankRoutes.patch("/contact/:id");
-// bankRoutes.delete("/contact/:id");
+export const bankRoutes =() =>{
 
-export default bankRoutes;
+    routes.get("");
+    routes.post("");
+    // routes.patch("/:id");
+    // routes.delete("/:id");
+    // routes.get("/contact/:id");
+    // routes.post("/contact/:id");
+    // routes.patch("/contact/:id");
+    // routes.delete("/contact/:id");
+
+    return routes
+}
+
+
