@@ -9,6 +9,46 @@
   <a href="#devs">Devs</a> • 
 </p>
 
+### API
+
+
+---
+
+
+### Get `/client`
+
+
+### Resposta: Status 200
+```json
+{
+    "id": 2,
+    "name": "Ana Paula",
+    "type": "Fisico"
+}
+```
+---
+
+
+### Post `/client`
+### Regras:
+- `name` e `type`: precisam ser uma string.
+
+
+```json
+{
+    "name": "Empresa Devedora LTDA",
+    "type": "Juridico"
+}
+```
+### Resposta: Status 201 Created
+```json
+{
+    "id": 1,
+    "name": "Empresa Devedora LTDA",
+    "type": "Juridico"
+}
+```
+---
 
 ### 🛠 Tecnologias
 
