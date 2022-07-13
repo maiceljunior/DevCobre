@@ -1,16 +1,19 @@
 import { Router } from "express";
 
-const agreementRoutes = Router();
+const routes = Router();
 
-agreementRoutes.get("");
-agreementRoutes.post("");
-// agreementRoutes.patch("/:id");
-// agreementRoutes.delete("/:id");
-// agreementRoutes.get("/status/:id");
-// agreementRoutes.post("/status/:id");
-// agreementRoutes.patch("/status/:id");
-// agreementRoutes.delete("/status/:id");
+export const agreementRoutes = () =>{
+
+    routes.get("");
+    routes.post("");
+    // routes.patch("/:id");
+    // routes.delete("/:id");
+    // routes.get("/status/:id");
+    // routes.post("/status/:id");
+    // routes.patch("/status/:id");
+    // routes.delete("/status/:id");
+    return routes
+}
 
 
 
-export default agreementRoutes;

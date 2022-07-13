@@ -1,11 +1,16 @@
 import { Router } from "express";
 
-const debtTypeRoutes = Router();
+const routes = Router();
 
-debtTypeRoutes.get("");
-debtTypeRoutes.post("");
-// debtTypeRoutes.patch("/:id");
-// debtTypeRoutes.delete("/:id");
+export const debtTypeRoutes = () => {
+    
+    routes.get("");
+    routes.post("");
+    // routes.patch("/:id");
+    // routes.delete("/:id");
+
+    return routes
+
+};
 
 
-export default debtTypeRoutes;

@@ -1,14 +1,16 @@
 import { Router } from "express";
+const routes = Router();
 
-const historyRoutes = Router();
+export const historyRoutes =() =>{
+    routes.get("");
+    routes.post("");
+    // routes.patch("/:id");
+    // routes.delete("/:id");
+    // routes.get("/employee/:id");
+    // routes.post("/employee/:id");
+    // routes.patch("/employee/:id");
+    // routes.delete("/employee/:id");
 
-historyRoutes.get("");
-historyRoutes.post("");
-// historyRoutes.patch("/:id");
-// historyRoutes.delete("/:id");
-// historyRoutes.get("/employee/:id");
-// historyRoutes.post("/employee/:id");
-// historyRoutes.patch("/employee/:id");
-// historyRoutes.delete("/employee/:id");
+    return routes
+};
 
-export default historyRoutes;

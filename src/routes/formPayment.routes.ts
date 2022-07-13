@@ -1,15 +1,19 @@
 import { Router } from "express";
 
-const formPaymentRoutes = Router();
+const routes = Router();
 
-formPaymentRoutes.get("");
-formPaymentRoutes.post("");
-// formPaymentRoutes.patch("/:id");
-// formPaymentRoutes.delete("/:id");
-// formPaymentRoutes.get("/debts/:id");
-// formPaymentRoutes.post("/debts/:id");
-// formPaymentRoutes.patch("/debts/:id");
-// formPaymentRoutes.delete("/debts/:id");
+export const formPaymentRoutes =() =>{
 
+    
+    routes.get("");
+    routes.post("");
+    // routes.patch("/:id");
+    // routes.delete("/:id");
+    // routes.get("/debts/:id");
+    // routes.post("/debts/:id");
+    // routes.patch("/debts/:id");
+    // routes.delete("/debts/:id");
 
-export default formPaymentRoutes;
+    return routes
+};
+

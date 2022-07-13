@@ -1,11 +1,14 @@
 import { Router } from "express";
 
-const levelAcessRoutes = Router();
-
-levelAcessRoutes.get("");
-levelAcessRoutes.post("");
-// levelAcessRoutes.patch("/:id");
-// levelAcessRoutes.delete("/:id");
+const routes=Router();
 
 
-export default levelAcessRoutes;
+export const levelAcessRoutes = () =>{
+    routes.get("");
+    routes.post("");
+    // routes.patch("/:id");
+    // routes.delete("/:id");
+    return routes
+
+};
+
