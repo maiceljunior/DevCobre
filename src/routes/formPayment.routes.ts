@@ -2,19 +2,18 @@ import { Router } from "express";
 
 const routes = Router();
 
-export const debtsRoutes = () =>{
+export const formPaymentRoutes =() =>{
+
+    
     routes.get("");
     routes.post("");
     // routes.patch("/:id");
     // routes.delete("/:id");
-    // routes.get("/type/:id");
-    // routes.post("/type/:id");
-    // routes.patch("/type/:id");
-    // routes.delete("/type/:id");
+    // routes.get("/debts/:id");
+    // routes.post("/debts/:id");
+    // routes.patch("/debts/:id");
+    // routes.delete("/debts/:id");
 
     return routes
-
 };
-
-
 
