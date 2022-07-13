@@ -23,6 +23,8 @@ const createEmployeeService = async ({
     id: employee.id,
     name: employee.name,
     email: employee.email,
+    created_at: employee.created_at,
+    updated_at: employee.updated_at,
   };
 };
 

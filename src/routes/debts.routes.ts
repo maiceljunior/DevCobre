@@ -1,8 +1,16 @@
 import { Router } from "express";
 
-const debtsRoutes = Router();
+const routes = Router();
 
-debtsRoutes.post("");
-debtsRoutes.get("/:id");
+export const debtsRoutes = () => {
+  routes.get("");
+  routes.post("");
+  // routes.patch("/:id");
+  // routes.delete("/:id");
+  // routes.get("/type/:id");
+  // routes.post("/type/:id");
+  // routes.patch("/type/:id");
+  // routes.delete("/type/:id");
 
-export default debtsRoutes;
+  return routes;
+};

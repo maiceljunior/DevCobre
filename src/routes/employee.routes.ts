@@ -2,12 +2,14 @@ import { Router } from "express";
 import createEmployeeController from "../controllers/employee/createEmployee.controller";
 import duplicatedEmailMiddleware from "../middlewares/duplicatedEmail.middleware";
 
-const employeeRoutes = Router();
+const routes = Router();
 
-employeeRoutes.post(
-  "/create",
-  duplicatedEmailMiddleware,
-  createEmployeeController
-);
-
-export default employeeRoutes;
+export const employeeRoutes = () => {
+  routes.post("/create", duplicatedEmailMiddleware, createEmployeeController);
+};
+// routes.patch("/:id");
+// routes.delete("/:id");
+// routes.get("/info/:id");
+// routes.post("/info/:id");
+// routes.patch("/info/:id");
+// routes.delete("/info/:id");

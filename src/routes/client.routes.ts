@@ -1,8 +1,20 @@
 import { Router } from "express";
 
-const clientRoutes = Router();
+const routes = Router();
 
-clientRoutes.post("");
-clientRoutes.get("/:id");
+export const clientRoutes = () =>{
 
-export default clientRoutes;
+    routes.get("");
+    routes.post("");
+    // routes.patch("/:document");
+    // routes.delete("/:document");
+    // routes.get("/info/:document");
+    // routes.post("/info/:document");
+    // routes.patch("/info/:document");
+    // routes.delete("/info/:document");
+
+    return routes
+}
+
+
+
