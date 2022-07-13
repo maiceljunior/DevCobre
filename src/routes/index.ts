@@ -1,12 +1,23 @@
 import { Express } from "express";
+import agreementRoutes from "./agreement.routes";
 import bankRoutes from "./bank.routes";
 import clientRoutes from "./client.routes";
 import debtsRoutes from "./debts.routes";
-import userRoutes from "./user.routes";
+import debtTypeRoutes from "./debtType.routes";
+import employeeRoutes from "./employee.routes";
+import formPaymentRoutes from "./formPayment.routes";
+import historyRoutes from "./history.routes";
+import levelAcessRoutes from "./levelAcess.routes";
+
 
 export const appRoutes = (app: Express) => {
-  app.use("/user", userRoutes);
   app.use("/bank", bankRoutes);
   app.use("/client", clientRoutes);
   app.use("/debts", debtsRoutes);
+  app.use("/agreement",agreementRoutes);
+  app.use("/employee",employeeRoutes);
+  app.use("/history",historyRoutes);
+  app.use("/level",levelAcessRoutes);
+  app.use("/payment",formPaymentRoutes);
+  app.use("type",debtTypeRoutes);
 };
