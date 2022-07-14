@@ -7,7 +7,8 @@ const routes = Router();
 
 export const employeeRoutes = () => {
   routes.post("/create", duplicatedEmailMiddleware, createEmployeeController);
-  routes.get("/info/:id", listEmployeeController);
+  routes.get("/:id", listEmployeeController);
+  return routes;
 };
 // routes.patch("/:id");
 // routes.delete("/:id");
