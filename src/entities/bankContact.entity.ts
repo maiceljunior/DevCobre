@@ -1,8 +1,8 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Client } from "./client.entity";
+import { Bank } from "./bank.entity";
 
-@Entity("client_info")
-export class ClientInfo {
+@Entity("bank_contact")
+export class BankContact {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
@@ -12,6 +12,6 @@ export class ClientInfo {
   @Column({ length: 250 })
   email: string;
 
-  @ManyToOne(() => Client, (client) => client.document)
-  client_document: Client;
+  @ManyToOne(() => Bank, (bank) => bank.id)
+  bank: Bank;
 }
