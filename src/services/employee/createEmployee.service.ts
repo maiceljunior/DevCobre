@@ -8,7 +8,6 @@ const createEmployeeService = async ({
   name,
   email,
   password,
-  status,
 }: IEmployeRequest) => {
   const employeeRepository = AppDataSource.getRepository(Employee);
 
@@ -16,7 +15,6 @@ const createEmployeeService = async ({
     name,
     email,
     password: bcrypt.hashSync(password, 10),
-    status,
   });
 
   await employeeRepository.save(employee);
