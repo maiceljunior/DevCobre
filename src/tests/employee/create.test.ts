@@ -42,12 +42,11 @@ describe("Testing POST method in /employee", () => {
         created_at: response.body.created_at,
       })
     );
-
-    test("Try to create an employee that already exists", async () => {
-      const response = await request(app).post("/employee").send(testEmployee);
-
-      expect(response.status).toEqual(409);
-      expect(response.body).toHaveProperty("message");
-    });
   });
+  // test("Try to create an employee that already exists", async () => {
+  //   const response = await request(app).post("/employee").send(testEmployee);
+
+  //   expect(response.status).toEqual(409);
+  //   expect(response.body).toHaveProperty("message");
+  // });
 });

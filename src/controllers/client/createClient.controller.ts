@@ -6,7 +6,7 @@ const createClientController = async (req: Request, res: Response) => {
 
   const newClient = await createClientService({ document, name, type });
 
-  return res.json(newClient);
+  return res.status(201).json(newClient);
 };
 
 export default createClientController;

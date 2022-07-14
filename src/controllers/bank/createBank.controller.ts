@@ -6,7 +6,7 @@ const createBankController = async (req: Request, res: Response) => {
 
   const newBank = await createBankService({ name, status });
 
-  return res.status(200).json(newBank);
+  return res.status(201).json(newBank);
 };
 
 export default createBankController;
