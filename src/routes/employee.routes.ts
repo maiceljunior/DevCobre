@@ -8,7 +8,7 @@ import duplicatedEmailMiddleware from "../middlewares/duplicatedEmail.middleware
 const routes = Router();
 
 export const employeeRoutes = () => {
-  routes.post("/create", duplicatedEmailMiddleware, createEmployeeController);
+  routes.post("", duplicatedEmailMiddleware, createEmployeeController);
   routes.get("/:id", listEmployeeController);
   routes.delete("/:id", deleteEmployeeController);
   routes.patch("/:id", updateEmployeeController);
