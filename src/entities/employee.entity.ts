@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { Exclude } from "class-transformer";
 import { LevelAcess } from "./levelAcess.entity";
 
 @Entity("employee")
@@ -20,6 +21,7 @@ export class Employee {
   email: string;
 
   @Column({ length: 250 })
+  @Exclude()
   password: string;
 
   @Column("boolean", { default: true })

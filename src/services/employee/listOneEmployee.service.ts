@@ -13,13 +13,7 @@ const listEmployeeService = async (id: number) => {
     throw new AppError(404, "Employee not found!");
   }
 
-  return {
-    id: verifyEmployee.id,
-    name: verifyEmployee.name,
-    email: verifyEmployee.email,
-    created_at: verifyEmployee.created_at,
-    updated_at: verifyEmployee.updated_at,
-  };
+  return verifyEmployee;
 };
 
 export default listEmployeeService;
