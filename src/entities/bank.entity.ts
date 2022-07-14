@@ -3,7 +3,7 @@ import {
   Column,
   PrimaryGeneratedColumn,
   OneToMany,
-  JoinColumn,
+  JoinTable,
 } from "typeorm";
 import { BankContact } from "./bankContact.entity";
 import { Debts } from "./debt.entity";
@@ -13,7 +13,7 @@ export class Bank {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
-  @Column({ length: 250, unique: true })
+  @Column({ length: 251, unique: true })
   name: string;
 
   @Column()
@@ -22,7 +22,9 @@ export class Bank {
   @OneToMany(() => Debts, (debts) => debts.id)
   debts: Debts[];
 
-  @OneToMany(() => BankContact, (bankContact) => bankContact.id)
-  @JoinColumn()
-  bank_contact: BankContact[];
+  @OneToMany(() => BankContact, (bankContact) => bankContact.id, {
+    eager: true,
+  })
+  @JoinTable()
+  bankContact: BankContact[];
 }
