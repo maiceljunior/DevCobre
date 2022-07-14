@@ -18,10 +18,18 @@
 ---
 
 <p align="center">
+•
   <a href="#client">Client</a> •
   <a href="#bank">Bank</a> • 
   <a href="#debts">Debts</a> • 
+  <a href="#debttype">Debt Type</a> • 
   <a href="#agreement">Agreement</a> • 
+  <a href="#agreementstatus">Agreement Status</a> • 
+  <a href="#employee">Employee</a> • 
+  <a href="#levelacess">Level Acess</a> • 
+  <a href="#contactHistory">Contact History</a> • 
+  <a href="#formPayment">Form Payment</a> • 
+  
   
 </p>
 
@@ -229,6 +237,7 @@
  • <a href="#api">Inicio API</a> •
  
 </p>
+
 ---
 
 ### Debts
@@ -280,6 +289,54 @@
  • <a href="#api">Inicio API</a> •
  
 </p>
+
+---
+
+### DebtType
+
+### Get `/type`
+
+
+### Resposta: Status 
+```json
+{
+   
+}
+```
+---
+
+### Post `/type`
+
+
+### Resposta: Status 
+```json
+{
+   
+}
+```
+---
+
+### Patch `/type/:id`
+
+
+### Resposta: Status 
+```json
+{
+   
+}
+```
+---
+
+### Delete `/type/:id`
+
+
+### Resposta: Status 
+
+<p align="center">
+ • <a href="#api">Inicio API</a> •
+ 
+</p>
+
 ---
 
 ### Agreement
@@ -333,6 +390,304 @@
 
 ---
 
+### AgreementStatus
+
+### Get `/status`
+
+
+### Resposta: Status 
+```json
+{
+   
+}
+```
+---
+
+### Post `/status`
+
+
+### Resposta: Status 
+```json
+{
+   
+}
+```
+---
+
+### Patch `/status/:id`
+
+
+### Resposta: Status 
+```json
+{
+   
+}
+```
+---
+
+### Delete `/status/:id`
+
+
+### Resposta: Status 
+```json
+{
+   
+}
+```
+<p align="center">
+ • <a href="#api">Inicio API</a> •
+ 
+</p>
+
+---
+
+### Employee
+
+### Get `/employee/:id`
+
+
+### Resposta: Status 200
+```json
+{
+	"id": 1,
+	"name": "employee1",
+	"email": "mail@mail.com",
+	"created_at": "2022-07-14T16:42:07.871Z",
+	"updated_at": "2022-07-14T16:42:07.871Z"
+}
+```
+---
+
+### Resposta: Status 404 Not Found
+```json
+{
+	"message": "Employee not found!"
+}
+```
+---
+
+### Post `/employee`
+
+```json
+{
+	"name":"employee1",
+	"email":"mail@mail.com",
+	"password":"123456",
+	"level_acess":"1",
+	"status":true
+}
+```
+
+### Resposta: Status 201
+```json
+{
+	"id": 1,
+	"name": "employee1",
+	"email": "mail@mail.com",
+	"status": true,
+	"created_at": "2022-07-14T16:42:07.871Z",
+	"updated_at": "2022-07-14T16:42:07.871Z"
+}
+```
+---
+### Resposta: Status 409 Conflict
+```json
+{
+	"message": "Email already exists"
+}
+```
+---
+
+### Patch `/employee/:id`
+```json
+{
+	"name":"employee Adm"	,
+	"email":"mail@mail.com",
+	"password":"123456"
+}
+```
+---
+### Resposta: Status 200
+```json
+{
+	"message": "Employee updated!"
+}
+```
+---
+
+### Resposta: Status 404 Not Found
+```json
+{
+	"message": "Employee not found!"
+}
+```
+---
+
+### Delete `/employee/:id`
+
+
+### Resposta: Status 200
+```json
+{
+	"message": "Employee deleted!"
+}
+```
+---
+
+### Resposta: Status 404 Not Found
+```json
+{
+	"message": "Employee not found!"
+}
+```
+---
+
+<p align="center">
+ • <a href="#api">Inicio API</a> •
+ 
+</p>
+
+---
+
+### levelAcess
+
+### Get `/level`
+
+
+### Resposta: Status 
+```json
+{
+   
+}
+```
+---
+
+### Post `/level`
+
+
+### Resposta: Status 
+```json
+{
+   
+}
+```
+---
+
+### Patch `/level/:id`
+
+
+### Resposta: Status 
+```json
+{
+   
+}
+```
+---
+
+### Delete `/level/:id`
+
+
+### Resposta: Status 
+
+<p align="center">
+ • <a href="#api">Inicio API</a> •
+ 
+</p>
+
+---
+
+### ContactHistory
+
+### Get `/history`
+
+
+### Resposta: Status 
+```json
+{
+   
+}
+```
+---
+
+### Post `/history`
+
+
+### Resposta: Status 
+```json
+{
+   
+}
+```
+---
+
+### Patch `/history/:id`
+
+
+### Resposta: Status 
+```json
+{
+   
+}
+```
+---
+
+### Delete `/history/:id`
+
+
+### Resposta: Status 
+
+<p align="center">
+ • <a href="#api">Inicio API</a> •
+ 
+</p>
+
+---
+
+### formPayment
+
+### Get `/payment`
+
+
+### Resposta: Status 
+```json
+{
+   
+}
+```
+---
+
+### Post `/payment`
+
+
+### Resposta: Status 
+```json
+{
+   
+}
+```
+---
+
+### Patch `/payment/:id`
+
+
+### Resposta: Status 
+```json
+{
+   
+}
+```
+---
+
+### Delete `/payment/:id`
+
+
+### Resposta: Status 
+<p align="center">
+ • <a href="#api">Inicio API</a> •
+ 
+</p>
+
+---
 
 ### Tecnologias
 
@@ -348,7 +703,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 ### Devs
 
-<table>
+<table align="center">
   <tr>
     <td align="center"><a href="https://github.com/danilovalerio89"><img style="border-radius: 50%; border: solid 1.5px white;" src="https://ca.slack-edge.com/TQZR39SET-U02ETCPV8SY-bc58de584a43-512" width="100px;" alt=""/><br /><sub><b>Danilo Valerio</b></sub></a><br /><a href="https://github.com/danilovalerio89">🚀</a></td>
     <td align="center"><a href="https://github.com/letlm"><img style="border-radius: 50%; border: solid 1.5px white;" src="https://ca.slack-edge.com/TQZR39SET-U02J9FMNS8J-603a5fcda229-512" width="100px;" alt=""/><br /><sub><b>Letícia Leal</b></sub></a><br /><a href="https://github.com/letlm" title="">🚀</a></td>
@@ -364,3 +719,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
  • <a href="#devcobre">Inicio</a> •
  
 </p>
+
+
+
+

@@ -16,7 +16,7 @@ export const appRoutes = (app: Express) => {
   app.use("/agreement", agreementRoutes);
   app.use("/client", clientRoutes());
   app.use("/debts", debtsRoutes);
-  app.use("/type", debtTypeRoutes);
+  app.use("/type", debtTypeRoutes());
   app.use("/employee", employeeRoutes());
   app.use("/payment", formPaymentRoutes);
   app.use("/history", historyRoutes);
