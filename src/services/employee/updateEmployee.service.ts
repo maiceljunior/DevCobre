@@ -1,40 +1,38 @@
 import { AppDataSource } from "../../data-source";
 import { Employee } from "../../entities/employee.entity";
 import { AppError } from "../../errors";
-
 import bcrypt from "bcryptjs";
+import { IEmployeeUpdate } from "../../interfaces/employee";
 
-const updateEmployeeService = async (
-  id: string,
-  name: string,
-  password: string,
-  email: string
-) => {
+const updateEmployeeService = async (data: IEmployeeUpdate) => {
   const employeeRepository = AppDataSource.getRepository(Employee);
 
-  const employee = await employeeRepository.find();
+  const employee = await employeeRepository.findOneBy({ id: Number(data.id) });
 
-  const employeeFind = employee.find(
-    (employee) => employee.id.toString() === id
-  );
+  if (!employee) {
+    throw new AppError(400, "Employee does not exists!");
+  }
+  const updated_at = new Date();
 
-  if (!employeeFind) {
-    throw new AppError(404, "Employee not found!");
+  if (!data.body.password) {
+    await employeeRepository.update(data.id, {
+      ...employee,
+      ...data.body,
+      updated_at,
+    });
+
+    return;
   }
 
-  if (bcrypt.compareSync(password, employeeFind!.password)) {
-    throw new AppError(409, "Inform a different password.");
+  if (data.body.password) {
+    await employeeRepository.update(data.id, {
+      ...employee,
+      ...data.body,
+      password: bcrypt.hashSync(data.body.password, 10),
+      updated_at,
+    });
+    return;
   }
-
-  const newPassword = bcrypt.hashSync(password, 10);
-
-  employeeFind.name = name ? name : employeeFind.name;
-  employeeFind.email = email ? email : employeeFind.email;
-  employeeFind.password = password ? newPassword : employeeFind.password;
-
-  await employeeRepository.save(employeeFind);
-
-  return true;
 };
 
 export default updateEmployeeService;
