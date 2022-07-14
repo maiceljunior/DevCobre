@@ -6,5 +6,13 @@ export interface IBankRequest {
 export interface IBankInfo {
   telephone: number;
   email: string;
-  id: number;
+  bank: number;
+}
+
+export interface IBankInfoOf {
+  id: string;
+  body: {
+    telephone?: number;
+    email?: string;
+  };
 }

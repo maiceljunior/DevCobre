@@ -9,7 +9,7 @@ export class BankContact {
   @Column()
   telephone: number;
 
-  @Column({ length: 250 })
+  @Column({ length: 255 })
   email: string;
 
   @ManyToOne(() => Bank, (bank) => bank.id)

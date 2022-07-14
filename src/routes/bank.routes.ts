@@ -1,8 +1,12 @@
 import { Router } from "express";
 import createBankController from "../controllers/bank/createBank.controller";
+import createBankInfoController from "../controllers/bank/createBankInfo.controller";
 import deleteBankController from "../controllers/bank/deleteBank.controller";
+import deleteBankInfoController from "../controllers/bank/deleteBankInfo.controller";
 import listBankController from "../controllers/bank/listBank.controller";
+import listBankInfoController from "../controllers/bank/listBankInfo.controller";
 import updateBankController from "../controllers/bank/updateBank.controller";
+import updateBankInfoController from "../controllers/bank/updateBankInfo.controller";
 
 const routes = Router();
 
@@ -11,10 +15,9 @@ export const bankRoutes = () => {
   routes.post("", createBankController);
   routes.patch("/:id", updateBankController);
   routes.delete("/:id", deleteBankController);
-  routes.get("/:id/contact");
-  routes.post("/:id/contact");
-  routes.patch("/:id/contact");
-  routes.delete("/:id/contact");
-
+  routes.get("/:id/contact", listBankInfoController);
+  routes.post("/:id/contact", createBankInfoController);
+  routes.patch("/:id/contact/:idContact", updateBankInfoController);
+  routes.delete("/:id/contact/:idContact", deleteBankInfoController);
   return routes;
 };
