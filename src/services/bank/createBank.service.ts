@@ -9,7 +9,7 @@ const createBankService = async ({ name, status }: IBankRequest) => {
   const bankExists = await bankRepository.findOneBy({ name: name });
 
   if (bankExists) {
-    throw new AppError(400, "Bank already exists!");
+    throw new AppError(409, "Bank already exists!");
   }
 
   const bank = bankRepository.create({

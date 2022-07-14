@@ -16,7 +16,7 @@ const createClientService = async ({
   });
 
   if (findClient) {
-    throw new AppError(404, "Client already exists");
+    throw new AppError(409, "Client already exists");
   }
 
   const client = clientRepository.create({
