@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { AppDataSource } from "../data-source";
 import { Employee } from "../entities/employee.entity";
+import { AppError } from "../errors";
 
 const duplicatedEmailMiddleware = async (
   req: Request,
@@ -14,8 +15,7 @@ const duplicatedEmailMiddleware = async (
   const employee = await employeeRepository.findOneBy({ email });
 
   if (employee) {
-    res.statusCode = 422;
-    return res.json({ error: "email already exists" });
+    throw new AppError(409, "Email already exists");
   }
 
   next();

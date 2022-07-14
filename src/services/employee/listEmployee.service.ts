@@ -1,5 +1,6 @@
 import { AppDataSource } from "../../data-source";
 import { Employee } from "../../entities/employee.entity";
+import { AppError } from "../../errors";
 
 const listEmployeeService = async (id: number) => {
   const employeeRepository = AppDataSource.getTreeRepository(Employee);
@@ -9,7 +10,7 @@ const listEmployeeService = async (id: number) => {
   const verifyEmployee = employee.find((employee) => employee.id === id);
 
   if (!verifyEmployee) {
-    throw new Error("User not found");
+    throw new AppError(404, "Employee not found!");
   }
 
   return {
