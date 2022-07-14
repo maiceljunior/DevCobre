@@ -22,7 +22,7 @@ export class Bank {
   @OneToMany(() => Debts, (debts) => debts.id)
   debts: Debts[];
 
-  @OneToMany(() => BankContact, (bankContact) => bankContact.id, {
+  @OneToMany(() => BankContact, (bankContact) => bankContact.bank, {
     eager: true,
   })
   @JoinTable()
