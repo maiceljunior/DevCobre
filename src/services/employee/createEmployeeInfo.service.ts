@@ -4,25 +4,25 @@ import { EmployeeInfo } from "../../entities/employeeInfo.entity";
 import { AppError } from "../../errors";
 import { IEmployeeInfo } from "../../interfaces/employee";
 
-const createEmployeeInfoService = async ({
-  telephone,
-  address,
-  employee_id,
-}: IEmployeeInfo): Promise<EmployeeInfo> => {
-  const employeeInfoRepository = AppDataSource.getRepository(EmployeeInfo);
+const createEmployeeInfoService = async (
+  data: IEmployeeInfo
+): Promise<EmployeeInfo> => {
   const employeeRepository = AppDataSource.getRepository(Employee);
 
   const employee = await employeeRepository.findOneBy({
-    id: employee_id,
+    id: Number(data.id),
   });
 
   if (!employee) {
     throw new AppError(404, "Employee not found");
   }
 
+  const employeeInfoRepository = AppDataSource.getRepository(EmployeeInfo);
+
   const info = employeeInfoRepository.create({
-    telephone: telephone,
-    address: address,
+    telephone: data.body.telephone,
+    address: data.body.address,
+    employee_id: employee,
   });
 
   await employeeInfoRepository.save(info);
