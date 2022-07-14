@@ -3,11 +3,13 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { Exclude } from "class-transformer";
 import { LevelAcess } from "./levelAcess.entity";
+import { EmployeeInfo } from "./employeeInfo.entity";
 
 @Entity("employee")
 export class Employee {
@@ -36,5 +38,6 @@ export class Employee {
   @ManyToOne(() => LevelAcess, (levelAcess) => levelAcess.id)
   level_acess: LevelAcess;
 
-  //   @OneToOne(() => )
+  @OneToOne(() => EmployeeInfo, (employeeInfo) => employeeInfo.id)
+  employee_info: EmployeeInfo[];
 }

@@ -11,4 +11,7 @@ export class EmployeeInfo {
 
   @Column()
   telephone: number;
+
+  @Column()
+  address: string;
 }
