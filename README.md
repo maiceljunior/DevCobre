@@ -237,6 +237,7 @@
  • <a href="#api">Inicio API</a> •
  
 </p>
+
 ---
 
 ### Debts
@@ -288,6 +289,7 @@
  • <a href="#api">Inicio API</a> •
  
 </p>
+
 ---
 
 ### DebtType
@@ -334,6 +336,7 @@
  • <a href="#api">Inicio API</a> •
  
 </p>
+
 ---
 
 ### Agreement
@@ -590,6 +593,7 @@
  • <a href="#api">Inicio API</a> •
  
 </p>
+
 ---
 
 ### ContactHistory
@@ -636,6 +640,7 @@
  • <a href="#api">Inicio API</a> •
  
 </p>
+
 ---
 
 ### formPayment
@@ -681,6 +686,7 @@
  • <a href="#api">Inicio API</a> •
  
 </p>
+
 ---
 
 ### Tecnologias
