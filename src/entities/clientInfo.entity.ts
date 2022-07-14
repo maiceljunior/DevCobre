@@ -6,10 +6,10 @@ export class ClientInfo {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
-  @Column()
+  @Column({ nullable: true })
   telephone: number;
 
-  @Column({ length: 250 })
+  @Column({ nullable: true, length: 250 })
   email: string;
 
   @ManyToOne(() => Client, (client) => client.document)
