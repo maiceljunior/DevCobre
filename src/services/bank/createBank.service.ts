@@ -16,7 +16,7 @@ const createBankService = async ({ name, status }: IBankRequest) => {
     name,
     status,
   });
-  console.log(bank);
+
   await bankRepository.save(bank);
 
   return bank;

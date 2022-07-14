@@ -1,44 +1,17 @@
 import { AppDataSource } from "../../data-source";
 import { Bank } from "../../entities/bank.entity";
-import { BankContact } from "../../entities/bankContact.entity";
 import { AppError } from "../../errors";
-import { IBankInfoRequest } from "../../interfaces/bank";
 
-const listBankInfoService = async (
-  bankId: string
-): Promise<IBankInfoRequest> => {
+const listBankInfoService = async (id: string) => {
   const bankRepository = AppDataSource.getRepository(Bank);
-  const bankInfoRepository = AppDataSource.getRepository(BankContact);
 
-  const bank = await bankRepository.find();
+  const bankExists = await bankRepository.findOneBy({ id: parseInt(id) });
 
-  const findBank = bank.find((bank) => bank.id === parseInt(bankId));
-
-  if (!findBank) {
+  if (!bankExists) {
     throw new AppError(404, "Bank not found!");
   }
 
-  const banks = await bankInfoRepository.findOne({
-    where: {
-      bank: findBank,
-    },
-    relations: {
-      bank: true,
-    },
-  });
-
-  if (!banks) {
-    throw new AppError(404, "This bank has no information!");
-  }
-  const { email, id, telephone } = banks;
-
-  const bankReturn: IBankInfoRequest = {
-    name: findBank!.name,
-    status: findBank!.status,
-    infos: { email: email, id: id, telephone: telephone },
-  };
-
-  return bankReturn;
+  return bankExists;
 };
 
 export default listBankInfoService;

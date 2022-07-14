@@ -12,7 +12,7 @@ export interface IBankInfo {
 export interface IBankInfoOf {
   id: string;
   body: {
-    telephone: number;
-    email: string;
+    telephone?: number;
+    email?: string;
   };
 }

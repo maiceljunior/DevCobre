@@ -15,15 +15,48 @@ const createBankInfoService = async (data: IBankInfoOf): Promise<any> => {
 
   const bankInfoRepository = AppDataSource.getRepository(BankContact);
 
-  const bankInfo = bankInfoRepository.create({
-    telephone: data.body.telephone,
-    email: data.body.email,
-    bank: findBank,
-  });
+  const email = findBank.bankContact.find(
+    ({ email }) => email === data.body.email
+  );
 
-  await bankInfoRepository.save(bankInfo);
+  const telephone = findBank.bankContact.find(
+    ({ telephone }) => telephone === data.body.telephone
+  );
 
-  return { message: "Information entered successfully!" };
+  if (!email && !telephone) {
+    const bankInfo = bankInfoRepository.create({
+      telephone: data.body.telephone,
+      email: data.body.email,
+      bank: findBank,
+    });
+
+    await bankInfoRepository.save(bankInfo);
+
+    return { message: "Information entered successfully!" };
+  }
+
+  if (!email) {
+    const bankInfo = bankInfoRepository.create({
+      email: data.body.email,
+      bank: findBank,
+    });
+
+    await bankInfoRepository.save(bankInfo);
+
+    return { message: "Email atualizado!" };
+  }
+
+  if (!telephone) {
+    const bankInfo = bankInfoRepository.create({
+      telephone: data.body.telephone,
+      bank: findBank,
+    });
+
+    await bankInfoRepository.save(bankInfo);
+    return { message: "Telefone atualizado!" };
+  }
+
+  throw new AppError(404, "informacoes ja constam!");
 };
 
 export default createBankInfoService;
