@@ -26,3 +26,9 @@ export interface IEmployeeUpdate {
     password?: string;
   };
 }
+
+export interface IEmployeeInfo {
+  employee_id: number;
+  telephone: number;
+  address: string;
+}
