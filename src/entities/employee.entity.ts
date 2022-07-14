@@ -22,6 +22,9 @@ export class Employee {
   @Column({ length: 250 })
   password: string;
 
+  @Column()
+  status: boolean;
+
   @CreateDateColumn()
   created_at: Date;
 
