@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  JoinColumn,
+} from "typeorm";
+import { BankContact } from "./bankContact.entity";
 import { Debts } from "./debt.entity";
 
 @Entity("bank")
@@ -14,4 +21,8 @@ export class Bank {
 
   @OneToMany(() => Debts, (debts) => debts.id)
   debts: Debts[];
+
+  @OneToMany(() => BankContact, (bankContact) => bankContact.id)
+  @JoinColumn()
+  bank_contact: BankContact[];
 }
