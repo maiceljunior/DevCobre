@@ -7,16 +7,16 @@ import bcrypt from "bcryptjs";
 const createEmployeeService = async ({
   name,
   email,
-  status,
   password,
+  status,
 }: IEmployeRequest) => {
   const employeeRepository = AppDataSource.getRepository(Employee);
 
   const employee = employeeRepository.create({
     name,
     email,
-    status,
     password: bcrypt.hashSync(password, 10),
+    status,
   });
 
   await employeeRepository.save(employee);
