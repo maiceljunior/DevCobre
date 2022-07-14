@@ -4,9 +4,9 @@ import updateEmployeeService from "../../services/employee/updateEmployee.servic
 const updateEmployeeController = async (req: Request, res: Response) => {
   const { id } = req.params;
 
-  const { name, email, password } = req.body;
+  const employee = { id, body: req.body };
 
-  await updateEmployeeService(id, name, email, password);
+  await updateEmployeeService(employee);
 
   return res.status(200).json({ message: "Employee updated!" });
 };
