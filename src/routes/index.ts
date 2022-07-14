@@ -10,6 +10,7 @@ import { historyRoutes } from "./history.routes";
 import { levelAcessRoutes } from "./levelAcess.routes";
 
 export const appRoutes = (app: Express) => {
+
   app.use("/bank", bankRoutes());
   app.use("/agreement", agreementRoutes);
   app.use("client", clientRoutes);
@@ -19,4 +20,5 @@ export const appRoutes = (app: Express) => {
   app.use("/payment", formPaymentRoutes);
   app.use("/history", historyRoutes);
   app.use("/level", levelAcessRoutes);
+
 };
