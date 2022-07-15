@@ -14,7 +14,7 @@ const updateClientInfoService = async (
   });
 
   if (!client) {
-    throw new AppError(400, "Deu ruim");
+    throw new AppError(400, "Client not found");
   }
 
   const clientInfoRepository = AppDataSource.getRepository(ClientInfo);
@@ -24,7 +24,7 @@ const updateClientInfoService = async (
   });
 
   if (!contactExists) {
-    throw new AppError(400, "Deu ruim");
+    throw new AppError(400, "Client contact not found!");
   }
 
   await clientInfoRepository.update(idContact, {
