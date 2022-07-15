@@ -37,7 +37,7 @@
 
 ### Client
 
-### Get `/client`
+### Get `/client/:id`
 
 
 ### Resposta: Status 200
@@ -49,18 +49,7 @@
 }
 ```
 ---
-### Get `/client/:document/info`
 
-
-### Resposta: Status 200
-```json
-{
-    "document": 5555555555,
-    "name": "Ana Paula",
-    "type": "Fisico"
-}
-```
----
 
 ### Resposta: Status 404 Not Found
 ```json
@@ -131,6 +120,101 @@
 ```json
 {
 	"message": "Client deleted with sucess!"
+}
+```
+---
+### Resposta: Status 404 Not Found
+```json
+{
+	"status": "error",
+	"code": 404,
+	"message": "Client not found!"
+}
+```
+### ClientInfo
+
+### Get `/client/:document/info`
+
+
+### Resposta: Status 200
+```json
+{
+    "document": 5555555555,
+    "name": "Ana Paula",
+    "type": "Fisico",
+	"clientInfo":[]
+}
+```
+---
+
+### Resposta: Status 404 Not Found
+```json
+{
+	"status": "error",
+	"code": 404,
+	"message": "Client not found"
+}
+```
+---
+### Post `/client/:id/info`
+
+
+```json
+{
+    "telephone": 9999999999,
+    "email": "mail1@mail.com"
+}
+```
+### Resposta: Status 201 Created
+```json
+{
+	"message": "Information entered successfully!"
+}
+```
+---
+
+### Resposta: Status 404 Not Found
+```json
+{
+	"status": "error",
+	"code": 404,
+	"message": "Client already exists"
+}
+```
+---
+
+### Patch `/client/:document/info/:idContact`
+```json
+{
+	"telephone":"mailtest@mail.com",
+	"telephone":22222222
+}
+```
+
+### Resposta: Status 200 Update
+```json
+{
+	"message": "Contact updated with sucess!"
+}
+```
+---
+### Resposta: Status 404 Not Found
+```json
+{
+	"status": "error",
+	"code": 404,
+	"message": "Client not found!"
+}
+```
+---
+
+### Delete `/client/:document/info/:idContact`
+
+
+### Resposta: Status 200
+```json
+{
+	"message": "Contact deleted with sucess!"
 }
 ```
 ---
