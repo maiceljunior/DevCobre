@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class firstDeploy1657921755986 implements MigrationInterface {
-    name = 'firstDeploy1657921755986'
+export class heroku1657923467128 implements MigrationInterface {
+    name = 'heroku1657923467128'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`ALTER TABLE "bank" DROP CONSTRAINT "UQ_11f196da2e68cef1c7e84b4fe94"`);
