@@ -4,17 +4,16 @@ import { AppError } from "../../errors";
 
 const listEmployeeInfoService = async (id: string) => {
   const employeeRepository = AppDataSource.getRepository(Employee);
-  const employeeAccount = await employeeRepository.find();
 
-  const findEmployee = employeeAccount.find(
-    (employee) => employee.id === Number(id)
-  );
+  const employeeExists = await employeeRepository.findOneBy({
+    id: parseInt(id),
+  });
 
-  if (!findEmployee) {
+  if (!employeeExists) {
     throw new AppError(404, "User not found!");
   }
 
-  return findEmployee;
+  return employeeExists;
 };
 
 export default listEmployeeInfoService;

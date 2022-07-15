@@ -2,8 +2,9 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
   ManyToOne,
-  OneToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -19,7 +20,7 @@ export class Employee {
   @Column({ length: 250 })
   name: string;
 
-  @Column({ length: 250 })
+  @Column({ length: 251 })
   email: string;
 
   @Column({ length: 250 })
@@ -38,6 +39,9 @@ export class Employee {
   @ManyToOne(() => LevelAcess, (levelAcess) => levelAcess.id)
   level_acess: LevelAcess;
 
-  @OneToOne(() => EmployeeInfo, (employeeInfo) => employeeInfo.id)
+  @OneToMany(() => EmployeeInfo, (employeeInfo) => employeeInfo.employee, {
+    eager: true,
+  })
+  @JoinTable()
   employeeInfo: EmployeeInfo[];
 }

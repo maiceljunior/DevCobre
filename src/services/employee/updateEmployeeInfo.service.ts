@@ -18,7 +18,7 @@ const updateEmployeeInfoService = async (
   const employeeInfoRepository = AppDataSource.getRepository(EmployeeInfo);
 
   const findEmployeeInfo = await employeeInfoRepository.findOneBy({
-    id: Number(id),
+    id: Number(employeeId),
   });
 
   if (!findEmployeeInfo) {

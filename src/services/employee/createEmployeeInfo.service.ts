@@ -29,13 +29,15 @@ const createEmployeeInfoService = async (data: IEmployeeInfo): Promise<any> => {
     const info = employeeInfoRepository.create({
       telephone: data.body.telephone,
       address: data.body.address,
-      employee_id: employee,
+      employee: employee,
     });
 
     await employeeInfoRepository.save(info);
 
     return info;
   }
+
+  throw new AppError(404, "information already exists!");
 };
 
 export default createEmployeeInfoService;

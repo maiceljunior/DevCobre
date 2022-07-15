@@ -13,26 +13,16 @@ const updateEmployeeService = async (data: IEmployeeUpdate) => {
     throw new AppError(400, "Employee does not exists!");
   }
   const updated_at = new Date();
+  const newName = data.body.name;
+  const newEmail = data.body.email;
 
-  if (!data.body.password) {
-    await employeeRepository.update(data.id, {
-      ...employee,
-      ...data.body,
-      updated_at,
-    });
+  await employeeRepository.update(employee!.id, {
+    updated_at,
+    name: newName,
+    email: newEmail,
+  });
 
-    return;
-  }
-
-  if (data.body.password) {
-    await employeeRepository.update(data.id, {
-      ...employee,
-      ...data.body,
-      password: bcrypt.hashSync(data.body.password, 10),
-      updated_at,
-    });
-    return;
-  }
+  return;
 };
 
 export default updateEmployeeService;
