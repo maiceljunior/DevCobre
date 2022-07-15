@@ -7,7 +7,7 @@ const updatePaymentController = async (req: Request, res: Response) => {
   
     const { cash_payment,installments,entry_installments,entry,installments_times,values_installments } = req.body;
   
-    await updatePaymentService(cash_payment,installments,entry_installments,entry,installments_times,values_installments);
+    await updatePaymentService(idNumber,cash_payment,installments,entry_installments,entry,installments_times,values_installments);
   
     return res.status(200).json({ message: "Updated payment!" });
   };
