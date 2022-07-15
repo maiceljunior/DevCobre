@@ -5,17 +5,15 @@ import { AppError } from "../../errors";
 const listOneClientService = async (document: string) => {
   const clientRepository = AppDataSource.getRepository(Client);
 
-  const clients = await clientRepository.find();
+  const clients = await clientRepository.findOneBy({
+    document: parseInt(document),
+  });
 
-  const account = clients.find(
-    (client) => client.document === parseInt(document)
-  );
-
-  if (!account) {
+  if (!clients) {
     throw new AppError(404, "Client not found!");
   }
 
-  return account;
+  return clients;
 };
 
 export default listOneClientService;
