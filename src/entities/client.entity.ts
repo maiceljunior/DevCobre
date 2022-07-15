@@ -7,7 +7,7 @@ export class Client {
   @PrimaryColumn()
   document: number;
 
-  @Column({ length: 250 })
+  @Column({ length: 253 })
   name: string;
 
   @Column({ length: 16 })
