@@ -27,21 +27,20 @@ export class Debts {
 
   @Column({ type: "numeric", precision: 10, scale: 2 })
   debtOrigin: number;
-  // @CreateDateColumn()
-  // registration: Date;
+
+  @CreateDateColumn()
+  registration: Date;
+
   @CreateDateColumn()
   dateDebt: Date;
 
   @ManyToOne(() => Bank, (bank) => bank.id)
-  // @JoinTable()
   bank: Bank;
 
   @ManyToOne(() => Client, (client) => client.document)
-  // @JoinTable()
   client: Client;
 
   @ManyToOne(() => Debts_type, (debts_type) => debts_type.id)
-  // @JoinTable()
   debt_type: Debts_type;
 
   // @ManyToOne(() => FormOfPayment, (FormOfPayment) => FormOfPayment.id)
