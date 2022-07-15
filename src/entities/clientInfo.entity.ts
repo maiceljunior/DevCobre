@@ -9,7 +9,7 @@ export class ClientInfo {
   @Column({ nullable: true })
   telephone: number;
 
-  @Column({ nullable: true, length: 250 })
+  @Column({ nullable: true, length: 256 })
   email: string;
 
   @ManyToOne(() => Client, (client) => client.document)

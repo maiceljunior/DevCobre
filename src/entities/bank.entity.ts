@@ -13,7 +13,7 @@ export class Bank {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
-  @Column({ length: 251, unique: true })
+  @Column({ length: 250, unique: true })
   name: string;
 
   @Column()

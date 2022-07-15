@@ -2,6 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
   ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
@@ -16,32 +17,32 @@ export class Debts {
   id: number;
 
   @Column({ type: "numeric", precision: 10, scale: 2 })
-  debt_value: number;
+  debtValue: number;
 
   @Column({ type: "numeric", precision: 16 })
-  document_client: number;
+  documentClient: number;
 
   @Column({ type: "integer" })
   ipoc: number;
 
   @Column({ type: "numeric", precision: 10, scale: 2 })
-  debt_origin: number;
+  debtOrigin: number;
 
   @CreateDateColumn()
   registration: Date;
 
   @CreateDateColumn()
-  date_debt: Date;
+  dateDebt: Date;
 
-  @ManyToOne(() => Bank, (bank) => bank.id, { eager: true })
+  @ManyToOne(() => Bank, (bank) => bank.id)
   bank: Bank;
 
-  @ManyToOne(() => Client, (client) => client.document, { eager: true })
+  @ManyToOne(() => Client, (client) => client.document)
   client: Client;
 
   @ManyToOne(() => Debts_type, (debts_type) => debts_type.id)
   debt_type: Debts_type;
 
-  @ManyToOne(() => FormOfPayment, (FormOfPayment) => FormOfPayment.id)
-  formOfPayment: FormOfPayment;
+  // @ManyToOne(() => FormOfPayment, (FormOfPayment) => FormOfPayment.id)
+  // formOfPayment: FormOfPayment;
 }
