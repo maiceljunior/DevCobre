@@ -9,7 +9,7 @@ const updateBankInfoController = async (req: Request, res: Response) => {
   await updateBankInfoService(id, idContact, data);
 
   return res.status(200).json({
-    message: "Bank updated sucess!",
+    message: "Bank Contact updated sucess!",
   });
 };
 
