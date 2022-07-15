@@ -7,7 +7,7 @@ export class EmployeeInfo {
   id: number;
 
   @OneToOne(() => Employee, (employee) => employee.id)
-  employee: Employee;
+  employee_id: Employee;
 
   @Column()
   telephone: number;

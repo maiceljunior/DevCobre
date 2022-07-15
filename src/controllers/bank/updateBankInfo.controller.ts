@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import updateBankInfoService from "../../services/bank/updateBankInfo.services";
+import updateBankInfoService from "../../services/bank/updateBankInfo.service";
 
 const updateBankInfoController = async (req: Request, res: Response) => {
   const { id } = req.params;
