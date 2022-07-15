@@ -2,7 +2,8 @@ import { Request, Response } from "express";
 import createClientService from "../../services/client/createClient.service";
 
 const createClientController = async (req: Request, res: Response) => {
-  const { document, name, type } = req.newClient;
+  // const { document, name, type } = req.newClient;
+  const { document, name, type } = req.body;
 
   const newClient = await createClientService({ document, name, type });
 
