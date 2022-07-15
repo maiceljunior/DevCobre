@@ -7,12 +7,16 @@ export interface IClientRequest {
 export interface IClientInfoRequest {
   telephone: number;
   email: string;
-  client_document: number;
 }
 
-// export interface IClient {
-//   id: string;
-//   telephone: number;
-//   email: string;
-//   client_document: number;
-// }
+export interface IClientInfo {
+  document: number;
+  name: string;
+  type: string;
+  infos: object;
+}
+
+export interface IInfoClient {
+  document: string;
+  body: { telephone?: number; email?: string };
+}

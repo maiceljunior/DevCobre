@@ -43,10 +43,10 @@ describe("Testing POST method in /employee", () => {
       })
     );
   });
-  // test("Try to create an employee that already exists", async () => {
-  //   const response = await request(app).post("/employee").send(testEmployee);
+  test("Try to create an employee that already exists", async () => {
+    const response = await request(app).post("/employee").send(testEmployee);
 
-  //   expect(response.status).toEqual(409);
-  //   expect(response.body).toHaveProperty("message");
-  // });
+    expect(response.status).toEqual(409);
+    expect(response.body).toHaveProperty("message");
+  });
 });

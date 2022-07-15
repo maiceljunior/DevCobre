@@ -4,9 +4,7 @@ import { EmployeeInfo } from "../../entities/employeeInfo.entity";
 import { AppError } from "../../errors";
 import { IEmployeeInfo } from "../../interfaces/employee";
 
-const createEmployeeInfoService = async (
-  data: IEmployeeInfo
-): Promise<EmployeeInfo> => {
+const createEmployeeInfoService = async (data: IEmployeeInfo): Promise<any> => {
   const employeeRepository = AppDataSource.getRepository(Employee);
 
   const employee = await employeeRepository.findOneBy({
@@ -19,15 +17,25 @@ const createEmployeeInfoService = async (
 
   const employeeInfoRepository = AppDataSource.getRepository(EmployeeInfo);
 
-  const info = employeeInfoRepository.create({
-    telephone: data.body.telephone,
-    address: data.body.address,
-    employee_id: employee,
-  });
+  const telephone = employee.employeeInfo.find(
+    ({ telephone }) => telephone === data.body.telephone
+  );
 
-  await employeeInfoRepository.save(info);
+  const address = employee.employeeInfo.find(
+    ({ address }) => address === data.body.address
+  );
 
-  return info;
+  if (!telephone && !address) {
+    const info = employeeInfoRepository.create({
+      telephone: data.body.telephone,
+      address: data.body.address,
+      employee_id: employee,
+    });
+
+    await employeeInfoRepository.save(info);
+
+    return info;
+  }
 };
 
 export default createEmployeeInfoService;

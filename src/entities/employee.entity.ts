@@ -39,5 +39,5 @@ export class Employee {
   level_acess: LevelAcess;
 
   @OneToOne(() => EmployeeInfo, (employeeInfo) => employeeInfo.id)
-  employee_info: EmployeeInfo[];
+  employeeInfo: EmployeeInfo[];
 }

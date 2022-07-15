@@ -1,21 +1,20 @@
 import { AppDataSource } from "../../data-source";
 import { Client } from "../../entities/client.entity";
-import { ClientInfo } from "../../entities/clientInfo.entity";
 import { AppError } from "../../errors";
 
-const listClientInfoService = async (document: string): Promise<Client> => {
-  const clientInfo = AppDataSource.getRepository(Client);
+const listClientInfoService = async (document: string) => {
+  const clientRepository = AppDataSource.getRepository(Client);
+  const account = await clientRepository.find();
 
-  const teste = parseInt(document);
-  const info = await clientInfo.findOneBy({
-    document: teste,
-  });
+  const findAccount = account.find(
+    (user) => user.document === parseInt(document)
+  );
 
-  if (!info) {
-    throw new AppError(404, "Client not found");
+  if (!findAccount) {
+    throw new AppError(404, "Client not found!");
   }
 
-  return info;
+  return findAccount;
 };
 
 export default listClientInfoService;
