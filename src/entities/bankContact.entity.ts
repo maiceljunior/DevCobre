@@ -6,10 +6,10 @@ export class BankContact {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
-  @Column()
+  @Column({ nullable: true })
   telephone: number;
 
-  @Column({ length: 255 })
+  @Column({ nullable: true, length: 255 })
   email: string;
 
   @ManyToOne(() => Bank, (bank) => bank.id)

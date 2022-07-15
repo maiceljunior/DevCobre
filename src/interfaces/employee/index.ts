@@ -28,7 +28,9 @@ export interface IEmployeeUpdate {
 }
 
 export interface IEmployeeInfo {
-  employee_id: number;
-  telephone: number;
-  address: string;
+  id: string;
+  body: {
+    telephone: number;
+    address: string;
+  };
 }

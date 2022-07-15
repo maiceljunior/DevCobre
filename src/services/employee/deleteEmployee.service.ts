@@ -5,16 +5,13 @@ import { AppError } from "../../errors";
 const deleteEmployeeService = async (id: string) => {
   const employeeRepository = AppDataSource.getRepository(Employee);
 
-  const employee = await employeeRepository.find();
+  const employee = await employeeRepository.findOneBy({ id: parseInt(id) });
 
-  const employeeFind = employee.find(
-    (employee) => employee.id.toString() === id
-  );
-
-  if (!employeeFind) {
+  if (!employee) {
     throw new AppError(404, "Employee not found!");
   }
-  await employeeRepository.delete(employeeFind.id);
+
+  await employeeRepository.delete({ id: parseInt(id) });
 
   return true;
 };

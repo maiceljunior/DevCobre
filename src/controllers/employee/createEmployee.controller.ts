@@ -10,7 +10,7 @@ const createEmployeeController = async (req: Request, res: Response) => {
     email,
     password,
   });
-
+  console.log("Aqui");
   return res.status(201).send(instanceToPlain(newEmployee));
 };
 

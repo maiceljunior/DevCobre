@@ -7,6 +7,9 @@ import updateEmployeeController from "../controllers/employee/updateEmployee.con
 import duplicatedEmailMiddleware from "../middlewares/duplicatedEmail.middleware";
 import verifyAuthToken from "../middlewares/verifyAuthToken.middleware";
 import createEmployeeInfoController from "../controllers/employee/createEmployeeInfo.controller";
+import updateEmployeeInfoController from "../controllers/employee/updateEmployeeInfo.controller";
+import deleteEmployeeInfoController from "../controllers/employee/deleteEmployeeInfo.controller";
+import listEmployeeInfoController from "../controllers/employee/listEmployeeInfo.controller";
 
 const routes = Router();
 
@@ -17,9 +20,10 @@ export const employeeRoutes = () => {
   routes.delete("/:id", deleteEmployeeController);
   routes.patch("/:id", updateEmployeeController);
 
-  routes.post("/info/:id", createEmployeeInfoController);
-  // routes.patch("/info/:id");
-  // routes.delete("/info/:id");
+  routes.post("/:id/info", createEmployeeInfoController);
+  routes.get("/:id/info", listEmployeeInfoController);
+  routes.patch("/:id/info/:employeeId", updateEmployeeInfoController);
+  routes.delete("/:id/info/:employeeId", deleteEmployeeInfoController);
 
   return routes;
 };
