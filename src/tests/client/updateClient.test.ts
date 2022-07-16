@@ -2,13 +2,8 @@ import { AppDataSource } from "../../data-source";
 import { DataSource } from "typeorm";
 import request from "supertest";
 import app from "../../app";
-// import test from "node:test";
-// import describe from "node:test"
-// import beforeAll from "node:test"
-// import afterAll from "node:test"
-// import expect from "node:test"
 
-describe("Testing PATCH method in /client/<document>", () => {
+describe("Testing PATCH method in /client/:document", () => {
   let connection: DataSource;
 
   interface UpdateClient {
