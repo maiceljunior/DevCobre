@@ -3,7 +3,7 @@ import { AppDataSource } from "../../data-source";
 import app from "../../app";
 import request from "supertest";
 
-describe("Testing POST method in /client/<document>/info", () => {
+describe("Testing POST method in /client/:document/info", () => {
   let connection: DataSource;
 
   interface InfoClient {
@@ -49,22 +49,11 @@ describe("Testing POST method in /client/<document>/info", () => {
       .post(`/client/${responseInfo.body.document}/info`)
       .send(testInfo);
 
-    // const responseGet = await request(app).get(
-    //   `/client/${responseInfo.body.document}/info`
-    // );
-
     expect(response.status).toEqual(201);
     expect(response.body).toHaveProperty("message");
-
-    // expect(responseGet.body).toEqual(
-    //   expect.objectContaining({
-    //     id: 1,
-    //     telephone: testInfo.telephone,
-    //     email: testInfo.email,
-    //   })
-    // );
   });
-  test("Try to create an client that already exists", async () => {
+
+  test("Trying to create information for a client that doesn't exist", async () => {
     const response = await request(app).post("/client/1/info").send(testInfo);
 
     expect(response.status).toEqual(404);
