@@ -3,7 +3,7 @@ import { DataSource } from "typeorm";
 import request from "supertest";
 import app from "../../app";
 
-describe("Testing GET method in /client/<document>", () => {
+describe("Testing GET method in /client/:document", () => {
   let connection: DataSource;
 
   interface Client {
@@ -40,7 +40,6 @@ describe("Testing GET method in /client/<document>", () => {
     );
 
     expect(responseGet.status).toEqual(200);
-    // expect(responseGet.body.length).toEqual(1);
     expect(responseGet.body).toEqual(
       expect.objectContaining({
         document: response.body.document,
@@ -48,5 +47,12 @@ describe("Testing GET method in /client/<document>", () => {
         type: response.body.type,
       })
     );
+  });
+
+  test("Trying to list a specific client that doesn't exist", async () => {
+    const responseGet = await request(app).get(`/client/1`);
+
+    expect(responseGet.status).toEqual(404);
+    expect(responseGet.body).toHaveProperty("message");
   });
 });
