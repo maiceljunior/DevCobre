@@ -4,12 +4,14 @@ import {
   Entity,
   JoinTable,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Bank } from "./bank.entity";
 import { Client } from "./client.entity";
 import { Debts_type } from "./debtType.entity";
 import { FormOfPayment } from "./formOfPayment.entity";
+import { UserDebt } from "./userDebt.entity";
 
 @Entity("debts")
 export class Debts {
@@ -42,6 +44,9 @@ export class Debts {
 
   @ManyToOne(() => Debts_type, (debts_type) => debts_type.id)
   debt_type: Debts_type;
+
+  @OneToMany(() => UserDebt, (userDebt) => userDebt.id)
+  userDebt: UserDebt[];
 
   // @ManyToOne(() => FormOfPayment, (FormOfPayment) => FormOfPayment.id)
   // formOfPayment: FormOfPayment;

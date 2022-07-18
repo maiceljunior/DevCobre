@@ -12,10 +12,13 @@ import listOneUserController from "../controllers/user/listOneUser.controller";
 import updateUserController from "../controllers/user/updateUser.controller";
 import updateUserInfoController from "../controllers/user/updateUserInfo.controller";
 import deleteUserInfoController from "../controllers/user/deleteUserInfo.controller";
+import createUserDebtController from "../controllers/userDebt/createUserDebt.controller";
 
 const routes = Router();
 
 export const userRoutes = () => {
+  routes.post("/debts/:debtId/:userId", createUserDebtController);
+
   routes.post("", duplicatedEmailMiddleware, createUserController);
   routes.get("", verifyAuthToken, listUsersController);
   routes.get("/:id", listOneUserController);
