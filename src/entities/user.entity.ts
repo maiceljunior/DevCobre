@@ -10,10 +10,10 @@ import {
 } from "typeorm";
 import { Exclude } from "class-transformer";
 import { LevelAcess } from "./levelAcess.entity";
-import { EmployeeInfo } from "./employeeInfo.entity";
+import { UserInfo } from "./userInfo.entity";
 
-@Entity("employee")
-export class Employee {
+@Entity("user")
+export class User {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
@@ -39,9 +39,9 @@ export class Employee {
   @ManyToOne(() => LevelAcess, (levelAcess) => levelAcess.id)
   level_acess: LevelAcess;
 
-  @OneToMany(() => EmployeeInfo, (employeeInfo) => employeeInfo.employee, {
+  @OneToMany(() => UserInfo, (userInfo) => userInfo.user, {
     eager: true,
   })
   @JoinTable()
-  employeeInfo: EmployeeInfo[];
+  userInfo: UserInfo[];
 }

@@ -3,24 +3,24 @@
 // import app from "../../app";
 // import request from "supertest";
 
-// describe("Testing GET method in /employee", () => {
+// describe("Testing GET method in /user", () => {
 //   let connection: DataSource;
 
-//   interface Employee {
+//   interface User {
 //     name: string;
 //     email: string;
 //     password?: string;
 //   }
 
-//   let testEmployee1: Employee = {
-//     name: "Employee 1",
-//     email: "employee1@kenzie.com",
+//   let testUser1: User = {
+//     name: "User 1",
+//     email: "user1@kenzie.com",
 //     password: "123456Ab!",
 //   };
 
-//   let testEmployee2: Employee = {
-//     name: "Employee 2",
-//     email: "employee2@kenzie.com",
+//   let testUser: User = {
+//     name: "User 2",
+//     email: "user2@kenzie.com",
 //     password: "123456Ab!",
 //   };
 
@@ -34,19 +34,19 @@
 //         console.error("Error during Data Source initialization", err)
 //       );
 
-//     testRes1 = await request(app).post("/employee").send(testEmployee1);
-//     testRes2 = await request(app).post("/employee").send(testEmployee2);
+//     testRes1 = await request(app).post("/user").send(testUser1);
+//     testRes2 = await request(app).post("/user").send(testUser2);
 
-//     delete testEmployee1.password;
-//     delete testEmployee2.password;
+//     delete testUser1.password;
+//     delete testUser2.password;
 //   });
 
 //   afterAll(async () => {
 //     await connection.destroy();
 //   });
 
-//   test("Testing list all employees", async () => {
-//     const response = await request(app).get("/employee");
+//   test("Testing list all users", async () => {
+//     const response = await request(app).get("/user");
 
 //     expect(response.status).toEqual(200);
 //     expect(response.body.length).toEqual(2);
@@ -54,13 +54,13 @@
 //     expect(response.body).toEqual(
 //       expect.arrayContaining([
 //         expect.objectContaining({
-//           ...testEmployee1,
+//           ...testUser1,
 //           id: response.body[0].id,
 //           created_at: response.body[0].created_at,
 //           status: response.body[0].status,
 //         }),
 //         expect.objectContaining({
-//           ...testEmployee2,
+//           ...testUser2,
 //           id: response.body[1].id,
 //           created_at: response.body[1].created_at,
 //           status: response.body[1].status,
@@ -69,8 +69,8 @@
 //     );
 //   });
 
-//   test("Testing to list a single employee ", async () => {
-//     const response = await request(app).get(`/employee/${testRes1.body.id}`);
+//   test("Testing to list a single user ", async () => {
+//     const response = await request(app).get(`/user/${testRes1.body.id}`);
 
 //     expect(response.status).toEqual(200);
 //     expect(response.body).toEqual(
@@ -84,8 +84,8 @@
 //     );
 //   });
 
-//   test("Trying to list an employee that doesn't exist", async () => {
-//     const response = await request(app).get("/employee/x2a");
+//   test("Trying to list an user that doesn't exist", async () => {
+//     const response = await request(app).get("/user/x2a");
 
 //     expect(response.status).toEqual(404);
 //     expect(response.body).toHaveProperty("message");

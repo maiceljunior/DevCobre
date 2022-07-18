@@ -1,6 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Debts } from "./debt.entity";
-import { Employee } from "./employee.entity";
+import { User } from "./user.entity";
 
 @Entity()
 export class ContactHistory {
@@ -16,8 +16,8 @@ export class ContactHistory {
   @Column({ length: 500 })
   note: string;
 
-  @ManyToOne(() => Employee, (employee) => employee.id)
-  employees: Employee[];
+  @ManyToOne(() => User, (user) => user.id)
+  users: User[];
 
   @ManyToOne(() => Debts, (debts) => debts.id)
   debts: Debts;
