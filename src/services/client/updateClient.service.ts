@@ -5,10 +5,8 @@ import { AppError } from "../../errors";
 const updateClientService = async (document: string, name: string) => {
   const clientRepository = AppDataSource.getRepository(Client);
 
-  const documentInt = parseInt(document);
-
   const client = await clientRepository.findOneBy({
-    document: documentInt,
+    document: document,
   });
 
   if (!client) {

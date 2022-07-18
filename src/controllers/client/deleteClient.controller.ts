@@ -4,9 +4,7 @@ import deleteClientService from "../../services/client/deleteClient.service";
 const deleteClientController = async (req: Request, res: Response) => {
   const document = req.params.document;
 
-  const documentString = document.toString();
-
-  await deleteClientService(documentString);
+  await deleteClientService(document);
 
   return res.status(200).json({ message: "Client deleted with sucess!" });
 };

@@ -7,13 +7,13 @@ describe("Testing PATCH method in /client/:document", () => {
   let connection: DataSource;
 
   interface UpdateClient {
-    document: number;
+    document: string;
     name: string;
     type: string;
   }
 
   let testClient1: UpdateClient = {
-    document: 12345678910,
+    document: "12345678910",
     name: "Client Test",
     type: "Físico",
   };

@@ -4,8 +4,8 @@ import { Debts } from "./debt.entity";
 
 @Entity("client")
 export class Client {
-  @PrimaryColumn({ type: "bigint" })
-  document: number;
+  @PrimaryColumn({ length: 14 })
+  document: string;
 
   @Column({ length: 253 })
   name: string;

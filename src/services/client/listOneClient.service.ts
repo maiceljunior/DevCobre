@@ -6,7 +6,7 @@ const listOneClientService = async (document: string) => {
   const clientRepository = AppDataSource.getRepository(Client);
 
   const clients = await clientRepository.findOneBy({
-    document: parseInt(document),
+    document: document,
   });
 
   if (!clients) {
