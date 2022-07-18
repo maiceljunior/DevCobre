@@ -4,26 +4,18 @@ import { User } from "../../entities/user.entity";
 import { UserInfo } from "../../entities/userInfo.entity";
 import { AppError } from "../../errors";
 import { IUserRequest } from "../../interfaces/user";
+import verifyUserType from "../../utils/verifyUserType";
 
 const createUserService = async (data: IUserRequest): Promise<any> => {
-  if (
-    data.body.name === undefined ||
-    data.body.email === undefined ||
-    data.body.password === undefined
-  ) {
-    throw new AppError(
-      400,
-      "All these fields need to be informed: Name, Email, Password"
-    );
-  }
-
   const userRepository = AppDataSource.getRepository(User);
+  const user = new User();
+  user.name = data.body.name;
+  user.position = verifyUserType(data.body.position);
 
-  const user = userRepository.create({
-    name: data.body.name,
-  });
+  const createUser = userRepository.create(user);
 
-  const createUser = await userRepository.save(user);
+  const saveUser = await userRepository.save(createUser);
+  console.log(saveUser);
 
   const userInfoRepository = AppDataSource.getRepository(UserInfo);
 
@@ -35,7 +27,7 @@ const createUserService = async (data: IUserRequest): Promise<any> => {
     email: data.body.email,
     password: hashedPassword,
     status: data.body.status,
-    user: createUser,
+    user: saveUser,
   });
 
   await userInfoRepository.save(userInfoCreate);
@@ -43,7 +35,6 @@ const createUserService = async (data: IUserRequest): Promise<any> => {
   const returnUser = {
     id: createUser.id,
     name: createUser.name,
-    position: createUser.position,
     infos: {
       email: userInfoCreate.email,
       telephone: userInfoCreate.telephone,

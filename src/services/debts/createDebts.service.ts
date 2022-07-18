@@ -17,7 +17,7 @@ const createDebtsService = async ({
 }: IDebtsRequest) => {
   const clientRepository = AppDataSource.getRepository(Client);
   const client = await clientRepository.findOneBy({
-    document: Number(documentClient),
+    document: documentClient,
   });
 
   if (!client) {
@@ -52,7 +52,7 @@ const createDebtsService = async ({
 
   await debtRepository.save(debt);
 
-  return;
+  return debt;
 };
 
 export default createDebtsService;

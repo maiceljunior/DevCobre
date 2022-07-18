@@ -6,18 +6,11 @@ import deletePaymentController from "../controllers/payment/deletePayment.contro
 
 const routes = Router();
 
-export const formPaymentRoutes =() =>{
+export const formPaymentRoutes = () => {
+  routes.get("", listPaymentController);
+  routes.post("", createPaymentController);
+  routes.patch("/:id", updatePaymentController);
+  routes.delete("/:id", deletePaymentController);
 
-    
-    routes.get("",listPaymentController);
-    routes.post("",createPaymentController);
-    routes.patch("/:id",updatePaymentController);
-    routes.delete("/:id",deletePaymentController);
-    // routes.get("/debts/:id");
-    // routes.post("/debts/:id");
-    // routes.patch("/debts/:id");
-    // routes.delete("/debts/:id");
-
-    return routes
+  return routes;
 };
-

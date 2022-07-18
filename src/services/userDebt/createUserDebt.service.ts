@@ -11,7 +11,7 @@ const createUserDebtService = async (
 ): Promise<any> => {
   const userRepository = AppDataSource.getRepository(User);
 
-  const findUser = userRepository.findOneBy({ id: parseInt(user) });
+  const findUser = await userRepository.findOneBy({ id: parseInt(user) });
 
   if (!findUser) {
     throw new AppError(404, "User not found!");
@@ -19,23 +19,23 @@ const createUserDebtService = async (
 
   const debtRepository = AppDataSource.getRepository(Debts);
 
-  const findDebt = debtRepository.findOneBy({ id: parseInt(debt) });
+  const findDebt = await debtRepository.findOneBy({ id: parseInt(debt) });
 
   if (!findDebt) {
     throw new AppError(404, "Debt not found!");
   }
 
   const userDebtRepository = AppDataSource.getRepository(UserDebt);
+  const debtUser = new UserDebt();
+  debtUser.debt = Number(debt);
+  debtUser.user = findUser;
+  debtUser.name = name;
 
-  const debtUser = userDebtRepository.create({
-    // debt: findDebt,
-    // user: findUser,
-    name,
-  });
+  const debtUserCreate = userDebtRepository.create(debtUser);
 
-  await userRepository.save(debtUser);
+  await userDebtRepository.save(debtUserCreate);
 
-  return debtUser;
+  return "ok";
 };
 
 export default createUserDebtService;
