@@ -21,7 +21,9 @@ const deleteEmployeeInfoService = async (id: string, employeeId: string) => {
 
   const employeeInfoRepository = AppDataSource.getRepository(EmployeeInfo);
 
-  await employeeInfoRepository.delete({ id: Number(id) });
+  await employeeInfoRepository.delete({ id: Number(employeeId) });
+
+  return;
 };
 
 export default deleteEmployeeInfoService;

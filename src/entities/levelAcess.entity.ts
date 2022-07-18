@@ -6,7 +6,7 @@ export class LevelAcess {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
-  @Column({ length: 250 })
+  @Column({ length: 256 })
   name: string;
 
   @OneToMany(() => Employee, (employee) => employee.id)

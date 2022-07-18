@@ -8,15 +8,15 @@ import listClientsController from "../controllers/client/listClients.controller"
 import listOneClientController from "../controllers/client/listOneClient.controller";
 import updateClientController from "../controllers/client/updateClient.controller";
 import updateClientInfoController from "../controllers/client/updateClientInfo.controller";
-import { createClientSchema } from "../middlewares/validateCreateClient.middleware";
-import { validateCreateClient } from "../middlewares/validateCreateClient.middleware";
+// import { createClientSchema } from "../middlewares/validateCreateClient.middleware";
+// import { validateCreateClient } from "../middlewares/validateCreateClient.middleware";
 const routes = Router();
 
 export const clientRoutes = () => {
   routes.get("", listClientsController);
   routes.post(
     "",
-    validateCreateClient(createClientSchema),
+    // validateCreateClient(createClientSchema),
     createClientController
   );
   routes.get("/:document", listOneClientController);

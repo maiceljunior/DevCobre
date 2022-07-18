@@ -43,7 +43,7 @@ const createBankInfoService = async (data: IBankInfoOf): Promise<any> => {
 
     await bankInfoRepository.save(bankInfo);
 
-    return { message: "Email atualizado!" };
+    return { message: "Updated email!" };
   }
 
   if (!telephone) {
@@ -53,10 +53,10 @@ const createBankInfoService = async (data: IBankInfoOf): Promise<any> => {
     });
 
     await bankInfoRepository.save(bankInfo);
-    return { message: "Telefone atualizado!" };
+    return { message: "Phone updated!" };
   }
 
-  throw new AppError(404, "informacoes ja constam!");
+  throw new AppError(404, "information already exists!");
 };
 
 export default createBankInfoService;

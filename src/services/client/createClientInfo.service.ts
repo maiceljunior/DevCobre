@@ -43,7 +43,7 @@ const createClientInfoService = async (data: IInfoClient): Promise<any> => {
 
     await clientInfoRepository.save(clientInfo);
 
-    return { message: "Email entered successfully!" };
+    return { message: "Updated email!" };
   }
 
   if (!telephone) {
@@ -54,18 +54,10 @@ const createClientInfoService = async (data: IInfoClient): Promise<any> => {
 
     await clientInfoRepository.save(clientInfo);
 
-    return { message: "Telephone entered successfully!" };
+    return { message: "Phone uptaded!" };
   }
 
-  const infos = clientInfoRepository.create({
-    telephone: data.body.telephone,
-    email: data.body.email,
-    client: findClient,
-  });
-
-  await clientInfoRepository.save(infos);
-
-  throw new AppError(404, "Informações ja existentes!");
+  throw new AppError(404, "Information already exists!");
 };
 
 export default createClientInfoService;

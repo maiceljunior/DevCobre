@@ -7,7 +7,7 @@ const deleteEmployeeInfoController = async (req: Request, res: Response) => {
 
   await deleteEmployeeInfoService(id, employeeId);
 
-  return res.status(200).json({ message: "User delete with success!" });
+  return res.status(200).json({ message: "User Info delete with success!" });
 };
 
 export default deleteEmployeeInfoController;
