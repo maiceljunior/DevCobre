@@ -11,6 +11,7 @@ import {
 import { Exclude } from "class-transformer";
 import { LevelAcess } from "./levelAcess.entity";
 import { UserInfo } from "./userInfo.entity";
+import { UserDebt } from "./userDebt.entity";
 
 @Entity("user")
 export class User {
@@ -39,9 +40,12 @@ export class User {
   @ManyToOne(() => LevelAcess, (levelAcess) => levelAcess.id)
   level_acess: LevelAcess;
 
-  @OneToMany(() => UserInfo, (userInfo) => userInfo.user, {
+  @ManyToOne(() => UserInfo, (userInfo) => userInfo.user, {
     eager: true,
   })
   @JoinTable()
   userInfo: UserInfo[];
+
+  @OneToMany(() => UserDebt, (userDebt) => userDebt.id)
+  userDebt: UserDebt[];
 }
