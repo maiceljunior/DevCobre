@@ -374,8 +374,6 @@
 
 ## =======
 
-> > > > > > > 1823c60959be2bdf732e21ffe662c6092b43126e
-
 <p align="center">
  • <a href="#api">Inicio API</a> •
  
