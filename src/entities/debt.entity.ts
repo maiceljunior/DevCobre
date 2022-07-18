@@ -2,33 +2,37 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinTable,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Bank } from "./bank.entity";
 import { Client } from "./client.entity";
-import { Debts_type } from "./debtType.entity";
-import { FormOfPayment } from "./formOfPayment.entity";
+import { ContactHistory } from "./contactHistory.entity";
 import { UserDebt } from "./userDebt.entity";
+
+export enum DebtType {
+  CREDITO = "credito",
+  EMPRESTIMO = "emprestimo",
+}
+
 
 @Entity("debts")
 export class Debts {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
+  @Column({ unique: true })
+  ipoc: string;
+
   @Column({ type: "numeric", precision: 10, scale: 2 })
   debtValue: number;
 
-  @Column({ type: "numeric", precision: 16 })
-  documentClient: number;
-
-  @Column({ type: "integer" })
-  ipoc: number;
-
   @Column({ type: "numeric", precision: 10, scale: 2 })
   debtOrigin: number;
+
+  @Column({ type: "enum", enum: DebtType, default: DebtType.CREDITO })
+  debtType: DebtType;
 
   @CreateDateColumn()
   registration: Date;
@@ -36,18 +40,19 @@ export class Debts {
   @CreateDateColumn()
   dateDebt: Date;
 
+  @Column({ type: "boolean", default: true })
+  debtStatus: boolean;
+
   @ManyToOne(() => Bank, (bank) => bank.id)
   bank: Bank;
 
   @ManyToOne(() => Client, (client) => client.document)
   client: Client;
 
-  @ManyToOne(() => Debts_type, (debts_type) => debts_type.id)
-  debt_type: Debts_type;
+  @ManyToOne(() => ContactHistory, (contactHistory) => contactHistory.id)
+  contactHistory: ContactHistory[];
 
   @OneToMany(() => UserDebt, (userDebt) => userDebt.id)
   userDebt: UserDebt[];
 
-  // @ManyToOne(() => FormOfPayment, (FormOfPayment) => FormOfPayment.id)
-  // formOfPayment: FormOfPayment;
 }
