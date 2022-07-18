@@ -3,25 +3,25 @@
 // import app from "../../app";
 // import request from "supertest";
 
-// describe("Testing DELETE method in /employee/:id", () => {
+// describe("Testing DELETE method in /user/:id", () => {
 //   let connection: DataSource;
-//   interface Employee {
+//   interface User {
 //     name: string;
 //     email: string;
 //     password?: string;
 //     status: boolean;
 //   }
 
-//   let testEmployee: Employee = {
-//     name: "Employee Test",
-//     email: "employee@kenzie.com",
+//   let testUser: User = {
+//     name: "User Test",
+//     email: "user@kenzie.com",
 //     password: "123456Ab!",
 //     status: true,
 //   };
 
-//   let deletedEmployee: Employee = {
-//     name: "Employee Test",
-//     email: "employee@kenzie.com",
+//   let deletedUser: User = {
+//     name: "User Test",
+//     email: "user@kenzie.com",
 //     status: false,
 //   };
 
@@ -34,21 +34,21 @@
 //         console.error("Error during Data Source initialization", err)
 //       );
 
-//     testRes1 = await request(app).post("/employee").send(testEmployee);
+//     testRes1 = await request(app).post("/user").send(testUser);
 
-//     delete testEmployee.password;
+//     delete testUser.password;
 //   });
 
 //   afterAll(async () => {
 //     await connection.destroy();
 //   });
 
-//   test("Trying to delete an employee", async () => {
+//   test("Trying to delete an user", async () => {
 //     const response = await request(app)
-//       .patch(`/employee/${testRes1.body.id}`)
-//       .send(deletedEmployee);
+//       .patch(`/user/${testRes1.body.id}`)
+//       .send(deletedUser);
 
-//     const newResponse = await request(app).get(`/employee/${testRes1.body.id}`);
+//     const newResponse = await request(app).get(`/user/${testRes1.body.id}`);
 
 //     expect(response.status).toEqual(200);
 //     expect(response.body).toHaveProperty("message");
@@ -56,16 +56,16 @@
 //     expect(newResponse.body).toEqual(
 //       expect.objectContaining({
 //         id: newResponse.body.id,
-//         name: deletedEmployee.name,
-//         email: deletedEmployee.email,
+//         name: deletedUser.name,
+//         email: deletedUser.email,
 //         created_at: newResponse.body.created_at,
 //         status: newResponse.status,
 //       })
 //     );
 //   });
 
-//   test("Trying to delete an employee that doesn't exist", async () => {
-//     const response = await request(app).delete("/employee/x2a");
+//   test("Trying to delete an user that doesn't exist", async () => {
+//     const response = await request(app).delete("/user/x2a");
 
 //     expect(response.status).toEqual(404);
 //     expect(response.body).toHaveProperty("message");

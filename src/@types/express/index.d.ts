@@ -4,7 +4,7 @@ import { IClientRequest } from "../../interfaces/client";
 declare global {
   namespace Express {
     interface Request {
-      employee: {
+      user: {
         id: number;
       };
 

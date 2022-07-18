@@ -1,5 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Employee } from "./employee.entity";
+import { User } from "./user.entity";
 
 @Entity()
 export class LevelAcess {
@@ -9,6 +9,6 @@ export class LevelAcess {
   @Column({ length: 256 })
   name: string;
 
-  @OneToMany(() => Employee, (employee) => employee.id)
-  employees: Employee[];
+  @OneToMany(() => User, (user) => user.id)
+  users: User[];
 }

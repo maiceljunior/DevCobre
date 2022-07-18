@@ -3,18 +3,18 @@ import { AppDataSource } from "../../data-source";
 import app from "../../app";
 import request from "supertest";
 
-describe("Testing POST method in /employee", () => {
+describe("Testing POST method in /user", () => {
   let connection: DataSource;
 
-  interface Employee {
+  interface User {
     name: string;
     email: string;
     password: string;
   }
 
-  let testEmployee: Employee = {
-    name: "Employee Test",
-    email: "employee@kenzie.com",
+  let testUser: User = {
+    name: "User Test",
+    email: "user@kenzie.com",
     password: "123456Ab!",
   };
 
@@ -30,8 +30,8 @@ describe("Testing POST method in /employee", () => {
     await connection.destroy();
   });
 
-  test("Trying to create an employee", async () => {
-    const response = await request(app).post("/employee").send(testEmployee);
+  test("Trying to create an user", async () => {
+    const response = await request(app).post("/user").send(testUser);
 
     expect(response.status).toEqual(201);
     expect(response.body).toEqual(
@@ -43,8 +43,8 @@ describe("Testing POST method in /employee", () => {
       })
     );
   });
-  test("Try to create an employee that already exists", async () => {
-    const response = await request(app).post("/employee").send(testEmployee);
+  test("Try to create an user that already exists", async () => {
+    const response = await request(app).post("/user").send(testUser);
 
     expect(response.status).toEqual(409);
     expect(response.body).toHaveProperty("message");
