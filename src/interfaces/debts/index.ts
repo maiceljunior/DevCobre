@@ -1,9 +1,9 @@
 export interface IDebtsRequest {
   bankId: number;
-  documentClient: number;
-  debtType: number;
+  documentClient: string;
+  ipoc: string;
   debtValue: number;
-  ipoc: number;
   debtOrigin: number;
+  debtType: string;
   dateDebt: Date;
 }
