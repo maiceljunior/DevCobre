@@ -16,16 +16,16 @@ import deleteUserInfoController from "../controllers/user/deleteUserInfo.control
 const routes = Router();
 
 export const userRoutes = () => {
-  routes.post("", duplicatedEmailMiddleware, createUserController);
-  routes.get("", verifyAuthToken, listUsersController);
-  routes.get("/:id", listOneUserController);
-  routes.delete("/:id", deleteUserController);
-  routes.patch("/:id", updateUserController);
+  routes.post("", createUserController);
+  // routes.get("", verifyAuthToken, listUsersController);
+  // routes.get("/:id", listOneUserController);
+  // routes.delete("/:id", deleteUserController);
+  // routes.patch("/:id", updateUserController);
 
-  routes.post("/:id/info", createUserInfoService);
-  routes.get("/:id/info", listUserInfoController);
-  routes.patch("/:id/info/:userId", updateUserInfoController);
-  routes.delete("/:id/info/:userId", deleteUserInfoController);
+  // routes.post("/:id/info", createUserInfoService);
+  // routes.get("/:id/info", listUserInfoController);
+  // routes.patch("/:id/info/:userId", updateUserInfoController);
+  // routes.delete("/:id/info/:userId", deleteUserInfoController);
 
   return routes;
 };
