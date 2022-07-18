@@ -37,10 +37,7 @@
 
 ### Client
 
-<<<<<<< HEAD
 ### Get `/client/:id`
-=======
->>>>>>> 1823c60959be2bdf732e21ffe662c6092b43126e
 
 ### <h2 style = background-color:gray >Post `/client`</h2>
 
@@ -74,25 +71,6 @@
 }
 ```
 ---
-<<<<<<< HEAD
-
-=======
-### <h2 style = background-color:gray>Get `/client` (Listar todos os clients)</h2>
-
-
-### Resposta: Status 200
-```json
-{
-    {
-		"document": 899999999,
-		"name": "Empresa Devedora LTDA",
-		"type": "Juridico",
-		"clientInfo": []
-	}
-}
-```
----
->>>>>>> 1823c60959be2bdf732e21ffe662c6092b43126e
 
 ### <h2 style = background-color:gray>Patch `/client/:document`</h2>
 
@@ -243,7 +221,6 @@
 	"message": "Client not found"
 }
 ```
-<<<<<<< HEAD
 ### ClientInfo
 
 ### Get `/client/:document/info`
@@ -339,10 +316,6 @@
 	"message": "Client not found!"
 }
 ```
-=======
----
-
->>>>>>> 1823c60959be2bdf732e21ffe662c6092b43126e
 <p align="center">
  • <a href="#api">Inicio API</a> •
  
@@ -393,7 +366,26 @@
 }
 ```
 ---
+### <h2 style = background-color:gray>Get `/bank/:id`</h2>
 
+
+### Resposta: Status 200
+```json
+{
+		"id": 7,
+	"name": "Banco MaxDev",
+	"status": true,
+	"bankContact": []
+}
+```
+
+### Resposta: Status 404 Not Found
+```json
+{
+	"message": "Bank not found!"
+}
+```
+---
 
 ### <h2 style = background-color:gray>Patch `/bank/:id`</h2>
 
@@ -1177,6 +1169,6 @@ As seguintes ferramentas foram usadas na construção do projeto:
 </table>
 
 <p align="center">
- • <a href="#devcobre">Inicio</a> •
+ • <a href="#api">Inicio</a> •
  
 </p>
