@@ -4,8 +4,7 @@ import listOneClientService from "../../services/client/listOneClient.service";
 const listOneClientController = async (req: Request, res: Response) => {
   const document = req.params.document;
 
-  const documentString = document.toString();
-  const client = await listOneClientService(documentString);
+  const client = await listOneClientService(document);
 
   return res.status(200).send(client);
 };

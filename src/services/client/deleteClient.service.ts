@@ -5,17 +5,15 @@ import { AppError } from "../../errors";
 const deleteClientService = async (document: string): Promise<void> => {
   const clientRepository = AppDataSource.getRepository(Client);
 
-  const documentInt = parseInt(document);
-
   const client = await clientRepository.findOneBy({
-    document: documentInt,
+    document: document,
   });
 
   if (!client) {
     throw new AppError(404, "Client not found!");
   }
 
-  await clientRepository.delete({ document: documentInt });
+  await clientRepository.delete({ document: document });
 };
 
 export default deleteClientService;
