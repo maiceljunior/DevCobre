@@ -1,16 +1,20 @@
 import { AppDataSource } from "../../data-source";
 import { AppError } from "../../errors";
 import { Agreement } from "../../entities/agreement.entity";
+import { Equal } from "typeorm";
 
-const agreementDeleteService = async (id: number) => {
+const listOneAgreementService = async (id: string): Promise<any> => {
   const agreementRepository = AppDataSource.getRepository(Agreement);
-  const agreementExists = await agreementRepository.findOneBy({ id: id });
 
-  if (!agreementExists) {
+  const agreement = await agreementRepository.findOneBy({
+    id: Number(id)
+  });
+
+  if (!agreement) {
     throw new AppError(404, "Agreement not found!");
   }
 
-  await agreementRepository.delete({ id: id });
+  return agreement;
 };
 
-export default agreementDeleteService;
+export default listOneAgreementService;
