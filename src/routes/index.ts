@@ -13,7 +13,7 @@ import { sessionRoutes } from "./session.routes";
 export const appRoutes = (app: Express) => {
   app.use("/login", sessionRoutes());
   app.use("/bank", bankRoutes());
-  app.use("/agreement", agreementRoutes);
+  app.use("/agreement", agreementRoutes());
   app.use("/client", clientRoutes());
   app.use("/debts", debtsRoutes());
   app.use("/type", debtTypeRoutes());
