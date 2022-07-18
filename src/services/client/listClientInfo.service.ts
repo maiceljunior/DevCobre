@@ -5,7 +5,7 @@ import { AppError } from "../../errors";
 const listClientInfoService = async (document: string) => {
   const clientRepository = AppDataSource.getRepository(Client);
   const findAccount = await clientRepository.findOneBy({
-    document: parseInt(document),
+    document: document,
   });
 
   if (!findAccount) {

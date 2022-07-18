@@ -6,7 +6,7 @@ import { AppError } from "../../errors";
 const deleteClientInfoService = async (document: string, idContact: string) => {
   const clientRepository = AppDataSource.getRepository(Client);
   const findClient = await clientRepository.findOneBy({
-    document: parseInt(document),
+    document: document,
   });
 
   if (!findClient) {

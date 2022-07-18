@@ -7,7 +7,7 @@ describe("Testing DELETE method in /client/:document/info/:idContact", () => {
   let connection: DataSource;
 
   interface Client {
-    document: number;
+    document: string;
     name: string;
     type: string;
   }
@@ -18,7 +18,7 @@ describe("Testing DELETE method in /client/:document/info/:idContact", () => {
   }
 
   let testClient: Client = {
-    document: 12345678910,
+    document: "12345678910",
     name: "Client Test",
     type: "Físico",
   };

@@ -1,19 +1,17 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinTable,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
-
+import { Exclude } from "class-transformer";
+import { LevelAcess } from "./levelAcess.entity";
 import { UserInfo } from "./userInfo.entity";
-
-export enum UserRole {
-  HR = "HR",
-  MANAGER = "manager",
-  SUPERVISOR = "supervisor",
-  USER = "user",
-}
+import { UserDebt } from "./userDebt.entity";
 
 @Entity("user")
 export class User {
@@ -23,18 +21,31 @@ export class User {
   @Column({ length: 250 })
   name: string;
 
-  @Column({ type: "enum", enum: UserRole, default: UserRole.USER })
-  position: UserRole;
+  @Column({ length: 251 })
+  email: string;
 
-  @OneToMany(() => UserInfo, (userInfo) => userInfo.user, {
+  @Column({ length: 250 })
+  @Exclude()
+  password: string;
+
+  @Column("boolean", { default: true })
+  status: boolean = true;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
+
+  @ManyToOne(() => LevelAcess, (levelAcess) => levelAcess.id)
+  level_acess: LevelAcess;
+
+  @ManyToOne(() => UserInfo, (userInfo) => userInfo.user, {
     eager: true,
   })
   @JoinTable()
   userInfo: UserInfo[];
 
-  // @OneToMany(() => UserInfo, (userInfo) => userInfo.user, {
-
-  // })
-  // @JoinTable()
-  // : [];
+  @OneToMany(() => UserDebt, (userDebt) => userDebt.id)
+  userDebt: UserDebt[];
 }

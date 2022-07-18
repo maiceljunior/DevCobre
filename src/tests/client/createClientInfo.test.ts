@@ -12,13 +12,13 @@ describe("Testing POST method in /client/:document/info", () => {
   }
 
   interface Client {
-    document: number;
+    document: string;
     name: string;
     type: string;
   }
 
   let teste: Client = {
-    document: 12345678910,
+    document: "12345678910",
     name: "Client Test",
     type: "Físico",
   };

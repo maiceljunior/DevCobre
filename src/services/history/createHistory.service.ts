@@ -1,3 +1,4 @@
+
 import { ContactHistory } from "../../entities/contactHistory.entity";
 import { AppDataSource } from "../../data-source";
 import { AppError } from "../../errors";
@@ -35,3 +36,4 @@ const createContactHistoryService = async (data: any) => {
 };
 
 export default createContactHistoryService;
+
