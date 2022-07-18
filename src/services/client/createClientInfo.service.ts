@@ -8,7 +8,7 @@ const createClientInfoService = async (data: IInfoClient): Promise<any> => {
   const clientRepository = AppDataSource.getRepository(Client);
 
   const findClient = await clientRepository.findOneBy({
-    document: parseInt(data.document),
+    document: data.document,
   });
 
   if (!findClient) {

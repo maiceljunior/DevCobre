@@ -10,7 +10,7 @@ const updateClientInfoService = async (
   const clientRepository = AppDataSource.getRepository(Client);
 
   const client = await clientRepository.findOneBy({
-    document: parseInt(document),
+    document: document,
   });
 
   if (!client) {

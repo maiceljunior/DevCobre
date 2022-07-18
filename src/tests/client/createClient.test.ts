@@ -7,15 +7,21 @@ describe("Testing POST method in /client", () => {
   let connection: DataSource;
 
   interface Client {
+    document: string;
     name: string;
-    document: number;
     type: string;
   }
 
   let testClient: Client = {
+    document: "12345678901",
     name: "Client Test",
-    document: 12345678901,
-    type: "Pessoa Fisica",
+    type: "Fisico",
+  };
+
+  let testClient2: Client = {
+    document: "12345678901",
+    name: "Client TestDois",
+    type: "Fisico",
   };
 
   beforeAll(async () => {
@@ -42,8 +48,16 @@ describe("Testing POST method in /client", () => {
       })
     );
   });
-  test("Try to create an client that already exists", async () => {
+
+  test("Trying to create an client that already exists", async () => {
     const response = await request(app).post("/client").send(testClient);
+
+    expect(response.status).toEqual(409);
+    expect(response.body).toHaveProperty("message");
+  });
+
+  test("Trying to create a client with a document that already exists", async () => {
+    const response = await request(app).post("/client").send(testClient2);
 
     expect(response.status).toEqual(409);
     expect(response.body).toHaveProperty("message");
