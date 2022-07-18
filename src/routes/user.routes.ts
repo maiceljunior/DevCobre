@@ -11,11 +11,13 @@ import { Router } from "express";
 // import deleteUserInfoController from "../controllers/user/deleteUserInfo.controller";
 import createUserDebtController from "../controllers/userDebt/createUserDebt.controller";
 import createUserController from "../controllers/user/createUser.controller";
+import deleteUserDebtController from "../controllers/userDebt/deleteUserDebt.controller";
 const routes = Router();
 
 export const userRoutes = () => {
   routes.post("", createUserController);
   routes.post("/debts/:debtId/:userId", createUserDebtController);
+  routes.delete("/debts/:id", deleteUserDebtController);
   // routes.get("", verifyAuthToken, listUsersController);
   // routes.get("/:id", listOneUserController);
   // routes.delete("/:id", deleteUserController);

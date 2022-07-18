@@ -1,10 +1,15 @@
-import { Column, Entity, OneToOne, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  OneToOne,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { Debts } from "./debt.entity";
 import { Bank } from "./bank.entity";
 import { Client } from "./client.entity";
-import { Employee } from "./employee.entity";
-
 import { FormOfPayment } from "./formOfPayment.entity";
+import { User } from "./user.entity";
 
 @Entity("agreement")
 export class Agreement {
@@ -29,10 +34,9 @@ export class Agreement {
   @ManyToOne(() => Client, (client) => client.document)
   client: Client;
 
-  @ManyToOne(() => Employee, (user) => user.id)
-  user: Employee;
-    
+  @ManyToOne(() => User, (user) => user.id)
+  user: User;
+
   @OneToOne(() => FormOfPayment, (formOfPayment) => formOfPayment.id)
   formofpayment: FormOfPayment;
-
 }
