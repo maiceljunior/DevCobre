@@ -1,5 +1,5 @@
-### DevCobre
-<p align="center">Criação de sistema que recebe uma lista de dividas, nas quais teremos informações desses clientes no banco, assim podendo entrar em contato com e negociando o valor da divida do cliente perante o banco.</p>
+### <h1 align="center">DevCobre</h1>
+<p align="center">O sistema é focado na parte de cobrança de dividas, nas quais ele recebe a informação de dividendos dos banco, assim organizamos de uma forma pratica e rapida para realizar o contato e assim realizar um acordo com o dividendo.</p>
 
 
 <p align="center">
@@ -1074,7 +1074,3 @@ As seguintes ferramentas foram usadas na construção do projeto:
  • <a href="#devcobre">Inicio</a> •
  
 </p>
-
-
-
-
