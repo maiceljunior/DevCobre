@@ -72,10 +72,6 @@
 
 ---
 
-<<<<<<< HEAD
-
-=======
-
 ### <h2 style = background-color:gray>Get `/client` (Listar todos os clients)</h2>
 
 ### Resposta: Status 200
@@ -262,8 +258,6 @@
   "message": "Client not found"
 }
 ```
-
-<<<<<<< HEAD
 
 ### ClientInfo
 
