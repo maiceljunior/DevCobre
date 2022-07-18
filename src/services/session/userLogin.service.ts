@@ -1,14 +1,14 @@
 import { AppDataSource } from "../../data-source";
-import { User } from "../../entities/user.entity";
 import { AppError } from "../../errors";
 import { IUserLogin } from "../../interfaces/user";
 import * as bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { UserInfo } from "../../entities/userInfo.entity";
 
 const userLoginService = async ({ email, password }: IUserLogin) => {
-  const userRepository = AppDataSource.getRepository(User);
+  const userRepository = AppDataSource.getRepository(UserInfo);
 
-  const user = await userRepository.findOneBy({ email: email });
+  const user = await userRepository.find();
 
   if (!user) {
     throw new AppError(400, "Wrong email/password");

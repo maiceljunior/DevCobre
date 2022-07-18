@@ -1,5 +1,12 @@
 export interface IUserRequest {
-  name: string;
+  body: {
+    name: string;
+    email: string;
+    password: string;
+    telephone?: number;
+    address?: string;
+    status?: boolean;
+  };
 }
 
 export interface IUserReturn {

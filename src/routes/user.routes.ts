@@ -5,7 +5,7 @@ import duplicatedEmailMiddleware from "../middlewares/duplicatedEmail.middleware
 
 import deleteUserController from "../controllers/user/deleteUser.controller";
 import createUserController from "../controllers/user/createUser.controller";
-import createUserInfoService from "../services/user/createUserInfo.service";
+
 import listUserInfoController from "../controllers/user/listUserInfo.controller";
 import listUsersController from "../controllers/user/listUsers.controller";
 import listOneUserController from "../controllers/user/listOneUser.controller";
@@ -22,7 +22,6 @@ export const userRoutes = () => {
   // routes.delete("/:id", deleteUserController);
   // routes.patch("/:id", updateUserController);
 
-  // routes.post("/:id/info", createUserInfoService);
   // routes.get("/:id/info", listUserInfoController);
   // routes.patch("/:id/info/:userId", updateUserInfoController);
   // routes.delete("/:id/info/:userId", deleteUserInfoController);
