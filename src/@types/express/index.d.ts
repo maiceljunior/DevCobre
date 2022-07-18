@@ -1,11 +1,14 @@
 import * as express from "express";
+import { IClientRequest } from "../../interfaces/client";
 
 declare global {
   namespace Express {
     interface Request {
-      employee: {
+      user: {
         id: number;
       };
+      newClient: IClientRequest;
+      newBank: IBankRequest;
     }
   }
 }

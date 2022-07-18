@@ -3,16 +3,19 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Bank } from "./bank.entity";
 import { Client } from "./client.entity";
 import { ContactHistory } from "./contactHistory.entity";
+import { UserDebt } from "./userDebt.entity";
 
 export enum DebtType {
   CREDITO = "credito",
   EMPRESTIMO = "emprestimo",
 }
+
 
 @Entity("debts")
 export class Debts {
@@ -48,4 +51,8 @@ export class Debts {
 
   @ManyToOne(() => ContactHistory, (contactHistory) => contactHistory.id)
   contactHistory: ContactHistory[];
+
+  @OneToMany(() => UserDebt, (userDebt) => userDebt.id)
+  userDebt: UserDebt[];
+
 }

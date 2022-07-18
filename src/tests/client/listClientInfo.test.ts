@@ -7,7 +7,7 @@ describe("Testing GET method in /client/:document/info", () => {
   let connection: DataSource;
 
   interface Client {
-    document: number;
+    document: string;
     name: string;
     type: string;
   }
@@ -18,14 +18,14 @@ describe("Testing GET method in /client/:document/info", () => {
   }
 
   let client1: Client = {
-    document: 12345678910,
+    document: "12345678910",
     name: "Client Test",
     type: "Físico",
   };
 
   let client2: Client = {
-    document: 456456456,
-    name: "Client Test 2",
+    document: "44564564561235",
+    name: "Client TestDois",
     type: "Jurídico",
   };
 

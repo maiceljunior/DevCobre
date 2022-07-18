@@ -7,21 +7,21 @@ describe("Testing POST method in /client", () => {
   let connection: DataSource;
 
   interface Client {
-    document: number;
+    document: string;
     name: string;
     type: string;
   }
 
   let testClient: Client = {
-    document: 12345678901,
+    document: "12345678901",
     name: "Client Test",
-    type: "Pessoa Fisica",
+    type: "Fisico",
   };
 
   let testClient2: Client = {
-    document: 12345678901,
-    name: "Client Test2",
-    type: "Pessoa Fisica",
+    document: "12345678901",
+    name: "Client TestDois",
+    type: "Fisico",
   };
 
   beforeAll(async () => {

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { AppDataSource } from "../data-source";
-import { Employee } from "../entities/employee.entity";
+import { User } from "../entities/user.entity";
 import { AppError } from "../errors";
 
 const duplicatedEmailMiddleware = async (
@@ -10,11 +10,11 @@ const duplicatedEmailMiddleware = async (
 ) => {
   const { email } = req.body;
 
-  const employeeRepository = AppDataSource.getRepository(Employee);
+  const userRepository = AppDataSource.getRepository(User);
 
-  const employee = await employeeRepository.findOneBy({ email });
+  const user = await userRepository.findOneBy({ email });
 
-  if (employee) {
+  if (user) {
     throw new AppError(409, "Email already exists");
   }
 
