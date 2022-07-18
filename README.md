@@ -35,13 +35,7 @@
 
 ### Client
 
-<<<<<<< HEAD
-
 ### Get `/client/:id`
-
-=======
-
-> > > > > > > 1823c60959be2bdf732e21ffe662c6092b43126e
 
 ### <h2 style = background-color:gray >Post `/client`</h2>
 
