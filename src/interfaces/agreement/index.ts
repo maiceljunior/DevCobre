@@ -1,18 +1,20 @@
 export interface IAgreementRequest {
-    id?: number;
     agreedValue: number;
-    dataAgree: Date;
-    debtsId: number;
-    clientDocument: number;
+    dateAgree: Date;
+    status: boolean;
+    debts: number;
+    bank: string;
+    client: string;
+    user: string;
     formOfPayment: number;
 }
-
 export interface IAgreementReturn {
     id: number;
-    agreedValue: number;
-    dataAgree: Date;
-    debtsId: number;
-    clientDocument: number;
+    dateAgree: Date;
+    status: boolean;
+    debts: number;
+    bank: number;
+    client: number;
     formOfPayment: number;
 }
 
