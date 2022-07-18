@@ -1,16 +1,18 @@
 export interface IUserRequest {
-  name: string;
-  email: string;
-  password: string;
+  body: {
+    name: string;
+    email: string;
+    password: string;
+    telephone?: number;
+    address?: string;
+    status?: boolean;
+  };
 }
 
 export interface IUserReturn {
   id: number;
   name: string;
-  email: string;
-  status: boolean;
-  created_at: Date;
-  updated_at: Date;
+  position: string;
 }
 
 export interface IUserLogin {
@@ -32,5 +34,10 @@ export interface IUserInfo {
   body: {
     telephone: number;
     address: string;
+    emai: string;
+    password: string;
+    status: boolean;
+    created_at: string;
+    updated_at: string;
   };
 }

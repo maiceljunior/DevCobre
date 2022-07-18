@@ -3,14 +3,9 @@ import { Request, Response } from "express";
 import createUserService from "../../services/user/createUser.service";
 
 const createUserController = async (req: Request, res: Response) => {
-  const { name, email, password } = req.body;
+  const data = { body: req.body };
 
-  const newUser = await createUserService({
-    name,
-    email,
-    password,
-  });
-  console.log("Aqui");
+  const newUser = await createUserService(data);
   return res.status(201).send(instanceToPlain(newUser));
 };
 
