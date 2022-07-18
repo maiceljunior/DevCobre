@@ -1,6 +1,6 @@
 ### DevCobre
-<p align="center">Criação de sistema que recebe uma lista de dividas, nas quais teremos informações desses clientes no banco, assim podendo entrar em contato com e negociando o valor da divida do cliente perante o banco.</p>
 
+<p align="center">Criação de sistema que recebe uma lista de dividas, nas quais teremos informações desses clientes no banco, assim podendo entrar em contato com e negociando o valor da divida do cliente perante o banco.</p>
 
 <p align="center">
  <a href="#objetivo">Objetivo</a> •
@@ -9,9 +9,7 @@
   <a href="#devs">Devs</a> • 
 </p>
 
-
 ---
-
 
 ### API
 
@@ -25,7 +23,7 @@
   <a href="#debttype">Debt Type</a> • 
   <a href="#agreement">Agreement</a> • 
   <a href="#agreementstatus">Agreement Status</a> • 
-  <a href="#employee">Employee</a> • 
+  <a href="#user">User</a> • 
   <a href="#levelacess">Level Acess</a> • 
   <a href="#contactHistory">Contact History</a> • 
   <a href="#formPayment">Form Payment</a> • 
@@ -39,200 +37,235 @@
 
 ### Get `/client`
 
-
 ### Resposta: Status 200
+
 ```json
 {
-    "document": 5555555555,
-    "name": "Ana Paula",
-    "type": "Fisico"
+  "document": 5555555555,
+  "name": "Ana Paula",
+  "type": "Fisico"
 }
 ```
+
 ---
+
 ### Get `/client/:document/info`
 
-
 ### Resposta: Status 200
+
 ```json
 {
-    "document": 5555555555,
-    "name": "Ana Paula",
-    "type": "Fisico"
+  "document": 5555555555,
+  "name": "Ana Paula",
+  "type": "Fisico"
 }
 ```
+
 ---
 
 ### Resposta: Status 404 Not Found
+
 ```json
 {
-	"status": "error",
-	"code": 404,
-	"message": "Client not found"
+  "status": "error",
+  "code": 404,
+  "message": "Client not found"
 }
 ```
 
 ### Post `/client`
 
-
 ### Regras:
+
 - `name`,`type` e `document`: precisam ser uma string.
 
+```json
+{
+  "name": "Empresa Devedora LTDA",
+  "type": "Juridico"
+}
+```
+
+### Resposta: Status 201 Created
 
 ```json
 {
-    "name": "Empresa Devedora LTDA",
-    "type": "Juridico"
+  "document": 5555555555,
+  "name": "Empresa Devedora LTDA",
+  "type": "Juridico"
 }
 ```
-### Resposta: Status 201 Created
-```json
-{
-    "document": 5555555555,
-    "name": "Empresa Devedora LTDA",
-    "type": "Juridico"
-}
-```
+
 ---
 
 ### Resposta: Status 404 Not Found
+
 ```json
 {
-	"status": "error",
-	"code": 404,
-	"message": "Client already exists"
+  "status": "error",
+  "code": 404,
+  "message": "Client already exists"
 }
 ```
+
 ---
 
 ### Patch `/client/:document`
 
-
 ### Resposta: Status 200 Update
+
 ```json
 {
-	"message": "Updated client"
+  "message": "Updated client"
 }
 ```
+
 ---
+
 ### Resposta: Status 404 Not Found
+
 ```json
 {
-	"status": "error",
-	"code": 404,
-	"message": "Client not found!"
+  "status": "error",
+  "code": 404,
+  "message": "Client not found!"
 }
 ```
+
 ---
 
 ### Delete `/client/:document`
 
-
 ### Resposta: Status 200
+
 ```json
 {
-	"message": "Client deleted with sucess!"
+  "message": "Client deleted with sucess!"
 }
 ```
+
 ---
+
 ### Resposta: Status 404 Not Found
+
 ```json
 {
-	"status": "error",
-	"code": 404,
-	"message": "Client not found!"
+  "status": "error",
+  "code": 404,
+  "message": "Client not found!"
 }
 ```
+
 <p align="center">
  • <a href="#api">Inicio API</a> •
  
 </p>
 
 ---
+
 ### Bank
 
 ### Get `/bank`
 
-
 ### Resposta: Status 200
+
 ```json
-  {
-		"id": 1,
-		"name": "Bank1",
-		"status": true
-	}
+{
+  "id": 1,
+  "name": "Bank1",
+  "status": true
+}
 ```
+
 ---
 
 ### Post `/bank`
+
 ```json
 {
-    "name": "Bank1",
-    "status": true
+  "name": "Bank1",
+  "status": true
 }
 ```
 
-### Resposta: Status 
+### Resposta: Status
+
 ```json
 {
-	"name": "Bank1",
-	"status": true,
-	"id": 1
+  "name": "Bank1",
+  "status": true,
+  "id": 1
 }
 ```
+
 ---
+
 ### Resposta: Status 404 Not Found
+
 ```json
 {
-	"status": "error",
-	"code": 400,
-	"message": "Bank already exists!"
+  "status": "error",
+  "code": 400,
+  "message": "Bank already exists!"
 }
 ```
+
 ---
 
 ### Patch `/bank/:id`
 
 ```json
 {
-	"name": "New Bank"
+  "name": "New Bank"
 }
 ```
+
 ---
 
 ### Resposta: Status 200
+
 ```json
 {
-	"message": "Updated Bank!"
+  "message": "Updated Bank!"
 }
 ```
+
 ---
+
 ### Resposta: Status 404 Not Found
+
 ```json
 {
-	"status": "error",
-	"code": 404,
-	"message": "Bank not found!"
+  "status": "error",
+  "code": 404,
+  "message": "Bank not found!"
 }
 ```
+
 ---
+
 ### Delete `/bank/:id`
 
-
 ### Resposta: Status 200
+
 ```json
 {
-	"message": "Bank deleted witdh sucess!"
+  "message": "Bank deleted witdh sucess!"
 }
 ```
+
 ---
+
 ### Resposta: Status 404 Not Found
+
 ```json
 {
-	"status": "error",
-	"code": 404,
-	"message": "Bank not found!"
+  "status": "error",
+  "code": 404,
+  "message": "Bank not found!"
 }
 ```
+
 <p align="center">
  • <a href="#api">Inicio API</a> •
  
@@ -244,45 +277,40 @@
 
 ### Get `/debts`
 
+### Resposta: Status
 
-### Resposta: Status 
 ```json
-{
-   
-}
+{}
 ```
+
 ---
 
 ### Post `/debts`
 
+### Resposta: Status
 
-### Resposta: Status 
 ```json
-{
-   
-}
+{}
 ```
+
 ---
 
 ### Patch `/debts/:id`
 
+### Resposta: Status
 
-### Resposta: Status 
 ```json
-{
-   
-}
+{}
 ```
+
 ---
 
 ### Delete `/debts/:id`
 
+### Resposta: Status
 
-### Resposta: Status 
 ```json
-{
-   
-}
+{}
 ```
 
 <p align="center">
@@ -296,41 +324,37 @@
 
 ### Get `/type`
 
+### Resposta: Status
 
-### Resposta: Status 
 ```json
-{
-   
-}
+{}
 ```
+
 ---
 
 ### Post `/type`
 
+### Resposta: Status
 
-### Resposta: Status 
 ```json
-{
-   
-}
+{}
 ```
+
 ---
 
 ### Patch `/type/:id`
 
+### Resposta: Status
 
-### Resposta: Status 
 ```json
-{
-   
-}
+{}
 ```
+
 ---
 
 ### Delete `/type/:id`
 
-
-### Resposta: Status 
+### Resposta: Status
 
 <p align="center">
  • <a href="#api">Inicio API</a> •
@@ -343,46 +367,42 @@
 
 ### Get `/agreement`
 
+### Resposta: Status
 
-### Resposta: Status 
 ```json
-{
-   
-}
+{}
 ```
+
 ---
 
 ### Post `/agreement`
 
+### Resposta: Status
 
-### Resposta: Status 
 ```json
-{
-   
-}
+{}
 ```
+
 ---
 
 ### Patch `/agreement/:id`
 
+### Resposta: Status
 
-### Resposta: Status 
 ```json
-{
-   
-}
+{}
 ```
+
 ---
 
 ### Delete `/agreement/:id`
 
+### Resposta: Status
 
-### Resposta: Status 
 ```json
-{
-   
-}
+{}
 ```
+
 <p align="center">
  • <a href="#api">Inicio API</a> •
  
@@ -394,46 +414,42 @@
 
 ### Get `/status`
 
+### Resposta: Status
 
-### Resposta: Status 
 ```json
-{
-   
-}
+{}
 ```
+
 ---
 
 ### Post `/status`
 
+### Resposta: Status
 
-### Resposta: Status 
 ```json
-{
-   
-}
+{}
 ```
+
 ---
 
 ### Patch `/status/:id`
 
+### Resposta: Status
 
-### Resposta: Status 
 ```json
-{
-   
-}
+{}
 ```
+
 ---
 
 ### Delete `/status/:id`
 
+### Resposta: Status
 
-### Resposta: Status 
 ```json
-{
-   
-}
+{}
 ```
+
 <p align="center">
  • <a href="#api">Inicio API</a> •
  
@@ -441,105 +457,123 @@
 
 ---
 
-### Employee
+### User
 
-### Get `/employee/:id`
-
+### Get `/user/:id`
 
 ### Resposta: Status 200
+
 ```json
 {
-	"id": 1,
-	"name": "employee1",
-	"email": "mail@mail.com",
-	"created_at": "2022-07-14T16:42:07.871Z",
-	"updated_at": "2022-07-14T16:42:07.871Z"
+  "id": 1,
+  "name": "user1",
+  "email": "mail@mail.com",
+  "created_at": "2022-07-14T16:42:07.871Z",
+  "updated_at": "2022-07-14T16:42:07.871Z"
 }
 ```
+
 ---
 
 ### Resposta: Status 404 Not Found
+
 ```json
 {
-	"message": "Employee not found!"
+  "message": "User not found!"
 }
 ```
+
 ---
 
-### Post `/employee`
+### Post `/user`
 
 ```json
 {
-	"name":"employee1",
-	"email":"mail@mail.com",
-	"password":"123456",
-	"level_acess":"1",
-	"status":true
+  "name": "user1",
+  "email": "mail@mail.com",
+  "password": "123456",
+  "level_acess": "1",
+  "status": true
 }
 ```
 
 ### Resposta: Status 201
+
 ```json
 {
-	"id": 1,
-	"name": "employee1",
-	"email": "mail@mail.com",
-	"status": true,
-	"created_at": "2022-07-14T16:42:07.871Z",
-	"updated_at": "2022-07-14T16:42:07.871Z"
+  "id": 1,
+  "name": "user1",
+  "email": "mail@mail.com",
+  "status": true,
+  "created_at": "2022-07-14T16:42:07.871Z",
+  "updated_at": "2022-07-14T16:42:07.871Z"
 }
 ```
+
 ---
+
 ### Resposta: Status 409 Conflict
+
 ```json
 {
-	"message": "Email already exists"
+  "message": "Email already exists"
 }
 ```
+
 ---
 
-### Patch `/employee/:id`
+### Patch `/user/:id`
+
 ```json
 {
-	"name":"employee Adm"	,
-	"email":"mail@mail.com",
-	"password":"123456"
+  "name": "user Adm",
+  "email": "mail@mail.com",
+  "password": "123456"
 }
 ```
+
 ---
+
 ### Resposta: Status 200
+
 ```json
 {
-	"message": "Employee updated!"
+  "message": "User updated!"
 }
 ```
+
 ---
 
 ### Resposta: Status 404 Not Found
+
 ```json
 {
-	"message": "Employee not found!"
+  "message": "User not found!"
 }
 ```
+
 ---
 
-### Delete `/employee/:id`
-
+### Delete `/user/:id`
 
 ### Resposta: Status 200
+
 ```json
 {
-	"message": "Employee deleted!"
+  "message": "User deleted!"
 }
 ```
+
 ---
 
 ### Resposta: Status 404 Not Found
+
 ```json
 {
-	"message": "Employee not found!"
+  "message": "User not found!"
 }
 ```
+
 ---
 
 <p align="center">
@@ -553,41 +587,37 @@
 
 ### Get `/level`
 
+### Resposta: Status
 
-### Resposta: Status 
 ```json
-{
-   
-}
+{}
 ```
+
 ---
 
 ### Post `/level`
 
+### Resposta: Status
 
-### Resposta: Status 
 ```json
-{
-   
-}
+{}
 ```
+
 ---
 
 ### Patch `/level/:id`
 
+### Resposta: Status
 
-### Resposta: Status 
 ```json
-{
-   
-}
+{}
 ```
+
 ---
 
 ### Delete `/level/:id`
 
-
-### Resposta: Status 
+### Resposta: Status
 
 <p align="center">
  • <a href="#api">Inicio API</a> •
@@ -600,41 +630,37 @@
 
 ### Get `/history`
 
+### Resposta: Status
 
-### Resposta: Status 
 ```json
-{
-   
-}
+{}
 ```
+
 ---
 
 ### Post `/history`
 
+### Resposta: Status
 
-### Resposta: Status 
 ```json
-{
-   
-}
+{}
 ```
+
 ---
 
 ### Patch `/history/:id`
 
+### Resposta: Status
 
-### Resposta: Status 
 ```json
-{
-   
-}
+{}
 ```
+
 ---
 
 ### Delete `/history/:id`
 
-
-### Resposta: Status 
+### Resposta: Status
 
 <p align="center">
  • <a href="#api">Inicio API</a> •
@@ -647,41 +673,38 @@
 
 ### Get `/payment`
 
+### Resposta: Status
 
-### Resposta: Status 
 ```json
-{
-   
-}
+{}
 ```
+
 ---
 
 ### Post `/payment`
 
+### Resposta: Status
 
-### Resposta: Status 
 ```json
-{
-   
-}
+{}
 ```
+
 ---
 
 ### Patch `/payment/:id`
 
+### Resposta: Status
 
-### Resposta: Status 
 ```json
-{
-   
-}
+{}
 ```
+
 ---
 
 ### Delete `/payment/:id`
 
+### Resposta: Status
 
-### Resposta: Status 
 <p align="center">
  • <a href="#api">Inicio API</a> •
  
@@ -697,9 +720,6 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [TypeScript](https://www.typescriptlang.org/)
 - [TypeORM](https://typeorm.io/)
 - [Docker](https://www.docker.com/)
-
-
-
 
 ### Devs
 
@@ -719,7 +739,3 @@ As seguintes ferramentas foram usadas na construção do projeto:
  • <a href="#devcobre">Inicio</a> •
  
 </p>
-
-
-
-

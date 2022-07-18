@@ -1,13 +1,13 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Employee } from "./employee.entity";
+import { User } from "./user.entity";
 
-@Entity("employee_info")
-export class EmployeeInfo {
+@Entity("user_info")
+export class UserInfo {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
-  @ManyToOne(() => Employee, (employee) => employee.id)
-  employee: Employee;
+  @ManyToOne(() => User, (user) => user.id)
+  user: User;
 
   @Column({ nullable: true })
   telephone: number;

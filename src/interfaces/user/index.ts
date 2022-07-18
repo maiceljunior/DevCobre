@@ -1,10 +1,10 @@
-export interface IEmployeeRequest {
+export interface IUserRequest {
   name: string;
   email: string;
   password: string;
 }
 
-export interface IEmployeeReturn {
+export interface IUserReturn {
   id: number;
   name: string;
   email: string;
@@ -13,12 +13,12 @@ export interface IEmployeeReturn {
   updated_at: Date;
 }
 
-export interface IEmployeeLogin {
+export interface IUserLogin {
   email: string;
   password: string;
 }
 
-export interface IEmployeeUpdate {
+export interface IUserUpdate {
   id: string;
   body: {
     name?: string;
@@ -27,7 +27,7 @@ export interface IEmployeeUpdate {
   };
 }
 
-export interface IEmployeeInfo {
+export interface IUserInfo {
   id: string;
   body: {
     telephone: number;
