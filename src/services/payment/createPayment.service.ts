@@ -16,7 +16,6 @@ const createPaymentService = async (data: any) => {
   } = data;
   const paymentRepository = AppDataSource.getRepository(FormOfPayment);
 
-  console.log(debtsId);
   const debtRepository = AppDataSource.getRepository(Debts);
   const debt = await debtRepository.findOneBy({ id: debtsId });
 
@@ -25,28 +24,28 @@ const createPaymentService = async (data: any) => {
   }
   if (cash_payment === true) {
     if (installments === true) {
-      throw new AppError(400, "select only one payment method!");
+      throw new AppError(400, "Select only one payment method!");
     }
     if (entry_installments === true) {
-      throw new AppError(400, "select only one payment method!");
+      throw new AppError(400, "Select only one payment method!");
     }
   }
 
   if (installments === true) {
     if (cash_payment === true) {
-      throw new AppError(400, "select only one payment method!");
+      throw new AppError(400, "Select only one payment method!");
     }
     if (entry_installments === true) {
-      throw new AppError(400, "select only one payment method!");
+      throw new AppError(400, "Select only one payment method!");
     }
   }
 
   if (entry_installments === true) {
     if (cash_payment === true) {
-      throw new AppError(400, "select only one payment method!");
+      throw new AppError(400, "Select only one payment method!");
     }
     if (installments === true) {
-      throw new AppError(400, "select only one payment method!");
+      throw new AppError(400, "Select only one payment method!");
     }
   }
 
