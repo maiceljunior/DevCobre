@@ -1,8 +1,9 @@
 import { AppDataSource } from "../../data-source";
 import { AppError } from "../../errors";
 import { Agreement } from "../../entities/agreement.entity";
+import { IAgreementUpdate } from "../../interfaces/agreement";
 
-const updateAgreementService = async ({ id, agreedValue, dateAgree, status }: any): Promise<any>=> {
+const updateAgreementService = async ({ id, agreedValue, dateAgree, status }: IAgreementUpdate)=> {
   const agreementRepository = AppDataSource.getRepository(Agreement);
   const agreementExists = await agreementRepository.findOneBy({ id: id });
   if (!agreementExists) {
