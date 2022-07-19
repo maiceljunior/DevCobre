@@ -8,7 +8,6 @@ declare global {
         id: number;
       };
       newClient: IClientRequest;
-      newBank: IBankRequest;
     }
   }
 }
