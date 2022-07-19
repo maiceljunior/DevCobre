@@ -13,13 +13,9 @@ import verifyAuthPosition from "../middlewares/verifyAuthPosition.middleware";
 const routes = Router();
 
 export const userRoutes = () => {
-  routes.post("", schemaValidation(registerSchema), createUserController);
 
-  routes.post(
-    "/debts/:debtId/:userId",
-    verifyAuthPosition,
-    createUserDebtController
-  );
+  routes.post("/debts/:userId", createUserDebtController);
+  routes.post("", schemaValidation(registerSchema), createUserController);
   routes.delete("/debts/:id", deleteUserDebtController);
   routes.get("", listUsersController);
   routes.get("/:id", listOneUserController);

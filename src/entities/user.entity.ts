@@ -5,9 +5,9 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { ContactHistory } from "./contactHistory.entity";
-import { UserDebt } from "./userDebt.entity";
 
+import { Debts } from "./debt.entity";
+import { ContactHistory } from "./contactHistory.entity";
 import { UserInfo } from "./userInfo.entity";
 
 export enum UserRole {
@@ -34,8 +34,9 @@ export class User {
   @JoinTable()
   userInfo: UserInfo[];
 
-  @OneToMany(() => UserDebt, (userDebt) => userDebt.id)
-  userDebt: UserDebt[];
+  @OneToMany(() => Debts, (debt) => debt.user)
+  @JoinTable()
+  debts: Debts[];
 
   @OneToMany(() => ContactHistory, (contactHistory) => contactHistory.id)
   contactHistory: ContactHistory[];
