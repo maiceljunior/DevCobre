@@ -22,11 +22,16 @@ export interface IUserLogin {
 }
 
 export interface IUserUpdate {
-  id: string;
   body: {
-    name?: string;
-    email?: string;
-    password?: string;
+    id: string;
+    name: string;
+    email: string;
+    password: string;
+    telephone: number;
+    address: string;
+    emai: string;
+    status: boolean;
+    position: string;
   };
 }
 

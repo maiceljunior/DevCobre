@@ -23,7 +23,7 @@ export class User {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
-  @Column({ length: 251 })
+  @Column({ length: 250 })
   name: string;
 
   @Column({ type: "simple-enum", enum: UserRole, default: UserRole.USER })
@@ -34,7 +34,7 @@ export class User {
   })
   @Exclude()
   @JoinTable()
-  userInfo: UserInfo[];
+  userInfo: UserInfo;
 
   @OneToMany(() => Debts, (debt) => debt.user)
   @JoinTable()
