@@ -21,7 +21,8 @@ const createPaymentService = async (data:any) => {
         entry_installments:entry_installments,
         entry:entry,
         installments_times:installments_times,
-        values_installments:values_installments
+        values_installments:values_installments,
+        debts_id:debts_id
     });
 
     await paymentRepository.save(payment);
