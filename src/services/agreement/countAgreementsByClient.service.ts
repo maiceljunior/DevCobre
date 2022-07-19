@@ -2,7 +2,7 @@ import { AppDataSource } from "../../data-source";
 import { Agreement } from "../../entities/agreement.entity";
 import { Equal } from "typeorm";
 
-const countAgreementsByClientService = async (clientId: string): Promise<any> => {
+const countAgreementsByClientService = async (clientId: string) => {
   const agreementRepository = AppDataSource.getRepository(Agreement);
   const completed = await agreementRepository.count({where: {
     status: true,

@@ -1,7 +1,7 @@
 import { AppDataSource } from "../../data-source";
 import { Agreement } from "../../entities/agreement.entity";
 
-const countAgreementsService = async (): Promise<any> => {
+const countAgreementsService = async () => {
   const agreementRepository = AppDataSource.getRepository(Agreement);
   const completed = await agreementRepository.count({where: {
     status: true,

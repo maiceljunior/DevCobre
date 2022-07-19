@@ -6,10 +6,10 @@ const createAgreementController = async (req: Request, res: Response) => {
     agreedValue,
     dateAgree,
     status,
-    debtsId,
-    bankId,
-    clientId,
-    userId,
+    debts,
+    bank,
+    client,
+    user,
     formOfPayment,
   } = req.body;
 
@@ -17,10 +17,10 @@ const createAgreementController = async (req: Request, res: Response) => {
     agreedValue,
     dateAgree,
     status,
-    debtsId,
-    bankId,
-    clientId,
-    userId,
+    debts,
+    bank,
+    client,
+    user,
     formOfPayment,
   });
 
