@@ -16,7 +16,6 @@ export enum DebtType {
   EMPRESTIMO = "emprestimo",
 }
 
-
 @Entity("debts")
 export class Debts {
   @PrimaryGeneratedColumn("increment")
@@ -31,7 +30,7 @@ export class Debts {
   @Column({ type: "numeric", precision: 10, scale: 2 })
   debtOrigin: number;
 
-  @Column({ type: "enum", enum: DebtType, default: DebtType.CREDITO })
+  @Column({ type: "simple-enum", enum: DebtType, default: DebtType.CREDITO })
   debtType: DebtType;
 
   @CreateDateColumn()
@@ -54,5 +53,4 @@ export class Debts {
 
   @OneToMany(() => UserDebt, (userDebt) => userDebt.id)
   userDebt: UserDebt[];
-
 }
