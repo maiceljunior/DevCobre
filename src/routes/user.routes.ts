@@ -8,6 +8,7 @@ import registerSchema from "../schemas/register/register.schema";
 import listUsersController from "../controllers/user/listUsers.controller";
 import listOneUserController from "../controllers/user/listOneUser.controller";
 import deleteUserController from "../controllers/user/deleteUser.controller";
+import updateUserController from "../controllers/user/updateUser.controller";
 const routes = Router();
 
 export const userRoutes = () => {
