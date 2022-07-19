@@ -20,6 +20,7 @@ const registerSchema = yup.object().shape({
     .required("Telephone is required")
     .min(6, "Telephone requires at least 6 characters")
     .max(14, "Telephone cannot exceed 14 characters"),
+  position: yup.string().required("You need to declare your position."),
 });
 
 export default registerSchema;
