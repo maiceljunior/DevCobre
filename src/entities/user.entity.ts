@@ -24,7 +24,7 @@ export class User {
   @Column({ length: 250 })
   name: string;
 
-  @Column({ type: "enum", enum: UserRole, default: UserRole.USER })
+  @Column({ type: "simple-enum", enum: UserRole, default: UserRole.USER })
   position: UserRole;
 
   @OneToMany(() => UserInfo, (userInfo) => userInfo.user, {
