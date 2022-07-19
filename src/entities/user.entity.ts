@@ -9,6 +9,7 @@ import {
 import { Debts } from "./debt.entity";
 import { ContactHistory } from "./contactHistory.entity";
 import { UserInfo } from "./userInfo.entity";
+import { Exclude } from "class-transformer";
 
 export enum UserRole {
   HR = "HR",
@@ -31,6 +32,7 @@ export class User {
   @OneToMany(() => UserInfo, (userInfo) => userInfo.user, {
     eager: true,
   })
+  @Exclude()
   @JoinTable()
   userInfo: UserInfo[];
 
