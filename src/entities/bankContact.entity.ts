@@ -12,6 +12,8 @@ export class BankContact {
   @Column({ nullable: true, length: 250 })
   email: string;
 
-  @ManyToOne(() => Bank, (bank) => bank.id)
+  @ManyToOne(() => Bank, (bank) => bank.id, {
+    onDelete: "CASCADE",
+  })
   bank: Bank;
 }
