@@ -7,7 +7,6 @@ declare global {
       user: {
         id: number;
       };
-      newClient: IClientRequest;
     }
   }
 }
