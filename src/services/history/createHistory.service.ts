@@ -3,7 +3,6 @@ import { ContactHistory } from "../../entities/contactHistory.entity";
 import { AppDataSource } from "../../data-source";
 import { AppError } from "../../errors";
 import { Debts } from "../../entities/debt.entity";
-
 import { User } from "../../entities/user.entity";
 
 const createContactHistoryService = async (data: any) => {
