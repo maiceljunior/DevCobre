@@ -8,6 +8,8 @@ import listUsersController from "../controllers/user/listUsers.controller";
 import listOneUserController from "../controllers/user/listOneUser.controller";
 import deleteUserController from "../controllers/user/deleteUser.controller";
 import updateUserController from "../controllers/user/updateUser.controller";
+import verifyAuthToken from "../middlewares/verifyAuthToken.middleware";
+import listUserDebtsController from "../controllers/userDebt/listUserDebts.controller";
 const routes = Router();
 
 export const userRoutes = () => {
@@ -19,6 +21,7 @@ export const userRoutes = () => {
 
   // Aloca divida para o usuario.
   routes.post("/debts/:userId", createUserDebtController);
+  routes.get("/debts/me", verifyAuthToken, listUserDebtsController);
 
   return routes;
 };

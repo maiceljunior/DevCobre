@@ -27,7 +27,7 @@ const createUserDebtService = async (user: string, debts: []): Promise<any> => {
     await debtRepository.save(debt);
   });
 
-  return "ok";
+  return;
 };
 
 export default createUserDebtService;
