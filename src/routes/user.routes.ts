@@ -1,21 +1,15 @@
 import { Router } from "express";
-// import verifyAuthToken from "../middlewares/verifyAuthToken.middleware";
-// import duplicatedEmailMiddleware from "../middlewares/duplicatedEmail.middleware";
-// import deleteUserController from "../controllers/user/deleteUser.controller";
 
-// import listUserInfoController from "../controllers/user/listUserInfo.controller";
-// import listUsersController from "../controllers/user/listUsers.controller";
-// import listOneUserController from "../controllers/user/listOneUser.controller";
-// import updateUserController from "../controllers/user/updateUser.controller";
-// import updateUserInfoController from "../controllers/user/updateUserInfo.controller";
-// import deleteUserInfoController from "../controllers/user/deleteUserInfo.controller";
 import createUserDebtController from "../controllers/userDebt/createUserDebt.controller";
 import createUserController from "../controllers/user/createUser.controller";
 import deleteUserDebtController from "../controllers/userDebt/deleteUserDebt.controller";
+import schemaValidation from "../middlewares/schemaValidation";
+import registerSchema from "../schemas/register/register.schema";
 const routes = Router();
 
 export const userRoutes = () => {
-  routes.post("", createUserController);
+  routes.post("", schemaValidation(registerSchema), createUserController);
+
   routes.post("/debts/:debtId/:userId", createUserDebtController);
   routes.delete("/debts/:id", deleteUserDebtController);
   // routes.get("", verifyAuthToken, listUsersController);
