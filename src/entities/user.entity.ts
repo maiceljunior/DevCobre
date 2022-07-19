@@ -5,7 +5,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { UserDebt } from "./userDebt.entity";
+import { Debts } from "./debt.entity";
 
 import { UserInfo } from "./userInfo.entity";
 
@@ -33,6 +33,7 @@ export class User {
   @JoinTable()
   userInfo: UserInfo[];
 
-  @OneToMany(() => UserDebt, (userDebt) => userDebt.id)
-  userDebt: UserDebt[];
+  @OneToMany(() => Debts, (debt) => debt.user)
+  @JoinTable()
+  debts: Debts[];
 }

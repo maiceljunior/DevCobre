@@ -16,7 +16,7 @@ const routes = Router();
 
 export const userRoutes = () => {
   routes.post("", createUserController);
-  routes.post("/debts/:debtId/:userId", createUserDebtController);
+  routes.post("/debts/:userId", createUserDebtController);
   routes.delete("/debts/:id", deleteUserDebtController);
   // routes.get("", verifyAuthToken, listUsersController);
   // routes.get("/:id", listOneUserController);
