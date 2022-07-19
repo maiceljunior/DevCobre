@@ -19,6 +19,11 @@ const verifyAuthToken = (req: Request, res: Response, next: NextFunction) => {
       if (error) {
         throw new AppError(401, "Missing Authentication");
       }
+      req.user = {
+        id: decoded.id,
+        email: decoded.email,
+        position: decoded.position,
+      };
     }
   );
   next();

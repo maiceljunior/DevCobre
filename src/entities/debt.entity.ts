@@ -2,6 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -9,13 +10,13 @@ import {
 import { Bank } from "./bank.entity";
 import { Client } from "./client.entity";
 import { ContactHistory } from "./contactHistory.entity";
-import { UserDebt } from "./userDebt.entity";
+import { User } from "./user.entity";
+import { FormOfPayment } from "./formOfPayment.entity";
 
 export enum DebtType {
   CREDITO = "credito",
   EMPRESTIMO = "emprestimo",
 }
-
 
 @Entity("debts")
 export class Debts {
@@ -31,7 +32,7 @@ export class Debts {
   @Column({ type: "numeric", precision: 10, scale: 2 })
   debtOrigin: number;
 
-  @Column({ type: "enum", enum: DebtType, default: DebtType.CREDITO })
+  @Column({ type: "simple-enum", enum: DebtType, default: DebtType.CREDITO })
   debtType: DebtType;
 
   @CreateDateColumn()
@@ -49,10 +50,12 @@ export class Debts {
   @ManyToOne(() => Client, (client) => client.document)
   client: Client;
 
-  @ManyToOne(() => ContactHistory, (contactHistory) => contactHistory.id)
+  @OneToMany(() => ContactHistory, (contactHistory) => contactHistory.id)
   contactHistory: ContactHistory[];
 
-  @OneToMany(() => UserDebt, (userDebt) => userDebt.id)
-  userDebt: UserDebt[];
+  @ManyToOne(() => User, (user) => user.debts)
+  user: User;
 
+  @OneToMany(() => FormOfPayment, (FormOfPayment) => FormOfPayment.id)
+  FormOfPayment: FormOfPayment[];
 }

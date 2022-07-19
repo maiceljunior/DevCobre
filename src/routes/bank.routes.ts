@@ -8,16 +8,14 @@ import listBankInfoController from "../controllers/bank/listBankInfo.controller"
 import listOneBankController from "../controllers/bank/listOneBank.controller";
 import updateBankController from "../controllers/bank/updateBank.controller";
 import updateBankInfoController from "../controllers/bank/updateBankInfo.controller";
-import {
-  createBankSchema,
-  validateCreateBank,
-} from "../middlewares/validateCreateBank.middleware";
+import schemaValidation from "../middlewares/schemaValidation";
+import createBankSchema from "../schemas/bank/bank.schema";
 
 const routes = Router();
 
 export const bankRoutes = () => {
   routes.get("", listBankController);
-  routes.post("", validateCreateBank(createBankSchema), createBankController);
+  routes.post("", schemaValidation(createBankSchema), createBankController);
   routes.get("/:id", listOneBankController);
   routes.patch("/:id", updateBankController);
   routes.delete("/:id", deleteBankController);

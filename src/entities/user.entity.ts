@@ -5,9 +5,11 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { UserDebt } from "./userDebt.entity";
 
+import { Debts } from "./debt.entity";
+import { ContactHistory } from "./contactHistory.entity";
 import { UserInfo } from "./userInfo.entity";
+import { Exclude } from "class-transformer";
 
 export enum UserRole {
   HR = "HR",
@@ -24,15 +26,20 @@ export class User {
   @Column({ length: 250 })
   name: string;
 
-  @Column({ type: "enum", enum: UserRole, default: UserRole.USER })
+  @Column({ type: "simple-enum", enum: UserRole, default: UserRole.USER })
   position: UserRole;
 
   @OneToMany(() => UserInfo, (userInfo) => userInfo.user, {
     eager: true,
   })
+  @Exclude()
   @JoinTable()
-  userInfo: UserInfo[];
+  userInfo: UserInfo;
 
-  @OneToMany(() => UserDebt, (userDebt) => userDebt.id)
-  userDebt: UserDebt[];
+  @OneToMany(() => Debts, (debt) => debt.user)
+  @JoinTable()
+  debts: Debts[];
+
+  @OneToMany(() => ContactHistory, (contactHistory) => contactHistory.id)
+  contactHistory: ContactHistory[];
 }
