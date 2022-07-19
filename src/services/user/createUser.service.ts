@@ -35,6 +35,7 @@ const createUserService = async (data: IUserRequest): Promise<any> => {
   const returnUser = {
     id: createUser.id,
     name: createUser.name,
+    position: createUser.position,
     infos: {
       email: userInfoCreate.email,
       telephone: userInfoCreate.telephone,
