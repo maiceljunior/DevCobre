@@ -12,6 +12,8 @@ export class ClientInfo {
   @Column({ nullable: true, length: 256 })
   email: string;
 
-  @ManyToOne(() => Client, (client) => client.document)
+  @ManyToOne(() => Client, (client) => client.document, {
+    onDelete: "CASCADE",
+  })
   client: Client;
 }

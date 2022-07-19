@@ -6,6 +6,8 @@ import deleteUserDebtController from "../controllers/userDebt/deleteUserDebt.con
 import schemaValidation from "../middlewares/schemaValidation";
 import registerSchema from "../schemas/register/register.schema";
 import listUsersController from "../controllers/user/listUsers.controller";
+import listOneUserController from "../controllers/user/listOneUser.controller";
+import deleteUserController from "../controllers/user/deleteUser.controller";
 const routes = Router();
 
 export const userRoutes = () => {
@@ -14,10 +16,10 @@ export const userRoutes = () => {
   routes.post("/debts/:debtId/:userId", createUserDebtController);
   routes.delete("/debts/:id", deleteUserDebtController);
   routes.get("", listUsersController);
-  // routes.get("/:id", listOneUserController);
-  // routes.delete("/:id", deleteUserController);
+  routes.get("/:id", listOneUserController);
+  routes.delete("/:id", deleteUserController);
   // routes.patch("/:id", updateUserController);
-  // // routes.post("/:id/info", createUserInfoService);
+  // routes.post("/:id/info", createUserInfoService);
   // routes.get("/:id/info", listUserInfoController);
   // routes.patch("/:id/info/:userId", updateUserInfoController);
   // routes.delete("/:id/info/:userId", deleteUserInfoController);

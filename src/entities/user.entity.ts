@@ -21,7 +21,7 @@ export class User {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
-  @Column({ length: 250 })
+  @Column({ length: 251 })
   name: string;
 
   @Column({ type: "simple-enum", enum: UserRole, default: UserRole.USER })
