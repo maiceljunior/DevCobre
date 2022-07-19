@@ -12,12 +12,19 @@ const createUserService = async (data: IUserRequest): Promise<any> => {
   user.name = data.body.name;
   user.position = verifyUserType(data.body.position);
 
+  const userInfoRepository = AppDataSource.getRepository(UserInfo);
+
+  const userExists = await userInfoRepository.findOneBy({
+    email: data.body.email,
+  });
+
+  if (userExists) {
+    throw new AppError(409, "User already exists!");
+  }
+
   const createUser = userRepository.create(user);
 
   const saveUser = await userRepository.save(createUser);
-  console.log(saveUser);
-
-  const userInfoRepository = AppDataSource.getRepository(UserInfo);
 
   const hashedPassword = bcryptjs.hashSync(data.body.password, 10);
 
