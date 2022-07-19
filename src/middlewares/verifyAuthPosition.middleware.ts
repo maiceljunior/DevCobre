@@ -26,8 +26,10 @@ const verifyAuthPosition = (
       if (error) {
         throw new AppError(401, "Missing position permissions!");
       }
-      next();
+
+      throw new AppError(401, "Missing position permissions!");
     }
   );
+  next();
 };
 export default verifyAuthPosition;

@@ -9,6 +9,7 @@ import {
 import { Bank } from "./bank.entity";
 import { Client } from "./client.entity";
 import { ContactHistory } from "./contactHistory.entity";
+import { FormOfPayment } from "./formOfPayment.entity";
 import { UserDebt } from "./userDebt.entity";
 
 export enum DebtType {
@@ -53,4 +54,7 @@ export class Debts {
 
   @OneToMany(() => UserDebt, (userDebt) => userDebt.id)
   userDebt: UserDebt[];
+
+  @OneToMany(() => FormOfPayment, (FormOfPayment) => FormOfPayment.id)
+  FormOfPayment: FormOfPayment[];
 }
