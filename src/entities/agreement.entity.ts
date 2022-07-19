@@ -4,12 +4,18 @@ import {
   OneToOne,
   ManyToOne,
   PrimaryGeneratedColumn,
+  JoinColumn,
 } from "typeorm";
 import { Debts } from "./debt.entity";
 import { Bank } from "./bank.entity";
 import { Client } from "./client.entity";
-import { FormOfPayment } from "./formOfPayment.entity";
 import { User } from "./user.entity";
+
+export enum FormOfPayment {
+  AVISTA = "a vista",
+  PARCELADO = "parcelado",
+  ENTRADA = "entrada",
+}
 
 @Entity("agreement")
 export class Agreement {
@@ -25,7 +31,21 @@ export class Agreement {
   @Column()
   status: boolean;
 
+  @Column({
+    type: "simple-enum",
+    enum: FormOfPayment,
+    default: FormOfPayment.AVISTA,
+  })
+  formOfPayment: FormOfPayment;
+
+  @Column({ nullable: true })
+  valueEntry: string;
+
+  @Column({ nullable: true })
+  installments: string;
+
   @OneToOne(() => Debts, (debts) => debts.id)
+  @JoinColumn()
   debts: Debts;
 
   @ManyToOne(() => Bank, (bank) => bank.id)
@@ -36,7 +56,4 @@ export class Agreement {
 
   @ManyToOne(() => User, (user) => user.id)
   user: User;
-
-  @OneToOne(() => FormOfPayment, (formOfPayment) => formOfPayment.id)
-  formofpayment: FormOfPayment;
 }
