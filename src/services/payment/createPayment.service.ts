@@ -15,28 +15,28 @@ const createPaymentService = async (data:any) => {
     }
     if(cash_payment === true){
         if(installments === true){
-            throw new AppError(400,"select only method !")  
+            throw new AppError(400,"select only one payment method!")  
         }
         if(entry_installments === true){
-            throw new AppError(400,"select only method !")  
+            throw new AppError(400,"select only one payment method!")  
         }
     }
 
     if(installments === true){
         if(cash_payment === true){
-            throw new AppError(400,"select only method !")  
+            throw new AppError(400,"select only one payment method!")  
         }
         if(entry_installments === true){
-            throw new AppError(400,"select only method !")  
+            throw new AppError(400,"select only one payment method!")  
         }
     }
 
     if(entry_installments === true){
         if(cash_payment === true){
-            throw new AppError(400,"select only method !")  
+            throw new AppError(400,"select only one payment method!")  
         } 
         if(installments === true){
-            throw new AppError(400,"select only method !")  
+            throw new AppError(400,"select only one payment method!")  
         }  
     }
 
