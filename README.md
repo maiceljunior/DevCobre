@@ -16,15 +16,12 @@
 ---
 
 <p align="center">
-•
+  <a href="#login">Login</a>•
   <a href="#client">Client</a> •
   <a href="#bank">Bank</a> • 
   <a href="#debts">Debts</a> • 
-  <a href="#debttype">Debt Type</a> • 
   <a href="#agreement">Agreement</a> • 
-  <a href="#agreementstatus">Agreement Status</a> • 
   <a href="#user">User</a> • 
-  <a href="#levelacess">Level Acess</a> • 
   <a href="#contacthistory">Contact History</a> • 
   <a href="#formpayment">Form Payment</a> • 
   
@@ -33,22 +30,28 @@
 
 ---
 
-### Client
 
-### Get `/client/:id`
+### Login
+### <h2 style = background-color:gray >Post `/login`</h2>
+
+### Regras:
+- `email`,`password`:string
+
+---
+
+### Client
 
 ### <h2 style = background-color:gray >Post `/client`</h2>
 
 ### Regras:
 
-- `name`,`type` : string
-- `document` : number
+- `name`,`type`e `document`: string
 
 ```json
 {
-  "documente": 899999999,
-  "name": "Empresa Devedora LTDA",
-  "type": "Juridico"
+	"document": "89999999999998",
+	"name": "Empresa Devedora LTDA",
+	"type": "Juridico"
 }
 ```
 
@@ -56,13 +59,13 @@
 
 ```json
 {
-  "documente": 899999999,
-  "name": "Empresa Devedora LTDA",
-  "type": "Juridico"
+	"document": "89999999999998",
+	"name": "Empresa Devedora LTDA",
+	"type": "Juridico"
 }
 ```
 
-### Resposta: Status 404 Not Found
+### Resposta: Status 409 Conflict
 
 ```json
 {
@@ -78,8 +81,14 @@
 
 ```json
 {
-    {
-		"document": 899999999,
+ {
+		"document": "11111111111111",
+		"name": "Empresa Devedora LTDA",
+		"type": "Juridico",
+		"clientInfo": []
+	},
+	{
+		"document": "89999999999998",
 		"name": "Empresa Devedora LTDA",
 		"type": "Juridico",
 		"clientInfo": []
@@ -88,8 +97,22 @@
 ```
 
 ---
+### <h2 style = background-color:gray>Get `/client/:document`</h2>
 
-> > > > > > > 1823c60959be2bdf732e21ffe662c6092b43126e
+### Resposta: Status 200
+
+```json
+
+{
+	"document": "89999999999999",
+	"name": "Empresa Devedora LTDA",
+	"type": "Juridico",
+	"clientInfo": []
+}
+
+```
+
+---
 
 ### <h2 style = background-color:gray>Patch `/client/:document`</h2>
 
@@ -105,10 +128,9 @@
 
 ```json
 {
-  "status": "error",
-  "code": 404,
   "message": "Client not found!"
 }
+
 ```
 
 ---
@@ -127,8 +149,6 @@
 
 ```json
 {
-  "status": "error",
-  "code": 404,
   "message": "Client not found!"
 }
 ```
@@ -164,6 +184,15 @@
 ```
 
 ---
+### Resposta: Status 404 Not Found
+
+```json
+{
+  "message": "Client not found!"
+}
+```
+
+---
 
 ### <h2 style = background-color:gray>Get `/client/:document/info`</h2>
 
@@ -171,16 +200,16 @@
 
 ```json
 {
-  "document": 899999999,
-  "name": "Empresa Devedora LTDA",
-  "type": "Juridico",
-  "clientInfo": [
-    {
-      "id": 4,
-      "telephone": 5465448,
-      "email": "mail@mail.com"
-    }
-  ]
+	"document": "89999999999999",
+	"name": "Empresa Devedora LTDA",
+	"type": "Juridico",
+	"clientInfo": [
+		{
+			"id": 5,
+			"telephone": 5465448,
+			"email": "mail@mail.com"
+		}
+	]
 }
 ```
 
@@ -188,8 +217,6 @@
 
 ```json
 {
-  "status": "error",
-  "code": 404,
   "message": "Client not found"
 }
 ```
@@ -280,8 +307,6 @@
 
 ```json
 {
-  "status": "error",
-  "code": 404,
   "message": "Client not found"
 }
 ```
@@ -311,9 +336,7 @@
 
 ```json
 {
-  "status": "error",
-  "code": 404,
-  "message": "Client already exists"
+   "message": "Client already exists"
 }
 ```
 
@@ -342,9 +365,7 @@
 
 ```json
 {
-  "status": "error",
-  "code": 404,
-  "message": "Client not found!"
+ "message": "Client not found!"
 }
 ```
 
@@ -366,9 +387,7 @@
 
 ```json
 {
-  "status": "error",
-  "code": 404,
-  "message": "Client not found!"
+   "message": "Client not found!"
 }
 ```
 
@@ -598,16 +617,20 @@
 
 ### Resposta: Status 404 Not Found
 
-````json
+```json
 {
 	"message": "Bank not found!"
 }
-### Resposta: Status 404 Not Found
+```
+
+###  Resposta: Status 404 Not Found
+
+
 ```json
 {
 	"message": "Bank contact not found!"
 }
-````
+```
 
 <p align="center">
  • <a href="#api">Inicio API</a> •
@@ -618,43 +641,120 @@
 
 ### Debts
 
+
+### Post `/debts`
+
+- `bankId`,`documentClient`,`debtValue`,`debtOrigin`,`ipoc` : number
+
+- `debType`,`dateDebt` : string
+
+```**json**
+{
+		"documentClient": 89999999999999,
+		"bankId": 14,
+		"debtValue":25141,
+		"debtOrigin":4000,
+		"debtType":"credito",
+	  "ipoc": 25547,
+	  "dateDebt":"2020-01-01"
+}
+```
+
+### Resposta: Status 200 Ok
+
+```json
+{
+		"documentClient": 89999999999999,
+		"bankId": 14,
+		"debtValue":25141,
+		"debtOrigin":4000,
+		"debtType":"credito",
+	  "ipoc": 25547,
+	  "dateDebt":"2020-01-01"
+}
+```
+###  Resposta: Status 400 Bad Request
+
+
+```json
+{
+	"message": "Ipoc already exists!"
+}
+```
+
+###  Resposta: Status 400 Bad Request
+
+
+```json
+{
+	"message": "Client does not exists!"
+}
+```
+
+###  Resposta: Status 400 Bad Request
+
+
+```json
+{
+	"message": "Bank does not exists!"
+}
+```
+---
 ### Get `/debts`
 
 ### Resposta: Status
 
 ```json
-{}
+{
+		"id": 4,
+		"ipoc": "25155",
+		"debtValue": "25141.00",
+		"debtOrigin": "4000.00",
+		"debtType": "credito",
+		"registration": "2022-07-19T18:01:59.509Z",
+		"dateDebt": "2020-01-01T00:00:00.000Z",
+		"debtStatus": true
+	},
+	{
+		"id": 5,
+		"ipoc": "25547",
+		"debtValue": "25141.00",
+		"debtOrigin": "4000.00",
+		"debtType": "credito",
+		"registration": "2022-07-19T19:03:21.445Z",
+		"dateDebt": "2020-01-01T00:00:00.000Z",
+		"debtStatus": true
+	},
+	{
+		"id": 6,
+		"ipoc": "25549",
+		"debtValue": "25141.00",
+		"debtOrigin": "4000.00",
+		"debtType": "credito",
+		"registration": "2022-07-19T19:06:47.308Z",
+		"dateDebt": "2020-01-01T00:00:00.000Z",
+		"debtStatus": true
+	}
 ```
 
----
-
-### Post `/debts`
+### Get `/debts/:id`
 
 ### Resposta: Status
 
 ```json
-{}
+{
+		"id": 4,
+		"ipoc": "25155",
+		"debtValue": "25141.00",
+		"debtOrigin": "4000.00",
+		"debtType": "credito",
+		"registration": "2022-07-19T18:01:59.509Z",
+		"dateDebt": "2020-01-01T00:00:00.000Z",
+		"debtStatus": true
+	}
 ```
 
 ---
-
-### Patch `/debts/:id`
-
-### Resposta: Status
-
-```json
-{}
-```
-
----
-
-### Delete `/debts/:id`
-
-### Resposta: Status
-
-```json
-{}
-```
 
 <p align="center">
  • <a href="#api">Inicio API</a> •
@@ -663,48 +763,7 @@
 
 ---
 
-### DebtType
 
-### Get `/type`
-
-### Resposta: Status
-
-```json
-{}
-```
-
----
-
-### Post `/type`
-
-### Resposta: Status
-
-```json
-{}
-```
-
----
-
-### Patch `/type/:id`
-
-### Resposta: Status
-
-```json
-{}
-```
-
----
-
-### Delete `/type/:id`
-
-### Resposta: Status
-
-<p align="center">
- • <a href="#api">Inicio API</a> •
- 
-</p>
-
----
 
 ### Agreement
 
@@ -751,52 +810,6 @@
  
 </p>
 
----
-
-### AgreementStatus
-
-### Get `/status`
-
-### Resposta: Status
-
-```json
-{}
-```
-
----
-
-### Post `/status`
-
-### Resposta: Status
-
-```json
-{}
-```
-
----
-
-### Patch `/status/:id`
-
-### Resposta: Status
-
-```json
-{}
-```
-
----
-
-### Delete `/status/:id`
-
-### Resposta: Status
-
-```json
-{}
-```
-
-<p align="center">
- • <a href="#api">Inicio API</a> •
- 
-</p>
 
 ---
 
@@ -1071,86 +1084,104 @@
  
 </p>
 
----
-
-### levelAcess
-
-### Get `/level`
-
-### Resposta: Status
-
-```json
-{}
-```
-
----
-
-### Post `/level`
-
-### Resposta: Status
-
-```json
-{}
-```
-
----
-
-### Patch `/level/:id`
-
-### Resposta: Status
-
-```json
-{}
-```
-
----
-
-### Delete `/level/:id`
-
-### Resposta: Status
-
-<p align="center">
- • <a href="#api">Inicio API</a> •
- 
-</p>
-
----
 
 ### ContactHistory
+
+---
+### Post `/history`
+- `date_contact`,`note`: string
+- `debtId`,`userId`:number
+- `agreement`: boolean
+
+
+```json
+{
+	"date_contact":"2022-01-01",
+	"agreement":false,
+	"note":"faltou ligar",
+	"debtId":5,
+	"userId":2
+}
+```
+### Resposta: Status 201 Created
+
+```json
+{
+	"date": "2022-01-01",
+	"agreement": false,
+	"note": "faltou ligar",
+	"debts": 5,
+	"user_entry_contact": "Maicel"
+}
+```
+
+---
+
+
 
 ### Get `/history`
 
 ### Resposta: Status
 
 ```json
-{}
+{
+		"id": 7,
+		"agreement": false,
+		"date_contact": "2022-01-01T00:00:00.000Z",
+		"note": "faltou ligar"
+}
 ```
 
 ---
 
-### Post `/history`
-
-### Resposta: Status
-
-```json
-{}
-```
-
----
 
 ### Patch `/history/:id`
+ - `note`,`date_contact`: string
+ - `agreement`: boolean
 
-### Resposta: Status
+
 
 ```json
-{}
+{
+	"note":"cliente atendeu mas não quis negociar",
+	"date_contact":"2022-07-19"
+}
+```
+
+### Resposta: Status 200 Ok
+
+```json
+{
+	"message": "Update contact History"
+}
+```
+
+### Resposta: Status 400 Not Found
+
+```json
+{
+	"message": "Contact history not found!"
+}
 ```
 
 ---
 
 ### Delete `/history/:id`
 
-### Resposta: Status
+### Resposta: Status 200
+```json
+{
+	"message": "Contact history not found!"
+}
+```
+
+### Resposta: Status 404 Not Found
+
+```json
+{
+	"message": "Contact history not found!"
+}
+```
 
 <p align="center">
  • <a href="#api">Inicio API</a> •
@@ -1161,39 +1192,110 @@
 
 ### formpayment
 
+
+### Post `/payment`
+
+- `cash_payment`,`installments`,`entry_installments`: boolean
+- `entry`,`installments_times`,`values_installments`,`debtsId`: number
+
+```json
+{
+	
+	"cash_payment":true,
+	"installments":false,
+	"entry_installments":false,
+	"entry":5000,
+	"installments_times":50,
+	"values_installments":0,
+	"debtsId":4
+	
+}
+```
+### Resposta: Status 201 Created
+
+```json
+{
+	"cash_payment": true,
+	"installments": false,
+	"entry_installments": false,
+	"entry": 5000,
+	"installments_times": 50,
+	"values_installments": 0,
+	"debts": {
+		"id": 4,
+		"ipoc": "25155",
+		"debtValue": "25141.00",
+		"debtOrigin": "4000.00",
+		"debtType": "credito",
+		"registration": "2022-07-19T18:01:59.509Z",
+		"dateDebt": "2020-01-01T00:00:00.000Z",
+		"debtStatus": true
+	},
+	"id": 9
+}
+```
+
+### Resposta: Status 400 Bad Request
+
+```json
+{
+	"message": "Select only one payment method!"
+}
+```
+### Resposta: Status 400 Bad Request
+
+```json
+{
+	"error": "ValidationError"
+}
+```
+---
+
 ### Get `/payment`
 
 ### Resposta: Status
 
 ```json
-{}
+{
+		"id": 8,
+		"cash_payment": true,
+		"installments": false,
+		"entry_installments": false,
+		"entry": "5000.00",
+		"installments_times": 50,
+		"values_installments": "0.00"
+	},
+	{
+		"id": 9,
+		"cash_payment": true,
+		"installments": false,
+		"entry_installments": false,
+		"entry": "5000.00",
+		"installments_times": 50,
+		"values_installments": "0.00"
+	}
 ```
 
 ---
 
-### Post `/payment`
+### Get `/payment/:id`
 
 ### Resposta: Status
 
 ```json
-{}
+{
+		"id": 8,
+		"cash_payment": true,
+		"installments": false,
+		"entry_installments": false,
+		"entry": "5000.00",
+		"installments_times": 50,
+		"values_installments": "0.00"
+}
 ```
 
 ---
 
-### Patch `/payment/:id`
-
-### Resposta: Status
-
-```json
-{}
-```
-
----
-
-### Delete `/payment/:id`
-
-### Resposta: Status
 
 <p align="center">
  • <a href="#api">Inicio API</a> •
