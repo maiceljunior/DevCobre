@@ -1,7 +1,7 @@
 import * as yup from "yup";
 
 const registerSchema = yup.object().shape({
-  email: yup.string().required("Email is required."),
+  email: yup.string().required("Email is required.").email("Email is invalid."),
   password: yup
     .string()
     .required("Password is required.")
@@ -12,14 +12,14 @@ const registerSchema = yup.object().shape({
   name: yup
     .string()
     .required("Name is required.")
-    .min(3, "Requires at least 3 characters")
-    .max(200, "Cannot exceed 200 characters"),
+    .min(3, "Name requires at least 3 characters")
+    .max(200, "Name cannot exceed 200 characters"),
   address: yup.string().required("Address is required"),
   telephone: yup
     .string()
     .required("Telephone is required")
-    .min(6, "Requires at least 6 characters")
-    .max(14, "Cannot exceed 14 characters"),
+    .min(6, "Telephone requires at least 6 characters")
+    .max(14, "Telephone cannot exceed 14 characters"),
 });
 
 export default registerSchema;
