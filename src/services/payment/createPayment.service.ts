@@ -13,6 +13,32 @@ const createPaymentService = async (data:any) => {
     if(!debt){
         throw new AppError(400, " Debits does not exists!");
     }
+    if(cash_payment === true){
+        if(installments === true){
+            throw new AppError(400,"select only one payment method!")  
+        }
+        if(entry_installments === true){
+            throw new AppError(400,"select only one payment method!")  
+        }
+    }
+
+    if(installments === true){
+        if(cash_payment === true){
+            throw new AppError(400,"select only one payment method!")  
+        }
+        if(entry_installments === true){
+            throw new AppError(400,"select only one payment method!")  
+        }
+    }
+
+    if(entry_installments === true){
+        if(cash_payment === true){
+            throw new AppError(400,"select only one payment method!")  
+        } 
+        if(installments === true){
+            throw new AppError(400,"select only one payment method!")  
+        }  
+    }
 
     const payment = paymentRepository.create({
         ...data,
