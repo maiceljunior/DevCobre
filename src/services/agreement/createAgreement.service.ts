@@ -4,7 +4,6 @@ import { Agreement } from "../../entities/agreement.entity";
 import { Bank } from "../../entities/bank.entity";
 import { Debts } from "../../entities/debt.entity";
 import { Client } from "../../entities/client.entity";
-// import { Employee } from "../../entities/employee.entity";
 import { FormOfPayment } from "../../entities/formOfPayment.entity";
 import { User } from "../../entities/user.entity";
 

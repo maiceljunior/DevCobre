@@ -5,8 +5,9 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Debts } from "./debt.entity";
 
+import { Debts } from "./debt.entity";
+import { ContactHistory } from "./contactHistory.entity";
 import { UserInfo } from "./userInfo.entity";
 
 export enum UserRole {
@@ -21,10 +22,10 @@ export class User {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
-  @Column({ length: 250 })
+  @Column({ length: 251 })
   name: string;
 
-  @Column({ type: "enum", enum: UserRole, default: UserRole.USER })
+  @Column({ type: "simple-enum", enum: UserRole, default: UserRole.USER })
   position: UserRole;
 
   @OneToMany(() => UserInfo, (userInfo) => userInfo.user, {
@@ -36,4 +37,7 @@ export class User {
   @OneToMany(() => Debts, (debt) => debt.user)
   @JoinTable()
   debts: Debts[];
+
+  @OneToMany(() => ContactHistory, (contactHistory) => contactHistory.id)
+  contactHistory: ContactHistory[];
 }

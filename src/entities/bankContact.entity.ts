@@ -9,9 +9,11 @@ export class BankContact {
   @Column({ nullable: true })
   telephone: number;
 
-  @Column({ nullable: true, length: 255 })
+  @Column({ nullable: true, length: 251 })
   email: string;
 
-  @ManyToOne(() => Bank, (bank) => bank.id)
+  @ManyToOne(() => Bank, (bank) => bank.id, {
+    onDelete: "CASCADE",
+  })
   bank: Bank;
 }
