@@ -1,4 +1,10 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { Debts } from "./debt.entity";
 
 @Entity("form_of_payment")
@@ -24,6 +30,6 @@ export class FormOfPayment {
   @Column({ type: "numeric", precision: 10, scale: 2 })
   values_installments: number;
 
-  @OneToMany(() => Debts, (debts) => debts.id)
-  debts_id: Debts[];
+  @ManyToOne(() => Debts, (debts) => debts.id)
+  debts: Debts[];
 }
