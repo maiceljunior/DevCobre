@@ -20,5 +20,5 @@ export class ContactHistory {
   users: User[];
 
   @ManyToOne(() => Debts, (debts) => debts.id)
-  debts: Debts;
+  debts: Debts[];
 }

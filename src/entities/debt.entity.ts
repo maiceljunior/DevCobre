@@ -49,7 +49,7 @@ export class Debts {
   @ManyToOne(() => Client, (client) => client.document)
   client: Client;
 
-  @ManyToOne(() => ContactHistory, (contactHistory) => contactHistory.id)
+  @OneToMany(() => ContactHistory, (contactHistory) => contactHistory.id)
   contactHistory: ContactHistory[];
 
   @OneToMany(() => UserDebt, (userDebt) => userDebt.id)

@@ -5,6 +5,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import { ContactHistory } from "./contactHistory.entity";
 import { UserDebt } from "./userDebt.entity";
 
 import { UserInfo } from "./userInfo.entity";
@@ -35,4 +36,7 @@ export class User {
 
   @OneToMany(() => UserDebt, (userDebt) => userDebt.id)
   userDebt: UserDebt[];
+
+  @OneToMany(() => ContactHistory, (contactHistory) => contactHistory.id)
+  contactHistory: ContactHistory[];
 }
