@@ -5,7 +5,7 @@ const createBankSchema = yup.object().shape({
     .string()
     .matches(
       /[^a-zA-Z áàãâäéèëêíìîïóòõôöúùûüýÿçñßæœøÁÀÃÂÄÉÈËÊÍÌÎÏÓÒÕÔÖÚÙÛÜÝŸÇÑßÆŒØ]/,
-      "No special characters allowed"
+      "No special characters allowed."
     )
     .required("Error")
     .min(1, "The bank name needs at least 1 character!"),
