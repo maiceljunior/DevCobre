@@ -9,81 +9,62 @@ import listOneClientController from "../controllers/client/listOneClient.control
 import updateClientController from "../controllers/client/updateClient.controller";
 import updateClientInfoController from "../controllers/client/updateClientInfo.controller";
 import schemaValidation from "../middlewares/schemaValidation";
-import verifyAuthAdm from "../middlewares/verifyAuthAdm.middleware";
+import verifyAuthAllNotHR from "../middlewares/verifyAuthAllNotHR";
 import verifyAuthManagerSupervisor from "../middlewares/verifyAuthManagerSupervisor";
-import verifyAuthSupervisor from "../middlewares/verifyAuthSupervisor";
 import verifyAuthToken from "../middlewares/verifyAuthToken.middleware";
-import verifyAuthUser from "../middlewares/verifyAuthUser.middleware";
 import createClientSchema from "../schemas/client/client.schema";
 
 const routes = Router();
 
 export const clientRoutes = () => {
-  routes.get(
-    "",
-    verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthManagerSupervisor,
-    verifyAuthUser,
-    listClientsController
-  );
+  routes.get("", verifyAuthToken, verifyAuthAllNotHR, listClientsController);
   routes.post(
     "",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthSupervisor,
+    verifyAuthManagerSupervisor,
     schemaValidation(createClientSchema),
     createClientController
   );
   routes.get(
     "/:document",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthManagerSupervisor,
-    verifyAuthUser,
+    verifyAuthAllNotHR,
     listOneClientController
   );
   routes.patch(
     "/:document",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthSupervisor,
+    verifyAuthManagerSupervisor,
     updateClientController
   );
   routes.delete(
     "/:document",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthSupervisor,
+    verifyAuthManagerSupervisor,
     deleteClientController
   );
   routes.get(
     "/:document/info",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthManagerSupervisor,
-    verifyAuthUser,
+    verifyAuthAllNotHR,
     listClientInfoController
   );
   routes.post(
     "/:document/info",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthSupervisor,
+    verifyAuthManagerSupervisor,
     createClientInfoController
   );
   routes.patch(
     "/:document/info/:idContact",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthSupervisor,
+    verifyAuthManagerSupervisor,
     updateClientInfoController
   );
   routes.delete(
     "/:document/info/:idContact",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthSupervisor,
+    verifyAuthManagerSupervisor,
     deleteClientInfoController
   );
 
