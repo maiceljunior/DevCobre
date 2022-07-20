@@ -24,12 +24,7 @@ export const userRoutes = () => {
     schemaValidation(registerSchema),
     createUserController
   );
-  routes.get(
-    "",
-    verifyAuthToken,
-    verifyAuthAdmHRManagerSupervisor,
-    listUsersController
-  );
+  routes.get("", listUsersController);
   routes.get(
     "/:id",
     verifyAuthToken,
