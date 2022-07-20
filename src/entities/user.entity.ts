@@ -12,6 +12,7 @@ import { UserInfo } from "./userInfo.entity";
 import { Exclude } from "class-transformer";
 
 export enum UserRole {
+  ADM = "ADM",
   HR = "HR",
   MANAGER = "manager",
   SUPERVISOR = "supervisor",
