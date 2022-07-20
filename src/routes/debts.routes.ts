@@ -18,7 +18,6 @@ export const debtsRoutes = () => {
     "",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
     verifyAuthManagerSupervisor,
     verifyAuthUser,
     listDebtsController
@@ -27,7 +26,6 @@ export const debtsRoutes = () => {
     "/:id",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
     verifyAuthManagerSupervisor,
     verifyAuthUser,
     listOneDebtController
@@ -36,7 +34,6 @@ export const debtsRoutes = () => {
     "",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
     verifyAuthSupervisor,
     schemaValidation(debtRegisterSchema),
     createDebtsController

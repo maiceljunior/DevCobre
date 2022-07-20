@@ -62,7 +62,6 @@ export const userRoutes = () => {
     "/debts/:userId",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
     verifyAuthSupervisor,
     createUserDebtController
   );
@@ -70,7 +69,6 @@ export const userRoutes = () => {
     "/debts/me",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
     verifyAuthManagerSupervisor,
     verifyAuthUser,
     listUserDebtsController

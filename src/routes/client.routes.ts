@@ -10,7 +10,6 @@ import updateClientController from "../controllers/client/updateClient.controlle
 import updateClientInfoController from "../controllers/client/updateClientInfo.controller";
 import schemaValidation from "../middlewares/schemaValidation";
 import verifyAuthAdm from "../middlewares/verifyAuthAdm.middleware";
-import verifyAuthHR from "../middlewares/verifyAuthHR.middleware";
 import verifyAuthManagerSupervisor from "../middlewares/verifyAuthManagerSupervisor";
 import verifyAuthSupervisor from "../middlewares/verifyAuthSupervisor";
 import verifyAuthToken from "../middlewares/verifyAuthToken.middleware";
@@ -24,7 +23,6 @@ export const clientRoutes = () => {
     "",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
     verifyAuthManagerSupervisor,
     verifyAuthUser,
     listClientsController
@@ -33,7 +31,6 @@ export const clientRoutes = () => {
     "",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
     verifyAuthSupervisor,
     schemaValidation(createClientSchema),
     createClientController
@@ -42,7 +39,6 @@ export const clientRoutes = () => {
     "/:document",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
     verifyAuthManagerSupervisor,
     verifyAuthUser,
     listOneClientController
@@ -51,7 +47,6 @@ export const clientRoutes = () => {
     "/:document",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
     verifyAuthSupervisor,
     updateClientController
   );
@@ -59,7 +54,6 @@ export const clientRoutes = () => {
     "/:document",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
     verifyAuthSupervisor,
     deleteClientController
   );
@@ -67,7 +61,6 @@ export const clientRoutes = () => {
     "/:document/info",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
     verifyAuthManagerSupervisor,
     verifyAuthUser,
     listClientInfoController
@@ -76,7 +69,6 @@ export const clientRoutes = () => {
     "/:document/info",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
     verifyAuthSupervisor,
     createClientInfoController
   );
@@ -84,7 +76,6 @@ export const clientRoutes = () => {
     "/:document/info/:idContact",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
     verifyAuthSupervisor,
     updateClientInfoController
   );
@@ -92,7 +83,6 @@ export const clientRoutes = () => {
     "/:document/info/:idContact",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
     verifyAuthSupervisor,
     deleteClientInfoController
   );

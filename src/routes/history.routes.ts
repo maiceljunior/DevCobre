@@ -19,7 +19,6 @@ export const historyRoutes = () => {
     "",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
     verifyAuthManagerSupervisor,
     verifyAuthUser,
     listHistoryController
@@ -28,7 +27,6 @@ export const historyRoutes = () => {
     "",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
     verifyAuthManagerSupervisor,
     verifyAuthUser,
     schemaValidation(historySchema),
@@ -38,7 +36,6 @@ export const historyRoutes = () => {
     "/:id",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
     verifyAuthSupervisor,
     updateHistoryController
   );
@@ -46,7 +43,6 @@ export const historyRoutes = () => {
     "/:id",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
     verifyAuthSupervisor,
     deleteHistoryController
   );

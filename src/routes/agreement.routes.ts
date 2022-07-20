@@ -9,7 +9,6 @@ import listAgreementByClientController from "../controllers/agreement/listAgreem
 import listAgreementByUserController from "../controllers/agreement/listAgreementByUser.controller";
 import verifyAuthToken from "../middlewares/verifyAuthToken.middleware";
 import verifyAuthAdm from "../middlewares/verifyAuthAdm.middleware";
-import verifyAuthHR from "../middlewares/verifyAuthHR.middleware";
 import verifyAuthManagerSupervisor from "../middlewares/verifyAuthManagerSupervisor";
 import verifyAuthUser from "../middlewares/verifyAuthUser.middleware";
 import verifyAuthSupervisor from "../middlewares/verifyAuthSupervisor";
@@ -21,7 +20,6 @@ export const agreementRoutes = () => {
     "",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
     verifyAuthManagerSupervisor,
     verifyAuthUser,
     listAgreementController
@@ -30,7 +28,6 @@ export const agreementRoutes = () => {
     "",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
     verifyAuthManagerSupervisor,
     verifyAuthUser,
     createAgreementController
@@ -39,7 +36,6 @@ export const agreementRoutes = () => {
     "/:id",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
     verifyAuthManagerSupervisor,
     verifyAuthUser,
     listOneAgreementController
@@ -48,7 +44,6 @@ export const agreementRoutes = () => {
     "/:id",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
     verifyAuthManagerSupervisor,
     updateAgreementController
   );
@@ -56,7 +51,6 @@ export const agreementRoutes = () => {
     "/:id",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
     verifyAuthManagerSupervisor,
     deleteAgreementController
   );
@@ -64,7 +58,6 @@ export const agreementRoutes = () => {
     "/bank/:id",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
     verifyAuthSupervisor,
     listAgreementByBankController
   );
@@ -72,15 +65,14 @@ export const agreementRoutes = () => {
     "/client/:id",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
     verifyAuthManagerSupervisor,
+    verifyAuthUser,
     listAgreementByClientController
   );
   routes.get(
     "/user/:id",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
     verifyAuthManagerSupervisor,
     verifyAuthUser,
     listAgreementByUserController

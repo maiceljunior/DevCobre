@@ -11,6 +11,7 @@ import updateBankInfoController from "../controllers/bank/updateBankInfo.control
 import schemaValidation from "../middlewares/schemaValidation";
 import verifyAuthAdm from "../middlewares/verifyAuthAdm.middleware";
 import verifyAuthHR from "../middlewares/verifyAuthHR.middleware";
+import verifyAuthManager from "../middlewares/verifyAuthHRSupervisor";
 import verifyAuthManagerSupervisor from "../middlewares/verifyAuthManagerSupervisor";
 import verifyAuthSupervisor from "../middlewares/verifyAuthSupervisor";
 import verifyAuthToken from "../middlewares/verifyAuthToken.middleware";
@@ -25,16 +26,14 @@ export const bankRoutes = () => {
     verifyAuthToken,
     verifyAuthAdm,
     verifyAuthHR,
-    verifyAuthManagerSupervisor,
-    verifyAuthUser,
+    verifyAuthSupervisor,
     listBankController
   );
   routes.post(
     "",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
-    verifyAuthSupervisor,
+    verifyAuthManager,
     schemaValidation(createBankSchema),
     createBankController
   );
@@ -44,21 +43,20 @@ export const bankRoutes = () => {
     verifyAuthAdm,
     verifyAuthHR,
     verifyAuthManagerSupervisor,
-    verifyAuthUser,
     listOneBankController
   );
   routes.patch(
     "/:id",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
+    verifyAuthManager,
     updateBankController
   );
   routes.delete(
     "/:id",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
+    verifyAuthManager,
     deleteBankController
   );
   routes.get(
@@ -67,31 +65,27 @@ export const bankRoutes = () => {
     verifyAuthAdm,
     verifyAuthHR,
     verifyAuthManagerSupervisor,
-    verifyAuthUser,
     listBankInfoController
   );
   routes.post(
     "/:id/contact",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
-    verifyAuthSupervisor,
+    verifyAuthManager,
     createBankInfoController
   );
   routes.patch(
     "/:id/contact/:idContact",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
-    verifyAuthSupervisor,
+    verifyAuthManager,
     updateBankInfoController
   );
   routes.delete(
     "/:id/contact/:idContact",
     verifyAuthToken,
     verifyAuthAdm,
-    verifyAuthHR,
-    verifyAuthSupervisor,
+    verifyAuthManager,
     deleteBankInfoController
   );
   return routes;
