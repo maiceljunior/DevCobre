@@ -3,13 +3,13 @@ import { AppDataSource } from "../../data-source";
 import app from "../../app";
 import request from "supertest";
 
-describe("Testing GET method in /user", () => {
+describe("Testing UPDATE method in /user", () => {
   let connection: DataSource;
 
   interface User {
-    name: string;
-    email: string;
-    password: string;
+    name?: string;
+    email?: string;
+    password?: string;
     position?: string;
     telephone?: string;
     address?: string;
@@ -42,6 +42,11 @@ describe("Testing GET method in /user", () => {
     position: "user",
     telephone: "987654321",
     address: "Street test, 01",
+  };
+
+  let newUser: User = {
+    name: "New User Test",
+    telephone: "999999999",
   };
 
   let admLogin: Login = {
@@ -85,68 +90,30 @@ describe("Testing GET method in /user", () => {
     await connection.destroy();
   });
 
-  test("Trying to list all users without a token", async () => {
-    const response = await request(app).get("/user");
+  test("Trying update a user without a token", async () => {
+    const response = await request(app)
+      .patch(`/user/${testRes1.body.id}`)
+      .send(newUser);
 
     expect(response.status).toEqual(401);
     expect(response.body).toHaveProperty("message");
   });
 
-  test("Trying to list a single user without a token", async () => {
-    const response = await request(app).get(`/user/${testRes1.body.id}`);
+  test("Trying update an user /user/:id", async () => {
+    const response = await request(app)
+      .patch(`/user/${testRes1.body.id}`)
+      .set("Authorization", `Bearer ${tokenResponse}`)
+      .send(newUser);
 
-    expect(response.status).toEqual(401);
+    expect(response.status).toEqual(200);
     expect(response.body).toHaveProperty("message");
   });
 
-  test("Testing list all users", async () => {
+  test("Trying update an user that doesn't exist /user/:id", async () => {
     const response = await request(app)
-      .get("/user")
-      .set("Authorization", `Bearer ${tokenResponse}`);
-
-    expect(response.status).toEqual(200);
-    expect(response.body.length).toEqual(3);
-    expect(Array.isArray(response.body)).toBe(true);
-    expect(response.body).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          id: response.body[0].id,
-          name: response.body[0].name,
-          position: response.body[0].position,
-        }),
-        expect.objectContaining({
-          id: response.body[1].id,
-          name: response.body[1].name,
-          position: response.body[1].position,
-        }),
-        expect.objectContaining({
-          id: response.body[2].id,
-          name: response.body[2].name,
-          position: response.body[2].position,
-        }),
-      ])
-    );
-  });
-
-  test("Testing to list a single user ", async () => {
-    const response = await request(app)
-      .get(`/user/${testRes1.body.id}`)
-      .set("Authorization", `Bearer ${tokenResponse}`);
-
-    expect(response.status).toEqual(200);
-    expect(response.body).toEqual(
-      expect.objectContaining({
-        id: response.body.id,
-        name: response.body.name,
-        position: response.body.position,
-      })
-    );
-  });
-
-  test("Trying to list an user that doesn't exist", async () => {
-    const response = await request(app)
-      .get("/user/x2a")
-      .set("Authorization", `Bearer ${tokenResponse}`);
+      .patch("/user/9999999")
+      .set("Authorization", `Bearer ${tokenResponse}`)
+      .send(newUser);
 
     expect(response.status).toEqual(404);
     expect(response.body).toHaveProperty("message");

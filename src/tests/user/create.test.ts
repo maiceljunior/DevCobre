@@ -57,6 +57,13 @@ describe("Testing POST method in /user", () => {
     await connection.destroy();
   });
 
+  test("Trying to create an user without a token", async () => {
+    const response = await request(app).post("/user/").send(notAdm);
+
+    expect(response.status).toEqual(401);
+    expect(response.body).toHaveProperty("message");
+  });
+
   test("Trying to create an user", async () => {
     const responseAdm = await request(app)
       .post("/adm/ti/create/user")
@@ -84,7 +91,7 @@ describe("Testing POST method in /user", () => {
       })
     );
   });
-  test("Try to create an user that already exists", async () => {
+  test("Trying create an user that already exists", async () => {
     const loginAdm = await request(app).post("/login").send(admLogin);
     const { token } = loginAdm.body;
 
