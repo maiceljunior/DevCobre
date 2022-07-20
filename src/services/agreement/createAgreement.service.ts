@@ -15,7 +15,7 @@ const createAgreementService = async ({
   debts,
   bank,
   client,
-  id,
+  user,
   formOfPayment,
   installments,
   valueEntry,
@@ -45,7 +45,7 @@ const createAgreementService = async ({
     agreement.agreedvalue = agreedValue;
     agreement.dateagree = dateAgree;
     agreement.status = status;
-    agreement.user = id;
+    agreement.user = user;
     agreement.installments = installments;
     agreement.debts = debtsId;
     agreement.bank = bankId;
@@ -69,7 +69,7 @@ const createAgreementService = async ({
     agreement.dateagree = dateAgree;
     agreement.status = status;
     agreement.installments = installments;
-    agreement.user = id;
+    agreement.user = user;
     agreement.valueEntry = valueEntry;
     agreement.debts = debtsId;
     agreement.bank = bankId;
@@ -88,7 +88,7 @@ const createAgreementService = async ({
   agreement.agreedvalue = agreedValue;
   agreement.dateagree = dateAgree;
   agreement.status = status;
-  agreement.user = id;
+  agreement.user = user;
   agreement.debts = debtsId;
   agreement.bank = bankId;
   agreement.client = clientId;
