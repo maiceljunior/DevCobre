@@ -1,24 +1,41 @@
 import { AppDataSource } from "../../data-source";
-import { Admin } from "../../entities/adm.entity";
+import { UserInfo } from "../../entities/userInfo.entity";
 import { AppError } from "../../errors";
+import * as bcryptjs from "bcryptjs";
+import { User, UserRole } from "../../entities/user.entity";
+import { IUserRequest } from "../../interfaces/user";
 
-const createAdmService = async ({ email, password }: any) => {
-  const admRepository = AppDataSource.getRepository(Admin);
+const createAdmService = async (data: IUserRequest) => {
+  const userRepository = AppDataSource.getRepository(User);
+  const user = new User();
+  user.name = data.body.name;
+  user.position = UserRole.ADM;
 
-  const adminExists = await admRepository.findOneBy({ email: email });
+  const userInfoRepository = AppDataSource.getRepository(UserInfo);
 
-  if (adminExists) {
-    throw new AppError(409, "Admin already exists!");
-  }
-
-  const adm = admRepository.create({
-    email,
-    password,
+  const userExists = await userInfoRepository.findOneBy({
+    email: data.body.email,
   });
 
-  await admRepository.save(adm);
+  if (userExists) {
+    throw new AppError(409, "User already exists!");
+  }
 
-  return adm;
+  const createUser = userRepository.create(user);
+
+  const saveUser = await userRepository.save(createUser);
+
+  const hashedPassword = bcryptjs.hashSync(data.body.password, 10);
+
+  const userInfoCreate = userInfoRepository.create({
+    email: data.body.email,
+    password: hashedPassword,
+    user: saveUser,
+  });
+
+  await userInfoRepository.save(userInfoCreate);
+
+  return { message: "Adm Created Width Sucess." };
 };
 
 export default createAdmService;

@@ -15,14 +15,14 @@ import verifyAuthHR from "../middlewares/verifyAuthHR.middleware";
 import verifyAuthAdm from "../middlewares/verifyAuthAdm.middleware";
 import verifyAuthManagerSupervisor from "../middlewares/verifyAuthManagerSupervisor";
 import verifyAuthSupervisor from "../middlewares/verifyAuthSupervisor";
+import verifyAuthAdmHR from "../middlewares/verifyAuthAdmHR.middleware";
 const routes = Router();
 
 export const userRoutes = () => {
   routes.post(
     "",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthHR,
+    verifyAuthAdmHR,
     schemaValidation(registerSchema),
     createUserController
   );
@@ -42,20 +42,8 @@ export const userRoutes = () => {
     verifyAuthManagerSupervisor,
     listOneUserController
   );
-  routes.delete(
-    "/:id",
-    verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthHR,
-    deleteUserController
-  );
-  routes.patch(
-    "/:id",
-    verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthHR,
-    updateUserController
-  );
+  routes.delete("/:id", verifyAuthToken, verifyAuthAdmHR, deleteUserController);
+  routes.patch("/:id", verifyAuthToken, verifyAuthAdmHR, updateUserController);
 
   // Aloca divida para o usuario.
   routes.post(
