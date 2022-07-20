@@ -21,13 +21,12 @@ const createUserDebtService = async (user: string, debts: []): Promise<any> => {
     throw new AppError(404, "Debt not found!");
   }
 
-  console.log(debt);
   debt.forEach(async (debt) => {
     debt.user = findUser;
     await debtRepository.save(debt);
   });
 
-  return "ok";
+  return;
 };
 
 export default createUserDebtService;

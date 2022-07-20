@@ -3,7 +3,7 @@ import { AppError } from "../../errors";
 import { Agreement } from "../../entities/agreement.entity";
 import { Equal } from "typeorm";
 
-const listOneAgreementService = async (id: string): Promise<any> => {
+const listOneAgreementService = async (id: string) => {
   const agreementRepository = AppDataSource.getRepository(Agreement);
 
   const agreement = await agreementRepository.findOneBy({

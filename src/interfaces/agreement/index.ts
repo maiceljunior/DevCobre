@@ -18,10 +18,9 @@ export interface IAgreementReturn {
     formOfPayment: number;
 }
 
-export interface IAgreementInfo {
+export interface IAgreementUpdate {
+    id: number;
     agreedValue: number;
-    dataAgree: Date;
-    debtsId: number;
-    clientDocument: number;
-    formOfPayment: number;
+    dateAgree: Date;
+    status: boolean;
 }

@@ -6,7 +6,7 @@ const updateUserController = async (req: Request, res: Response) => {
 
   const user = { id, body: req.body };
 
-  await updateUserService(user);
+  await updateUserService(id, user);
 
   return res.status(200).json({ message: "User updated!" });
 };
