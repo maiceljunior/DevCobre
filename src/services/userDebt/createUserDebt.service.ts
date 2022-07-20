@@ -26,7 +26,7 @@ const createUserDebtService = async (user: string, debts: []): Promise<any> => {
     await debtRepository.save(debt);
   });
 
-  return;
+  return { message: "Successfully allocated debts" };
 };
 
 export default createUserDebtService;

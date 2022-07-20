@@ -139,6 +139,11 @@ describe("Testing GET method in /user", () => {
         id: response.body.id,
         name: response.body.name,
         position: response.body.position,
+        infos: {
+          email: response.body.infos.email,
+          telephone: response.body.infos.telephone,
+          address: response.body.infos.address,
+        },
       })
     );
   });
