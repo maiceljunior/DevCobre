@@ -6,44 +6,30 @@ import createHistoryController from "../controllers/history/createHistory.contro
 import schemaValidation from "../middlewares/schemaValidation";
 import historySchema from "../schemas/history/history.schema";
 import verifyAuthToken from "../middlewares/verifyAuthToken.middleware";
-import verifyAuthAdm from "../middlewares/verifyAuthAdm.middleware";
-import verifyAuthHR from "../middlewares/verifyAuthHR.middleware";
-import verifyAuthManagerSupervisor from "../middlewares/verifyAuthManagerSupervisor";
-import verifyAuthUser from "../middlewares/verifyAuthUser.middleware";
-import verifyAuthSupervisor from "../middlewares/verifyAuthSupervisor";
+import verifyAuthAllNotHR from "../middlewares/verifyAuthAllNotHR";
+import verifyAuthAdmSupervisor from "../middlewares/verifyAuthAdmSupervisor";
 
 const routes = Router();
 
 export const historyRoutes = () => {
-  routes.get(
-    "",
-    verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthManagerSupervisor,
-    verifyAuthUser,
-    listHistoryController
-  );
+  routes.get("", verifyAuthToken, verifyAuthAllNotHR, listHistoryController);
   routes.post(
     "",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthManagerSupervisor,
-    verifyAuthUser,
+    verifyAuthAllNotHR,
     schemaValidation(historySchema),
     createHistoryController
   );
   routes.patch(
     "/:id",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthSupervisor,
+    verifyAuthAdmSupervisor,
     updateHistoryController
   );
   routes.delete(
     "/:id",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthSupervisor,
+    verifyAuthAdmSupervisor,
     deleteHistoryController
   );
 

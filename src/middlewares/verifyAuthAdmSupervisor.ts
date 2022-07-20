@@ -1,13 +1,17 @@
 import { Request, Response, NextFunction } from "express";
 import { AppError } from "../errors";
 
-const verifyAuthManager = (req: Request, res: Response, next: NextFunction) => {
+const verifyAuthAdmSupervisor = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const position = req.user.position;
 
-  if (position === "manager") {
+  if (position === "supervisor" || "ADM") {
     next();
   } else {
     throw new AppError(401, "Missing permissions!");
   }
 };
-export default verifyAuthManager;
+export default verifyAuthAdmSupervisor;
