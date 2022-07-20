@@ -16,7 +16,30 @@ describe("Testing DELETE method in /bank/:id", () => {
     status: true,
   };
 
+  interface User {
+    name: string;
+    email: string;
+    password: string;
+  }
+
+  interface Login {
+    email: string;
+    password: string;
+  }
+
+  let admUser: User = {
+    name: "User Test Adm",
+    email: "useradm@kenzie.com",
+    password: "123456Ab!",
+  };
+
+  let admLogin: Login = {
+    email: "useradm@kenzie.com",
+    password: "123456Ab!",
+  };
+
   let response: any;
+  let tokenResponse: any;
 
   beforeAll(async () => {
     await AppDataSource.initialize()
@@ -25,7 +48,17 @@ describe("Testing DELETE method in /bank/:id", () => {
         console.error("Error during Data Source initialization", err);
       });
 
-    response = await request(app).post("/bank").send(bank1);
+    const responseAdm = await request(app)
+      .post("/adm/ti/create/user")
+      .send(admUser);
+    const loginAdm = await request(app).post("/login").send(admLogin);
+    const { token } = loginAdm.body;
+    tokenResponse = token;
+
+    response = await request(app)
+      .post("/bank")
+      .set("Authorization", `Bearer ${token}`)
+      .send(bank1);
   });
 
   afterAll(async () => {
@@ -33,16 +66,18 @@ describe("Testing DELETE method in /bank/:id", () => {
   });
 
   test("Trying to delete a bank", async () => {
-    const responsePatch = await request(app).delete(
-      `/bank/${response.body.id}`
-    );
+    const responseDelete = await request(app)
+      .delete(`/bank/${response.body.id}`)
+      .set("Authorization", `Bearer ${tokenResponse}`);
 
-    expect(responsePatch.status).toEqual(200);
-    expect(responsePatch.body).toHaveProperty("message");
+    expect(responseDelete.status).toEqual(200);
+    expect(responseDelete.body).toHaveProperty("message");
   });
 
   test("Try to delete a bank that doesn't exist", async () => {
-    const response = await request(app).delete("/bank/0");
+    const response = await request(app)
+      .delete("/bank/0")
+      .set("Authorization", `Bearer ${tokenResponse}`);
 
     expect(response.status).toEqual(404);
     expect(response.body).toHaveProperty("message");

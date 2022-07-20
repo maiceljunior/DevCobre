@@ -16,6 +16,28 @@ describe("Testing POST method in /bank", () => {
     status: true,
   };
 
+  interface User {
+    name: string;
+    email: string;
+    password: string;
+  }
+
+  interface Login {
+    email: string;
+    password: string;
+  }
+
+  let admUser: User = {
+    name: "User Test Adm",
+    email: "useradm@kenzie.com",
+    password: "123456Ab!",
+  };
+
+  let admLogin: Login = {
+    email: "useradm@kenzie.com",
+    password: "123456Ab!",
+  };
+
   beforeAll(async () => {
     await AppDataSource.initialize()
       .then((res) => (connection = res))
@@ -29,22 +51,41 @@ describe("Testing POST method in /bank", () => {
   });
 
   test("Trying to create an bank", async () => {
-    const response = await request(app).post("/bank").send(bank1);
+    const response = await request(app)
+      .post("/adm/ti/create/user")
+      .send(admUser);
+    const loginAdm = await request(app).post("/login").send(admLogin);
 
-    expect(response.status).toEqual(201);
-    expect(response.body).toEqual(
+    const { token } = loginAdm.body;
+
+    const responsePost = await request(app)
+      .post("/bank")
+      .set("Authorization", `Bearer ${token}`)
+      .send(bank1);
+
+    expect(responsePost.status).toEqual(201);
+    expect(responsePost.body).toEqual(
       expect.objectContaining({
-        id: response.body.id,
-        name: response.body.name,
-        status: response.body.status,
+        id: responsePost.body.id,
+        name: responsePost.body.name,
+        status: responsePost.body.status,
       })
     );
   });
 
   test("Try to create an bank that already exists", async () => {
-    const response = await request(app).post("/bank").send(bank1);
+    const response = await request(app)
+      .post("/adm/ti/create/user")
+      .send(admUser);
+    const loginAdm = await request(app).post("/login").send(admLogin);
 
-    expect(response.status).toEqual(409);
-    expect(response.body).toHaveProperty("message");
+    const { token } = loginAdm.body;
+    const responsePost = await request(app)
+      .post("/bank")
+      .set("Authorization", `Bearer ${token}`)
+      .send(bank1);
+
+    expect(responsePost.status).toEqual(409);
+    expect(responsePost.body).toHaveProperty("message");
   });
 });

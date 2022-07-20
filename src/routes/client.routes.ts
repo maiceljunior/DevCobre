@@ -10,7 +10,7 @@ import updateClientController from "../controllers/client/updateClient.controlle
 import updateClientInfoController from "../controllers/client/updateClientInfo.controller";
 import schemaValidation from "../middlewares/schemaValidation";
 import verifyAuthAllNotHR from "../middlewares/verifyAuthAllNotHR";
-import verifyAuthManagerSupervisor from "../middlewares/verifyAuthManagerSupervisor";
+import verifyAuthAdmHRManager from "../middlewares/verifyAuthAdmHRManager";
 import verifyAuthToken from "../middlewares/verifyAuthToken.middleware";
 import createClientSchema from "../schemas/client/client.schema";
 
@@ -21,7 +21,7 @@ export const clientRoutes = () => {
   routes.post(
     "",
     verifyAuthToken,
-    verifyAuthManagerSupervisor,
+    verifyAuthAdmHRManager,
     schemaValidation(createClientSchema),
     createClientController
   );
@@ -34,13 +34,13 @@ export const clientRoutes = () => {
   routes.patch(
     "/:document",
     verifyAuthToken,
-    verifyAuthManagerSupervisor,
+    verifyAuthAdmHRManager,
     updateClientController
   );
   routes.delete(
     "/:document",
     verifyAuthToken,
-    verifyAuthManagerSupervisor,
+    verifyAuthAdmHRManager,
     deleteClientController
   );
   routes.get(
@@ -52,19 +52,19 @@ export const clientRoutes = () => {
   routes.post(
     "/:document/info",
     verifyAuthToken,
-    verifyAuthManagerSupervisor,
+    verifyAuthAdmHRManager,
     createClientInfoController
   );
   routes.patch(
     "/:document/info/:idContact",
     verifyAuthToken,
-    verifyAuthManagerSupervisor,
+    verifyAuthAdmHRManager,
     updateClientInfoController
   );
   routes.delete(
     "/:document/info/:idContact",
     verifyAuthToken,
-    verifyAuthManagerSupervisor,
+    verifyAuthAdmHRManager,
     deleteClientInfoController
   );
 

@@ -17,6 +17,17 @@ describe("Testing POST method in /client/:document/info", () => {
     type: string;
   }
 
+  interface User {
+    name: string;
+    email: string;
+    password: string;
+  }
+
+  interface Login {
+    email: string;
+    password: string;
+  }
+
   let teste: Client = {
     document: "12345678910",
     name: "Client Test",
@@ -28,7 +39,19 @@ describe("Testing POST method in /client/:document/info", () => {
     email: "client@mail.com",
   };
 
+  let admUser: User = {
+    name: "User Test Adm",
+    email: "useradm@kenzie.com",
+    password: "123456Ab!",
+  };
+
+  let admLogin: Login = {
+    email: "useradm@kenzie.com",
+    password: "123456Ab!",
+  };
+
   let responseInfo: any;
+  let tokenResponse: any;
 
   beforeAll(async () => {
     await AppDataSource.initialize()
@@ -37,7 +60,19 @@ describe("Testing POST method in /client/:document/info", () => {
         console.error("Error during Data Source initialization", err);
       });
 
-    responseInfo = await request(app).post("/client").send(teste);
+    const responseAdm = await request(app)
+      .post("/adm/ti/create/user")
+      .send(admUser);
+
+    const loginAdm = await request(app).post("/login").send(admLogin);
+    const { token } = loginAdm.body;
+
+    tokenResponse = token;
+
+    responseInfo = await request(app)
+      .post("/client")
+      .set("Authorization", `Bearer ${token}`)
+      .send(teste);
   });
 
   afterAll(async () => {
@@ -47,6 +82,7 @@ describe("Testing POST method in /client/:document/info", () => {
   test("Trying to create info an client", async () => {
     const response = await request(app)
       .post(`/client/${responseInfo.body.document}/info`)
+      .set("Authorization", `Bearer ${tokenResponse}`)
       .send(testInfo);
 
     expect(response.status).toEqual(201);
@@ -54,7 +90,10 @@ describe("Testing POST method in /client/:document/info", () => {
   });
 
   test("Trying to create information for a client that doesn't exist", async () => {
-    const response = await request(app).post("/client/1/info").send(testInfo);
+    const response = await request(app)
+      .post("/client/1/info")
+      .set("Authorization", `Bearer ${tokenResponse}`)
+      .send(testInfo);
 
     expect(response.status).toEqual(404);
     expect(response.body).toHaveProperty("message");
