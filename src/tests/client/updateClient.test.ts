@@ -70,21 +70,14 @@ describe("Testing PATCH method in /client/:document", () => {
   });
 
   test("Trying to update a client", async () => {
-    const responseAdm = await request(app)
-      .post("/adm/ti/create/user")
-      .send(admUser);
-
-    const loginAdm = await request(app).post("/login").send(admLogin);
-    const { token } = loginAdm.body;
-
     const responsePatch = await request(app)
       .patch(`/client/${response.body.document}`)
-      .set("Authorization", `Bearer ${token}`)
+      .set("Authorization", `Bearer ${tokenResponse}`)
       .send(testClient1.name);
 
     const responseGet = await request(app)
       .get(`/client/${response.body.document}`)
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", `Bearer ${tokenResponse}`);
 
     expect(responsePatch.status).toEqual(200);
     expect(responsePatch.body).toHaveProperty("message");
@@ -99,15 +92,9 @@ describe("Testing PATCH method in /client/:document", () => {
   });
 
   test("Trying to update a client that doesn't exist", async () => {
-    const responseAdm = await request(app)
-      .post("/adm/ti/create/user")
-      .send(admUser);
-
-    const loginAdm = await request(app).post("/login").send(admLogin);
-    const { token } = loginAdm.body;
     const response = await request(app)
       .patch(`/client/1`)
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", `Bearer ${tokenResponse}`);
 
     expect(response.status).toEqual(404);
     expect(response.body).toHaveProperty("message");

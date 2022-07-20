@@ -106,16 +106,9 @@ describe("Testing GET method in /client/:document/info", () => {
   });
 
   test("Trying to list a client and their information", async () => {
-    const responseAdm = await request(app)
-      .post("/adm/ti/create/user")
-      .send(admUser);
-
-    const loginAdm = await request(app).post("/login").send(admLogin);
-    const { token } = loginAdm.body;
-
     const responseGet = await request(app)
       .get(`/client/${responseClient1.body.document}/info`)
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", `Bearer ${tokenResponse}`);
 
     expect(responseGet.status).toEqual(200);
     expect(responseGet.body).toEqual(
@@ -140,16 +133,9 @@ describe("Testing GET method in /client/:document/info", () => {
   });
 
   test("Trying to list a client with no information", async () => {
-    const responseAdm = await request(app)
-      .post("/adm/ti/create/user")
-      .send(admUser);
-
-    const loginAdm = await request(app).post("/login").send(admLogin);
-    const { token } = loginAdm.body;
-
     const responseGet = await request(app)
       .get(`/client/${responseClient2.body.document}/info`)
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", `Bearer ${tokenResponse}`);
 
     expect(responseGet.status).toEqual(200);
     expect(responseGet.body).toEqual(
@@ -162,16 +148,9 @@ describe("Testing GET method in /client/:document/info", () => {
   });
 
   test("Trying to list a client that doesn't exist with information", async () => {
-    const responseAdm = await request(app)
-      .post("/adm/ti/create/user")
-      .send(admUser);
-
-    const loginAdm = await request(app).post("/login").send(admLogin);
-    const { token } = loginAdm.body;
-
     const response = await request(app)
       .get("/client/1/info")
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", `Bearer ${tokenResponse}`);
 
     expect(response.status).toEqual(404);
     expect(response.body).toHaveProperty("message");

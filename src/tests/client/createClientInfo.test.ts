@@ -80,16 +80,9 @@ describe("Testing POST method in /client/:document/info", () => {
   });
 
   test("Trying to create info an client", async () => {
-    const responseAdm = await request(app)
-      .post("/adm/ti/create/user")
-      .send(admUser);
-
-    const loginAdm = await request(app).post("/login").send(admLogin);
-    const { token } = loginAdm.body;
-
     const response = await request(app)
       .post(`/client/${responseInfo.body.document}/info`)
-      .set("Authorization", `Bearer ${token}`)
+      .set("Authorization", `Bearer ${tokenResponse}`)
       .send(testInfo);
 
     expect(response.status).toEqual(201);
@@ -97,16 +90,9 @@ describe("Testing POST method in /client/:document/info", () => {
   });
 
   test("Trying to create information for a client that doesn't exist", async () => {
-    const responseAdm = await request(app)
-      .post("/adm/ti/create/user")
-      .send(admUser);
-
-    const loginAdm = await request(app).post("/login").send(admLogin);
-    const { token } = loginAdm.body;
-
     const response = await request(app)
       .post("/client/1/info")
-      .set("Authorization", `Bearer ${token}`)
+      .set("Authorization", `Bearer ${tokenResponse}`)
       .send(testInfo);
 
     expect(response.status).toEqual(404);

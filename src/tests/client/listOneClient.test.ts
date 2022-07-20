@@ -70,16 +70,9 @@ describe("Testing GET method in /client/:document", () => {
   });
 
   test("Trying to list a specific client", async () => {
-    const responseAdm = await request(app)
-      .post("/adm/ti/create/user")
-      .send(admUser);
-
-    const loginAdm = await request(app).post("/login").send(admLogin);
-    const { token } = loginAdm.body;
-
     const responseGet = await request(app)
       .get(`/client/${response.body.document}`)
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", `Bearer ${tokenResponse}`);
 
     expect(responseGet.status).toEqual(200);
     expect(responseGet.body).toEqual(
@@ -92,16 +85,9 @@ describe("Testing GET method in /client/:document", () => {
   });
 
   test("Trying to list a specific client that doesn't exist", async () => {
-    const responseAdm = await request(app)
-      .post("/adm/ti/create/user")
-      .send(admUser);
-
-    const loginAdm = await request(app).post("/login").send(admLogin);
-    const { token } = loginAdm.body;
-
     const responseGet = await request(app)
       .get(`/client/1`)
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", `Bearer ${tokenResponse}`);
 
     expect(responseGet.status).toEqual(404);
     expect(responseGet.body).toHaveProperty("message");

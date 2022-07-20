@@ -81,16 +81,9 @@ describe("Testing GET method in /client", () => {
   });
 
   test("Trying to list an client", async () => {
-    const responseAdm = await request(app)
-      .post("/adm/ti/create/user")
-      .send(admUser);
-
-    const loginAdm = await request(app).post("/login").send(admLogin);
-    const { token } = loginAdm.body;
-
     const response = await request(app)
       .get("/client")
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", `Bearer ${tokenResponse}`);
 
     expect(response.status).toEqual(200);
     expect(response.body.length).toEqual(2);

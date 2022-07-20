@@ -85,26 +85,16 @@ describe("Testing PATCH method in /client/:document/info/:idContact", () => {
   });
 
   test("Trying to update a client's information", async () => {
-    const responseAdm = await request(app)
-      .post("/adm/ti/create/user")
-      .send(admUser);
-
-    const loginAdm = await request(app).post("/login").send(admLogin);
-    const { token } = loginAdm.body;
-
-    const get = await request(app)
+    const responseGet = await request(app)
       .get(`/client/${response.body.document}/info`)
-      .set("Authorization", `Bearer ${token}`);
-    const info = get.body.clientInfo[0].id;
+      .set("Authorization", `Bearer ${tokenResponse}`);
+
+    const info = responseGet.body.clientInfo[0].id;
 
     const responsePatch = await request(app)
       .patch(`/client/${response.body.document}/info/${info}`)
-      .set("Authorization", `Bearer ${token}`)
+      .set("Authorization", `Bearer ${tokenResponse}`)
       .send(testInfo.email);
-
-    const responseGet = await request(app)
-      .get(`/client/${response.body.document}/info`)
-      .set("Authorization", `Bearer ${token}`);
 
     expect(responsePatch.status).toEqual(200);
     expect(responsePatch.body).toHaveProperty("message");
@@ -117,7 +107,7 @@ describe("Testing PATCH method in /client/:document/info/:idContact", () => {
         clientInfo: [
           {
             id: info,
-            telephone: get.body.clientInfo[0].telephone,
+            telephone: responseGet.body.clientInfo[0].telephone,
             email: testInfo.email,
           },
         ],

@@ -85,27 +85,15 @@ describe("Testing DELETE method in /client/:document/info/:idContact", () => {
   });
 
   test("Trying to delete a client's information", async () => {
-    const responseAdm = await request(app)
-      .post("/adm/ti/create/user")
-      .send(admUser);
-
-    const loginAdm = await request(app).post("/login").send(admLogin);
-    const { token } = loginAdm.body;
-
-    tokenResponse = token;
-
-    const get = await request(app)
+    const responseGet = await request(app)
       .get(`/client/${response.body.document}/info`)
-      .set("Authorization", `Bearer ${token}`);
-    const info = get.body.clientInfo[0].id;
+      .set("Authorization", `Bearer ${tokenResponse}`);
+
+    const info = responseGet.body.clientInfo[0].id;
 
     const responseDelete = await request(app)
       .delete(`/client/${response.body.document}/info/${info}`)
-      .set("Authorization", `Bearer ${token}`);
-
-    const responseGet = await request(app)
-      .get(`/client/${response.body.document}/info`)
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", `Bearer ${tokenResponse}`);
 
     expect(responseDelete.status).toEqual(200);
     expect(responseDelete.body).toHaveProperty("message");
@@ -120,32 +108,18 @@ describe("Testing DELETE method in /client/:document/info/:idContact", () => {
   });
 
   test("Trying to delete missing information from an existing client", async () => {
-    const responseAdm = await request(app)
-      .post("/adm/ti/create/user")
-      .send(admUser);
-
-    const loginAdm = await request(app).post("/login").send(admLogin);
-    const { token } = loginAdm.body;
-
     const responseDelete = await request(app)
       .delete(`/client/${response.body.document}/info/0`)
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", `Bearer ${tokenResponse}`);
 
     expect(responseDelete.status).toEqual(404);
     expect(responseDelete.body).toHaveProperty("message");
   });
 
   test("Trying to delete information for a client that does not exist", async () => {
-    const responseAdm = await request(app)
-      .post("/adm/ti/create/user")
-      .send(admUser);
-
-    const loginAdm = await request(app).post("/login").send(admLogin);
-    const { token } = loginAdm.body;
-
     const response = await request(app)
       .delete("/client/1/info/0")
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", `Bearer ${tokenResponse}`);
 
     expect(response.status).toEqual(404);
     expect(response.body).toHaveProperty("message");
