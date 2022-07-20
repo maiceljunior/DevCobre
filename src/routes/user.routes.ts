@@ -19,8 +19,7 @@ const routes = Router();
 export const userRoutes = () => {
   routes.post(
     "",
-    verifyAuthToken,
-    verifyAuthAdmHR,
+
     schemaValidation(registerSchema),
     createUserController
   );
