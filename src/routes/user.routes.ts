@@ -19,11 +19,17 @@ const routes = Router();
 export const userRoutes = () => {
   routes.post(
     "",
-
+    verifyAuthToken,
+    verifyAuthAdmHR,
     schemaValidation(registerSchema),
     createUserController
   );
-  routes.get("", listUsersController);
+  routes.get(
+    "",
+    verifyAuthToken,
+    verifyAuthAdmHRManagerSupervisor,
+    listUsersController
+  );
   routes.get(
     "/:id",
     verifyAuthToken,
