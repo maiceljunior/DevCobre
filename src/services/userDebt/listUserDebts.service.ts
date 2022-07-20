@@ -11,7 +11,6 @@ const listUserDebtsService = async (id: any) => {
       debts: true,
     },
   });
-  console.log(user);
 
   return user;
 };

@@ -9,20 +9,64 @@ import listOneClientController from "../controllers/client/listOneClient.control
 import updateClientController from "../controllers/client/updateClient.controller";
 import updateClientInfoController from "../controllers/client/updateClientInfo.controller";
 import schemaValidation from "../middlewares/schemaValidation";
+import verifyAuthAllNotHR from "../middlewares/verifyAuthAllNotHR";
+import verifyAuthAdmHRManager from "../middlewares/verifyAuthAdmHRManager";
+import verifyAuthToken from "../middlewares/verifyAuthToken.middleware";
 import createClientSchema from "../schemas/client/client.schema";
 
 const routes = Router();
 
 export const clientRoutes = () => {
-  routes.get("", listClientsController);
-  routes.post("", schemaValidation(createClientSchema), createClientController);
-  routes.get("/:document", listOneClientController);
-  routes.patch("/:document", updateClientController);
-  routes.delete("/:document", deleteClientController);
-  routes.get("/:document/info", listClientInfoController);
-  routes.post("/:document/info", createClientInfoController);
-  routes.patch("/:document/info/:idContact", updateClientInfoController);
-  routes.delete("/:document/info/:idContact", deleteClientInfoController);
+  routes.get("", verifyAuthToken, verifyAuthAllNotHR, listClientsController);
+  routes.post(
+    "",
+    verifyAuthToken,
+    verifyAuthAdmHRManager,
+    schemaValidation(createClientSchema),
+    createClientController
+  );
+  routes.get(
+    "/:document",
+    verifyAuthToken,
+    verifyAuthAllNotHR,
+    listOneClientController
+  );
+  routes.patch(
+    "/:document",
+    verifyAuthToken,
+    verifyAuthAdmHRManager,
+    updateClientController
+  );
+  routes.delete(
+    "/:document",
+    verifyAuthToken,
+    verifyAuthAdmHRManager,
+    deleteClientController
+  );
+  routes.get(
+    "/:document/info",
+    verifyAuthToken,
+    verifyAuthAllNotHR,
+    listClientInfoController
+  );
+  routes.post(
+    "/:document/info",
+    verifyAuthToken,
+    verifyAuthAdmHRManager,
+    createClientInfoController
+  );
+  routes.patch(
+    "/:document/info/:idContact",
+    verifyAuthToken,
+    verifyAuthAdmHRManager,
+    updateClientInfoController
+  );
+  routes.delete(
+    "/:document/info/:idContact",
+    verifyAuthToken,
+    verifyAuthAdmHRManager,
+    deleteClientInfoController
+  );
 
   return routes;
 };

@@ -22,7 +22,7 @@ const createDebtsController = async (req: Request, res: Response) => {
     ipoc,
   });
 
-  return res.status(200).json(debt);
+  return res.status(201).json(debt);
 };
 
 export default createDebtsController;

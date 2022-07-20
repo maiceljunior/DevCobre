@@ -8,17 +8,55 @@ import listAgreementByBankController from "../controllers/agreement/listAgreemen
 import listAgreementByClientController from "../controllers/agreement/listAgreementByClient.controller";
 import listAgreementByUserController from "../controllers/agreement/listAgreementByUser.controller";
 import verifyAuthToken from "../middlewares/verifyAuthToken.middleware";
+import verifyAuthAllNotHR from "../middlewares/verifyAuthAllNotHR";
+import verifyAuthAdmManagerSupervisor from "../middlewares/verifyAuthAdmManagerSupervisor";
+import verifyAuthAdmSupervisor from "../middlewares/verifyAuthAdmSupervisor";
 
 const routes = Router();
 
 export const agreementRoutes = () => {
-  routes.get("", listAgreementController);
-  routes.post("", verifyAuthToken, createAgreementController);
-  routes.get("/:id", listOneAgreementController);
-  routes.patch("/:id", updateAgreementController);
-  routes.delete("/:id", deleteAgreementController);
-  routes.get("/bank/:id", listAgreementByBankController);
-  routes.get("/client/:id", listAgreementByClientController);
-  routes.get("/user/:id", listAgreementByUserController);
+  routes.get("", verifyAuthToken, verifyAuthAllNotHR, listAgreementController);
+  routes.post(
+    "",
+    verifyAuthToken,
+    verifyAuthAllNotHR,
+    createAgreementController
+  );
+  routes.get(
+    "/:id",
+    verifyAuthToken,
+    verifyAuthAllNotHR,
+    listOneAgreementController
+  );
+  routes.patch(
+    "/:id",
+    verifyAuthToken,
+    verifyAuthAdmManagerSupervisor,
+    updateAgreementController
+  );
+  routes.delete(
+    "/:id",
+    verifyAuthToken,
+    verifyAuthAdmManagerSupervisor,
+    deleteAgreementController
+  );
+  routes.get(
+    "/bank/:id",
+    verifyAuthToken,
+    verifyAuthAdmSupervisor,
+    listAgreementByBankController
+  );
+  routes.get(
+    "/client/:id",
+    verifyAuthToken,
+    verifyAuthAllNotHR,
+    listAgreementByClientController
+  );
+  routes.get(
+    "/user/:id",
+    verifyAuthToken,
+    verifyAuthAllNotHR,
+    listAgreementByUserController
+  );
   return routes;
 };
