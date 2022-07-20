@@ -21,15 +21,18 @@ describe("Testing PATCH method in /bank/:id", () => {
     email: string;
     password: string;
   }
+
   interface Login {
     email: string;
     password: string;
   }
+
   let admUser: User = {
     name: "User Test Adm",
     email: "useradm@kenzie.com",
     password: "123456Ab!",
   };
+
   let admLogin: Login = {
     email: "useradm@kenzie.com",
     password: "123456Ab!",
@@ -63,16 +66,9 @@ describe("Testing PATCH method in /bank/:id", () => {
   });
 
   test("Trying to update a bank", async () => {
-    const responseAdm = await request(app)
-      .post("/adm/ti/create/user")
-      .send(admUser);
-    const loginAdm = await request(app).post("/login").send(admLogin);
-    const { token } = loginAdm.body;
-    tokenResponse = token;
-
     const responsePatch = await request(app)
       .patch(`/bank/${response.body.id}`)
-      .set("Authorization", `Bearer ${token}`)
+      .set("Authorization", `Bearer ${tokenResponse}`)
       .send(bank1);
 
     expect(responsePatch.status).toEqual(200);
@@ -80,15 +76,9 @@ describe("Testing PATCH method in /bank/:id", () => {
   });
 
   test("Try to update a bank that doesn't exist", async () => {
-    const responseAdm = await request(app)
-      .post("/adm/ti/create/user")
-      .send(admUser);
-    const loginAdm = await request(app).post("/login").send(admLogin);
-    const { token } = loginAdm.body;
-    tokenResponse = token;
     const response = await request(app)
       .patch("/bank/0")
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", `Bearer ${tokenResponse}`);
 
     expect(response.status).toEqual(404);
     expect(response.body).toHaveProperty("message");

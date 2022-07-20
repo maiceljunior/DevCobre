@@ -21,15 +21,18 @@ describe("Testing DELETE method in /bank/:id", () => {
     email: string;
     password: string;
   }
+
   interface Login {
     email: string;
     password: string;
   }
+
   let admUser: User = {
     name: "User Test Adm",
     email: "useradm@kenzie.com",
     password: "123456Ab!",
   };
+
   let admLogin: Login = {
     email: "useradm@kenzie.com",
     password: "123456Ab!",
@@ -63,32 +66,18 @@ describe("Testing DELETE method in /bank/:id", () => {
   });
 
   test("Trying to delete a bank", async () => {
-    const responseAdm = await request(app)
-      .post("/adm/ti/create/user")
-      .send(admUser);
-    const loginAdm = await request(app).post("/login").send(admLogin);
-    const { token } = loginAdm.body;
-    tokenResponse = token;
-
     const responseDelete = await request(app)
       .delete(`/bank/${response.body.id}`)
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", `Bearer ${tokenResponse}`);
 
     expect(responseDelete.status).toEqual(200);
     expect(responseDelete.body).toHaveProperty("message");
   });
 
   test("Try to delete a bank that doesn't exist", async () => {
-    const responseAdm = await request(app)
-      .post("/adm/ti/create/user")
-      .send(admUser);
-    const loginAdm = await request(app).post("/login").send(admLogin);
-    const { token } = loginAdm.body;
-    tokenResponse = token;
-
     const response = await request(app)
       .delete("/bank/0")
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", `Bearer ${tokenResponse}`);
 
     expect(response.status).toEqual(404);
     expect(response.body).toHaveProperty("message");
