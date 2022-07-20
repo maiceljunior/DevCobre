@@ -3,41 +3,25 @@ import createDebtsController from "../controllers/debts/createDebts.controller";
 import listDebtsController from "../controllers/debts/listDebts.controller";
 import listOneDebtController from "../controllers/debts/listOneDebt.controller";
 import schemaValidation from "../middlewares/schemaValidation";
-import verifyAuthAdm from "../middlewares/verifyAuthAdm.middleware";
-import verifyAuthHR from "../middlewares/verifyAuthHR.middleware";
-import verifyAuthManagerSupervisor from "../middlewares/verifyAuthManagerSupervisor";
-import verifyAuthSupervisor from "../middlewares/verifyAuthSupervisor";
+import verifyAuthAdmManagerSupervisor from "../middlewares/verifyAuthAdmManagerSupervisor";
+import verifyAuthAllNotHR from "../middlewares/verifyAuthAllNotHR";
 import verifyAuthToken from "../middlewares/verifyAuthToken.middleware";
-import verifyAuthUser from "../middlewares/verifyAuthUser.middleware";
 import debtRegisterSchema from "../schemas/debts/debt.schema";
 
 const routes = Router();
 
 export const debtsRoutes = () => {
-  routes.get(
-    "",
-    verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthHR,
-    verifyAuthManagerSupervisor,
-    verifyAuthUser,
-    listDebtsController
-  );
+  routes.get("", verifyAuthToken, verifyAuthAllNotHR, listDebtsController);
   routes.get(
     "/:id",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthHR,
-    verifyAuthManagerSupervisor,
-    verifyAuthUser,
+    verifyAuthAllNotHR,
     listOneDebtController
   );
   routes.post(
     "",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthHR,
-    verifyAuthSupervisor,
+    verifyAuthAdmManagerSupervisor,
     schemaValidation(debtRegisterSchema),
     createDebtsController
   );

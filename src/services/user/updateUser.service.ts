@@ -13,7 +13,7 @@ const updateUserService = async (id: string, data: IUserUpdate) => {
   });
 
   if (!user) {
-    throw new AppError(400, "User does not exists!");
+    throw new AppError(404, "User does not exists!");
   }
 
   const userInfoId = user?.id;
@@ -23,7 +23,7 @@ const updateUserService = async (id: string, data: IUserUpdate) => {
   const userInfos = await userInfoRepository.findOneBy({ id: userInfoId });
 
   if (!userInfos) {
-    throw new AppError(400, "User does not exists!");
+    throw new AppError(404, "User does not exists!");
   }
 
   const newName = data.body.name;

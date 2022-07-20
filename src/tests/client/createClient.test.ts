@@ -2,14 +2,23 @@ import { DataSource } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import app from "../../app";
 import request from "supertest";
-
 describe("Testing POST method in /client", () => {
   let connection: DataSource;
-
   interface Client {
     document: string;
     name: string;
     type: string;
+  }
+
+  interface User {
+    name: string;
+    email: string;
+    password: string;
+  }
+
+  interface Login {
+    email: string;
+    password: string;
   }
 
   let testClient: Client = {
@@ -22,6 +31,17 @@ describe("Testing POST method in /client", () => {
     document: "12345678901",
     name: "Client TestDois",
     type: "Fisico",
+  };
+
+  let admUser: User = {
+    name: "User Test Adm",
+    email: "useradm@kenzie.com",
+    password: "123456Ab!",
+  };
+
+  let admLogin: Login = {
+    email: "useradm@kenzie.com",
+    password: "123456Ab!",
   };
 
   beforeAll(async () => {
@@ -37,29 +57,53 @@ describe("Testing POST method in /client", () => {
   });
 
   test("Trying to create an client", async () => {
-    const response = await request(app).post("/client").send(testClient);
-
-    expect(response.status).toEqual(201);
-    expect(response.body).toEqual(
+    const response = await request(app)
+      .post("/adm/ti/create/user")
+      .send(admUser);
+    const loginAdm = await request(app).post("/login").send(admLogin);
+    const { token } = loginAdm.body;
+    const resPost = await request(app)
+      .post("/client")
+      .set("Authorization", `Bearer ${token}`)
+      .send(testClient);
+    expect(resPost.status).toEqual(201);
+    expect(resPost.body).toEqual(
       expect.objectContaining({
-        document: response.body.document,
-        name: response.body.name,
-        type: response.body.type,
+        document: resPost.body.document,
+        name: resPost.body.name,
+        type: resPost.body.type,
       })
     );
   });
 
   test("Trying to create an client that already exists", async () => {
-    const response = await request(app).post("/client").send(testClient);
+    const response = await request(app)
+      .post("/adm/ti/create/user")
+      .send(admUser);
 
-    expect(response.status).toEqual(409);
-    expect(response.body).toHaveProperty("message");
+    const loginAdm = await request(app).post("/login").send(admLogin);
+    const { token } = loginAdm.body;
+
+    const resPost = await request(app)
+      .post("/client")
+      .set("Authorization", `Bearer ${token}`)
+      .send(testClient);
+    expect(resPost.status).toEqual(409);
+    expect(resPost.body).toHaveProperty("message");
   });
 
   test("Trying to create a client with a document that already exists", async () => {
-    const response = await request(app).post("/client").send(testClient2);
+    const response = await request(app)
+      .post("/adm/ti/create/user")
+      .send(admUser);
 
-    expect(response.status).toEqual(409);
-    expect(response.body).toHaveProperty("message");
+    const loginAdm = await request(app).post("/login").send(admLogin);
+    const { token } = loginAdm.body;
+    const resPost = await request(app)
+      .post("/client")
+      .set("Authorization", `Bearer ${token}`)
+      .send(testClient2);
+    expect(resPost.status).toEqual(409);
+    expect(resPost.body).toHaveProperty("message");
   });
 });

@@ -7,8 +7,10 @@ import { userRoutes } from "./user.routes";
 import { formPaymentRoutes } from "./formPayment.routes";
 import { historyRoutes } from "./history.routes";
 import { sessionRoutes } from "./session.routes";
+import { admRoutes } from "./adm.routes";
 
 export const appRoutes = (app: Express) => {
+  app.use("/adm", admRoutes());
   app.use("/login", sessionRoutes());
   app.use("/bank", bankRoutes());
   app.use("/agreement", agreementRoutes());
@@ -17,5 +19,4 @@ export const appRoutes = (app: Express) => {
   app.use("/payment", formPaymentRoutes());
   app.use("/history", historyRoutes());
   app.use("/user", userRoutes());
-
 };

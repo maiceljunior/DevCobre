@@ -8,81 +8,54 @@ import listAgreementByBankController from "../controllers/agreement/listAgreemen
 import listAgreementByClientController from "../controllers/agreement/listAgreementByClient.controller";
 import listAgreementByUserController from "../controllers/agreement/listAgreementByUser.controller";
 import verifyAuthToken from "../middlewares/verifyAuthToken.middleware";
-import verifyAuthAdm from "../middlewares/verifyAuthAdm.middleware";
-import verifyAuthHR from "../middlewares/verifyAuthHR.middleware";
-import verifyAuthManagerSupervisor from "../middlewares/verifyAuthManagerSupervisor";
-import verifyAuthUser from "../middlewares/verifyAuthUser.middleware";
-import verifyAuthSupervisor from "../middlewares/verifyAuthSupervisor";
+import verifyAuthAllNotHR from "../middlewares/verifyAuthAllNotHR";
+import verifyAuthAdmManagerSupervisor from "../middlewares/verifyAuthAdmManagerSupervisor";
+import verifyAuthAdmSupervisor from "../middlewares/verifyAuthAdmSupervisor";
 
 const routes = Router();
 
 export const agreementRoutes = () => {
-  routes.get(
-    "",
-    verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthHR,
-    verifyAuthManagerSupervisor,
-    verifyAuthUser,
-    listAgreementController
-  );
+  routes.get("", verifyAuthToken, verifyAuthAllNotHR, listAgreementController);
   routes.post(
     "",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthHR,
-    verifyAuthManagerSupervisor,
-    verifyAuthUser,
+    verifyAuthAllNotHR,
     createAgreementController
   );
   routes.get(
     "/:id",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthHR,
-    verifyAuthManagerSupervisor,
-    verifyAuthUser,
+    verifyAuthAllNotHR,
     listOneAgreementController
   );
   routes.patch(
     "/:id",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthHR,
-    verifyAuthManagerSupervisor,
+    verifyAuthAdmManagerSupervisor,
     updateAgreementController
   );
   routes.delete(
     "/:id",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthHR,
-    verifyAuthManagerSupervisor,
+    verifyAuthAdmManagerSupervisor,
     deleteAgreementController
   );
   routes.get(
     "/bank/:id",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthHR,
-    verifyAuthSupervisor,
+    verifyAuthAdmSupervisor,
     listAgreementByBankController
   );
   routes.get(
     "/client/:id",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthHR,
-    verifyAuthManagerSupervisor,
+    verifyAuthAllNotHR,
     listAgreementByClientController
   );
   routes.get(
     "/user/:id",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthHR,
-    verifyAuthManagerSupervisor,
-    verifyAuthUser,
+    verifyAuthAllNotHR,
     listAgreementByUserController
   );
   return routes;

@@ -17,6 +17,28 @@ describe("Testing GET method in /client/:document/info", () => {
     email: string;
   }
 
+  interface User {
+    name: string;
+    email: string;
+    password: string;
+  }
+
+  interface Login {
+    email: string;
+    password: string;
+  }
+
+  let admUser: User = {
+    name: "User Test Adm",
+    email: "useradm@kenzie.com",
+    password: "123456Ab!",
+  };
+
+  let admLogin: Login = {
+    email: "useradm@kenzie.com",
+    password: "123456Ab!",
+  };
+
   let client1: Client = {
     document: "12345678910",
     name: "Client Test",
@@ -43,6 +65,7 @@ describe("Testing GET method in /client/:document/info", () => {
   let responseClient2: any;
   let responseInfo1: any;
   let responseInfo2: any;
+  let tokenResponse: any;
 
   beforeAll(async () => {
     await AppDataSource.initialize()
@@ -51,14 +74,31 @@ describe("Testing GET method in /client/:document/info", () => {
         console.error("Error during Data Source initialization", err);
       });
 
-    responseClient1 = await request(app).post("/client").send(client1);
+    const responseAdm = await request(app)
+      .post("/adm/ti/create/user")
+      .send(admUser);
+
+    const loginAdm = await request(app).post("/login").send(admLogin);
+    const { token } = loginAdm.body;
+
+    tokenResponse = token;
+
+    responseClient1 = await request(app)
+      .post("/client")
+      .set("Authorization", `Bearer ${token}`)
+      .send(client1);
     responseInfo1 = await request(app)
       .post(`/client/${responseClient1.body.document}/info`)
+      .set("Authorization", `Bearer ${token}`)
       .send(info1);
     responseInfo2 = await request(app)
       .post(`/client/${responseClient1.body.document}/info`)
+      .set("Authorization", `Bearer ${token}`)
       .send(info2);
-    responseClient2 = await request(app).post("/client").send(client2);
+    responseClient2 = await request(app)
+      .post("/client")
+      .set("Authorization", `Bearer ${token}`)
+      .send(client2);
   });
 
   afterAll(async () => {
@@ -66,9 +106,9 @@ describe("Testing GET method in /client/:document/info", () => {
   });
 
   test("Trying to list a client and their information", async () => {
-    const responseGet = await request(app).get(
-      `/client/${responseClient1.body.document}/info`
-    );
+    const responseGet = await request(app)
+      .get(`/client/${responseClient1.body.document}/info`)
+      .set("Authorization", `Bearer ${tokenResponse}`);
 
     expect(responseGet.status).toEqual(200);
     expect(responseGet.body).toEqual(
@@ -93,9 +133,9 @@ describe("Testing GET method in /client/:document/info", () => {
   });
 
   test("Trying to list a client with no information", async () => {
-    const responseGet = await request(app).get(
-      `/client/${responseClient2.body.document}/info`
-    );
+    const responseGet = await request(app)
+      .get(`/client/${responseClient2.body.document}/info`)
+      .set("Authorization", `Bearer ${tokenResponse}`);
 
     expect(responseGet.status).toEqual(200);
     expect(responseGet.body).toEqual(
@@ -108,7 +148,9 @@ describe("Testing GET method in /client/:document/info", () => {
   });
 
   test("Trying to list a client that doesn't exist with information", async () => {
-    const response = await request(app).get("/client/1/info");
+    const response = await request(app)
+      .get("/client/1/info")
+      .set("Authorization", `Bearer ${tokenResponse}`);
 
     expect(response.status).toEqual(404);
     expect(response.body).toHaveProperty("message");

@@ -16,7 +16,27 @@ describe("Testing GET method in /bank/:id", () => {
     status: true,
   };
 
+  interface User {
+    name: string;
+    email: string;
+    password: string;
+  }
+  interface Login {
+    email: string;
+    password: string;
+  }
+  let admUser: User = {
+    name: "User Test Adm",
+    email: "useradm@kenzie.com",
+    password: "123456Ab!",
+  };
+  let admLogin: Login = {
+    email: "useradm@kenzie.com",
+    password: "123456Ab!",
+  };
+
   let response: any;
+  let tokenResponse: any;
 
   beforeAll(async () => {
     await AppDataSource.initialize()
@@ -25,7 +45,17 @@ describe("Testing GET method in /bank/:id", () => {
         console.error("Error during Data Source initialization", err);
       });
 
-    response = await request(app).post("/bank").send(bank1);
+    const responseAdm = await request(app)
+      .post("/adm/ti/create/user")
+      .send(admUser);
+    const loginAdm = await request(app).post("/login").send(admLogin);
+    const { token } = loginAdm.body;
+    tokenResponse = token;
+
+    response = await request(app)
+      .post("/bank")
+      .set("Authorization", `Bearer ${token}`)
+      .send(bank1);
   });
 
   afterAll(async () => {
@@ -33,7 +63,16 @@ describe("Testing GET method in /bank/:id", () => {
   });
 
   test("Trying to list a specific bank", async () => {
-    const responseGet = await request(app).get(`/bank/${response.body.id}`);
+    const responseAdm = await request(app)
+      .post("/adm/ti/create/user")
+      .send(admUser);
+    const loginAdm = await request(app).post("/login").send(admLogin);
+    const { token } = loginAdm.body;
+    tokenResponse = token;
+
+    const responseGet = await request(app)
+      .get(`/bank/${response.body.id}`)
+      .set("Authorization", `Bearer ${token}`);
 
     expect(responseGet.status).toEqual(200);
     expect(responseGet.body).toEqual(
@@ -46,7 +85,16 @@ describe("Testing GET method in /bank/:id", () => {
   });
 
   test("Trying to list a specific bank that doesn't exist", async () => {
-    const responseGet = await request(app).get(`/bank/0`);
+    const responseAdm = await request(app)
+      .post("/adm/ti/create/user")
+      .send(admUser);
+    const loginAdm = await request(app).post("/login").send(admLogin);
+    const { token } = loginAdm.body;
+    tokenResponse = token;
+
+    const responseGet = await request(app)
+      .get(`/bank/0`)
+      .set("Authorization", `Bearer ${token}`);
 
     expect(responseGet.status).toEqual(404);
     expect(responseGet.body).toHaveProperty("message");
