@@ -78,8 +78,8 @@ describe("Testing POST method in /bank/:id/contact", () => {
   test("Trying to create info a bank", async () => {
     const responsePost = await request(app)
       .post(`/bank/${response.body.id}/contact`)
-      .send(info1)
-      .set("Authorization", `Bearer ${tokenResponse}`);
+      .set("Authorization", `Bearer ${tokenResponse}`)
+      .send(info1);
 
     expect(responsePost.status).toEqual(200);
     expect(responsePost.body).toHaveProperty("message");
@@ -88,8 +88,8 @@ describe("Testing POST method in /bank/:id/contact", () => {
   test("Try to create contact for a bank that doesn't exist", async () => {
     const response = await request(app)
       .post("/bank/0/contact")
-      .send(info1)
-      .set("Authorization", `Bearer ${tokenResponse}`);
+      .set("Authorization", `Bearer ${tokenResponse}`)
+      .send(info1);
 
     expect(response.status).toEqual(404);
     expect(response.body).toHaveProperty("message");
