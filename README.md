@@ -931,20 +931,42 @@ Obs: caso não possua todos os dados no JSON sera dado a resposta de Bad Request
 
 ### <h2 style = background-color:gray>Patch `/agreement/:id`</h2>
 
-### Resposta: Status
+`agreedvalue`,`dateagree`:string
+`status`:boolean
 
 ```json
-{}
+{
+  "agreedvalue":"1800.00",
+  "dateagree":"2022-01-10",
+  "status":false
+}
+```
+
+### Resposta: Status 200
+
+```json
+{
+	"message": "Updated Agreement!"
+}
+```
+### Resposta: Status 200
+
+```json
+{
+	"message": "Agreement not found!"
+}
 ```
 
 ---
 
 ### <h2 style = background-color:gray>Delete `/agreement/:id`</h2>
 
-### Resposta: Status
+### Resposta: Status 200 Ok
 
 ```json
-{}
+{
+	"message": "Agreement deleted with sucess!"
+}
 ```
 
 <p align="center">
