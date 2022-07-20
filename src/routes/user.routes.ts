@@ -11,20 +11,67 @@ import updateUserController from "../controllers/user/updateUser.controller";
 import verifyAuthToken from "../middlewares/verifyAuthToken.middleware";
 import listUserDebtsController from "../controllers/userDebt/listUserDebts.controller";
 import verifyAuthUser from "../middlewares/verifyAuthUser.middleware";
+import verifyAuthHR from "../middlewares/verifyAuthHR.middleware";
+import verifyAuthAdm from "../middlewares/verifyAuthAdm.middleware";
+import verifyAuthManagerSupervisor from "../middlewares/verifyAuthManagerSupervisor";
+import verifyAuthSupervisor from "../middlewares/verifyAuthSupervisor";
 const routes = Router();
 
 export const userRoutes = () => {
-  routes.post("", schemaValidation(registerSchema), createUserController);
-  routes.get("", listUsersController);
-  routes.get("/:id", listOneUserController);
-  routes.delete("/:id", deleteUserController);
-  routes.patch("/:id", updateUserController);
+  routes.post(
+    "",
+    verifyAuthToken,
+    verifyAuthAdm,
+    verifyAuthHR,
+    schemaValidation(registerSchema),
+    createUserController
+  );
+  routes.get(
+    "",
+    verifyAuthToken,
+    verifyAuthAdm,
+    verifyAuthHR,
+    verifyAuthManagerSupervisor,
+    listUsersController
+  );
+  routes.get(
+    "/:id",
+    verifyAuthToken,
+    verifyAuthAdm,
+    verifyAuthHR,
+    verifyAuthManagerSupervisor,
+    listOneUserController
+  );
+  routes.delete(
+    "/:id",
+    verifyAuthToken,
+    verifyAuthAdm,
+    verifyAuthHR,
+    deleteUserController
+  );
+  routes.patch(
+    "/:id",
+    verifyAuthToken,
+    verifyAuthAdm,
+    verifyAuthHR,
+    updateUserController
+  );
 
   // Aloca divida para o usuario.
-  routes.post("/debts/:userId", createUserDebtController);
+  routes.post(
+    "/debts/:userId",
+    verifyAuthToken,
+    verifyAuthAdm,
+    verifyAuthHR,
+    verifyAuthSupervisor,
+    createUserDebtController
+  );
   routes.get(
     "/debts/me",
     verifyAuthToken,
+    verifyAuthAdm,
+    verifyAuthHR,
+    verifyAuthManagerSupervisor,
     verifyAuthUser,
     listUserDebtsController
   );

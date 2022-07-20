@@ -8,17 +8,82 @@ import listAgreementByBankController from "../controllers/agreement/listAgreemen
 import listAgreementByClientController from "../controllers/agreement/listAgreementByClient.controller";
 import listAgreementByUserController from "../controllers/agreement/listAgreementByUser.controller";
 import verifyAuthToken from "../middlewares/verifyAuthToken.middleware";
+import verifyAuthAdm from "../middlewares/verifyAuthAdm.middleware";
+import verifyAuthHR from "../middlewares/verifyAuthHR.middleware";
+import verifyAuthManagerSupervisor from "../middlewares/verifyAuthManagerSupervisor";
+import verifyAuthUser from "../middlewares/verifyAuthUser.middleware";
+import verifyAuthSupervisor from "../middlewares/verifyAuthSupervisor";
 
 const routes = Router();
 
 export const agreementRoutes = () => {
-  routes.get("", listAgreementController);
-  routes.post("", verifyAuthToken, createAgreementController);
-  routes.get("/:id", listOneAgreementController);
-  routes.patch("/:id", updateAgreementController);
-  routes.delete("/:id", deleteAgreementController);
-  routes.get("/bank/:id", listAgreementByBankController);
-  routes.get("/client/:id", listAgreementByClientController);
-  routes.get("/user/:id", listAgreementByUserController);
+  routes.get(
+    "",
+    verifyAuthToken,
+    verifyAuthAdm,
+    verifyAuthHR,
+    verifyAuthManagerSupervisor,
+    verifyAuthUser,
+    listAgreementController
+  );
+  routes.post(
+    "",
+    verifyAuthToken,
+    verifyAuthAdm,
+    verifyAuthHR,
+    verifyAuthManagerSupervisor,
+    verifyAuthUser,
+    createAgreementController
+  );
+  routes.get(
+    "/:id",
+    verifyAuthToken,
+    verifyAuthAdm,
+    verifyAuthHR,
+    verifyAuthManagerSupervisor,
+    verifyAuthUser,
+    listOneAgreementController
+  );
+  routes.patch(
+    "/:id",
+    verifyAuthToken,
+    verifyAuthAdm,
+    verifyAuthHR,
+    verifyAuthManagerSupervisor,
+    updateAgreementController
+  );
+  routes.delete(
+    "/:id",
+    verifyAuthToken,
+    verifyAuthAdm,
+    verifyAuthHR,
+    verifyAuthManagerSupervisor,
+    deleteAgreementController
+  );
+  routes.get(
+    "/bank/:id",
+    verifyAuthToken,
+    verifyAuthAdm,
+    verifyAuthHR,
+    verifyAuthSupervisor,
+    listAgreementByBankController
+  );
+  routes.get(
+    "/client/:id",
+    verifyAuthToken,
+    verifyAuthAdm,
+    verifyAuthHR,
+    verifyAuthManagerSupervisor,
+    listAgreementByClientController
+  );
+  routes.get(
+    "/user/:id",
+    verifyAuthToken,
+    verifyAuthAdm,
+    verifyAuthHR,
+    verifyAuthManagerSupervisor,
+    verifyAuthUser,
+    listAgreementByUserController
+  );
   return routes;
 };
