@@ -15,7 +15,7 @@ const listOneDebtService = async (id: string) => {
   });
 
   if (!debt) {
-    throw new AppError(400, "Aoooba Debt");
+    throw new AppError(400, "Debt Not Found!");
   }
   return debt;
 };
