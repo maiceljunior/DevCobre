@@ -10,12 +10,10 @@ import deleteUserController from "../controllers/user/deleteUser.controller";
 import updateUserController from "../controllers/user/updateUser.controller";
 import verifyAuthToken from "../middlewares/verifyAuthToken.middleware";
 import listUserDebtsController from "../controllers/userDebt/listUserDebts.controller";
-import verifyAuthUser from "../middlewares/verifyAuthUser.middleware";
-import verifyAuthHR from "../middlewares/verifyAuthHR.middleware";
-import verifyAuthAdm from "../middlewares/verifyAuthAdm.middleware";
-import verifyAuthManagerSupervisor from "../middlewares/verifyAuthManagerSupervisor";
-import verifyAuthSupervisor from "../middlewares/verifyAuthSupervisor";
 import verifyAuthAdmHR from "../middlewares/verifyAuthAdmHR.middleware";
+import verifyAuthAdmHRManagerSupervisor from "../middlewares/verifyAuthAdmHRManagerSupervisor";
+import verifyAuthAllNotHR from "../middlewares/verifyAuthAllNotHR";
+import verifyAuthAdmSupervisor from "../middlewares/verifyAuthAdmSupervisor";
 const routes = Router();
 
 export const userRoutes = () => {
@@ -29,17 +27,13 @@ export const userRoutes = () => {
   routes.get(
     "",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthHR,
-    verifyAuthManagerSupervisor,
+    verifyAuthAdmHRManagerSupervisor,
     listUsersController
   );
   routes.get(
     "/:id",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthHR,
-    verifyAuthManagerSupervisor,
+    verifyAuthAdmHRManagerSupervisor,
     listOneUserController
   );
   routes.delete("/:id", verifyAuthToken, verifyAuthAdmHR, deleteUserController);
@@ -49,16 +43,13 @@ export const userRoutes = () => {
   routes.post(
     "/debts/:userId",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthSupervisor,
+    verifyAuthAdmSupervisor,
     createUserDebtController
   );
   routes.get(
     "/debts/me",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthManagerSupervisor,
-    verifyAuthUser,
+    verifyAuthAllNotHR,
     listUserDebtsController
   );
 

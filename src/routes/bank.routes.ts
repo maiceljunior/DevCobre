@@ -9,13 +9,10 @@ import listOneBankController from "../controllers/bank/listOneBank.controller";
 import updateBankController from "../controllers/bank/updateBank.controller";
 import updateBankInfoController from "../controllers/bank/updateBankInfo.controller";
 import schemaValidation from "../middlewares/schemaValidation";
-import verifyAuthAdm from "../middlewares/verifyAuthAdm.middleware";
-import verifyAuthHR from "../middlewares/verifyAuthHR.middleware";
-import verifyAuthManager from "../middlewares/verifyAuthHRSupervisor";
-import verifyAuthManagerSupervisor from "../middlewares/verifyAuthManagerSupervisor";
-import verifyAuthSupervisor from "../middlewares/verifyAuthSupervisor";
+import verifyAuthAdmHRSupervisor from "../middlewares/verifyAuthAdmHRSupervisor";
+import verifyAuthAdmManager from "../middlewares/verifyAuthAdmManager";
+import verifyAuthAllNotUser from "../middlewares/verifyAuthAllNotUser";
 import verifyAuthToken from "../middlewares/verifyAuthToken.middleware";
-import verifyAuthUser from "../middlewares/verifyAuthUser.middleware";
 import createBankSchema from "../schemas/bank/bank.schema";
 
 const routes = Router();
@@ -24,68 +21,56 @@ export const bankRoutes = () => {
   routes.get(
     "",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthHR,
-    verifyAuthSupervisor,
+    verifyAuthAdmHRSupervisor,
     listBankController
   );
   routes.post(
     "",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthManager,
+    verifyAuthAdmManager,
     schemaValidation(createBankSchema),
     createBankController
   );
   routes.get(
     "/:id",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthHR,
-    verifyAuthManagerSupervisor,
+    verifyAuthAllNotUser,
     listOneBankController
   );
   routes.patch(
     "/:id",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthManager,
+    verifyAuthAdmManager,
     updateBankController
   );
   routes.delete(
     "/:id",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthManager,
+    verifyAuthAdmManager,
     deleteBankController
   );
   routes.get(
     "/:id/contact",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthHR,
-    verifyAuthManagerSupervisor,
+    verifyAuthAllNotUser,
     listBankInfoController
   );
   routes.post(
     "/:id/contact",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthManager,
+    verifyAuthAdmManager,
     createBankInfoController
   );
   routes.patch(
     "/:id/contact/:idContact",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthManager,
+    verifyAuthAdmManager,
     updateBankInfoController
   );
   routes.delete(
     "/:id/contact/:idContact",
     verifyAuthToken,
-    verifyAuthAdm,
-    verifyAuthManager,
+    verifyAuthAdmManager,
     deleteBankInfoController
   );
   return routes;
