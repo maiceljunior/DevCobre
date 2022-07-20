@@ -26,15 +26,18 @@ describe("Testing GET method in /bank", () => {
     email: string;
     password: string;
   }
+
   interface Login {
     email: string;
     password: string;
   }
+
   let admUser: User = {
     name: "User Test Adm",
     email: "useradm@kenzie.com",
     password: "123456Ab!",
   };
+
   let admLogin: Login = {
     email: "useradm@kenzie.com",
     password: "123456Ab!",
@@ -73,16 +76,9 @@ describe("Testing GET method in /bank", () => {
   });
 
   test("Testing list all banks", async () => {
-    const responseAdm = await request(app)
-      .post("/adm/ti/create/user")
-      .send(admUser);
-    const loginAdm = await request(app).post("/login").send(admLogin);
-    const { token } = loginAdm.body;
-    tokenResponse = token;
-
     const response = await request(app)
       .get("/bank")
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", `Bearer ${tokenResponse}`);
 
     expect(response.status).toEqual(200);
     expect(response.body.length).toEqual(2);

@@ -31,15 +31,18 @@ describe("Testing DELETE method in /bank/:id/contact/:idContact", () => {
     email: string;
     password: string;
   }
+
   interface Login {
     email: string;
     password: string;
   }
+
   let admUser: User = {
     name: "User Test Adm",
     email: "useradm@kenzie.com",
     password: "123456Ab!",
   };
+
   let admLogin: Login = {
     email: "useradm@kenzie.com",
     password: "123456Ab!",
@@ -78,21 +81,14 @@ describe("Testing DELETE method in /bank/:id/contact/:idContact", () => {
   });
 
   test("Trying to delete a bank's contact", async () => {
-    const responseAdm = await request(app)
-      .post("/adm/ti/create/user")
-      .send(admUser);
-    const loginAdm = await request(app).post("/login").send(admLogin);
-    const { token } = loginAdm.body;
-    tokenResponse = token;
-
     const responseGet = await request(app)
       .get(`/bank/${response.body.id}/contact`)
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", `Bearer ${tokenResponse}`);
     const idContact = responseGet.body.bankContact[0].id;
 
     const responseDelete = await request(app)
       .delete(`/bank/${response.body.id}/contact/${idContact}`)
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", `Bearer ${tokenResponse}`);
 
     expect(responseDelete.status).toEqual(200);
     expect(responseDelete.body).toHaveProperty("message");
@@ -107,32 +103,18 @@ describe("Testing DELETE method in /bank/:id/contact/:idContact", () => {
   });
 
   test("Trying to delete missing information from an existing bank", async () => {
-    const responseAdm = await request(app)
-      .post("/adm/ti/create/user")
-      .send(admUser);
-    const loginAdm = await request(app).post("/login").send(admLogin);
-    const { token } = loginAdm.body;
-    tokenResponse = token;
-
     const responseDelete = await request(app)
       .delete(`/bank/${response.body.id}/contact/0`)
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", `Bearer ${tokenResponse}`);
 
     expect(responseDelete.status).toEqual(404);
     expect(responseDelete.body).toHaveProperty("message");
   });
 
   test("Trying to delete information for a bank that does not exist", async () => {
-    const responseAdm = await request(app)
-      .post("/adm/ti/create/user")
-      .send(admUser);
-    const loginAdm = await request(app).post("/login").send(admLogin);
-    const { token } = loginAdm.body;
-    tokenResponse = token;
-
     const response = await request(app)
       .delete("/bank/0/contact/0")
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", `Bearer ${tokenResponse}`);
     expect(response.status).toEqual(404);
     expect(response.body).toHaveProperty("message");
   });

@@ -21,15 +21,18 @@ describe("Testing GET method in /bank/:id", () => {
     email: string;
     password: string;
   }
+
   interface Login {
     email: string;
     password: string;
   }
+
   let admUser: User = {
     name: "User Test Adm",
     email: "useradm@kenzie.com",
     password: "123456Ab!",
   };
+
   let admLogin: Login = {
     email: "useradm@kenzie.com",
     password: "123456Ab!",
@@ -63,16 +66,9 @@ describe("Testing GET method in /bank/:id", () => {
   });
 
   test("Trying to list a specific bank", async () => {
-    const responseAdm = await request(app)
-      .post("/adm/ti/create/user")
-      .send(admUser);
-    const loginAdm = await request(app).post("/login").send(admLogin);
-    const { token } = loginAdm.body;
-    tokenResponse = token;
-
     const responseGet = await request(app)
       .get(`/bank/${response.body.id}`)
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", `Bearer ${tokenResponse}`);
 
     expect(responseGet.status).toEqual(200);
     expect(responseGet.body).toEqual(
@@ -85,16 +81,9 @@ describe("Testing GET method in /bank/:id", () => {
   });
 
   test("Trying to list a specific bank that doesn't exist", async () => {
-    const responseAdm = await request(app)
-      .post("/adm/ti/create/user")
-      .send(admUser);
-    const loginAdm = await request(app).post("/login").send(admLogin);
-    const { token } = loginAdm.body;
-    tokenResponse = token;
-
     const responseGet = await request(app)
       .get(`/bank/0`)
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", `Bearer ${tokenResponse}`);
 
     expect(responseGet.status).toEqual(404);
     expect(responseGet.body).toHaveProperty("message");

@@ -21,15 +21,18 @@ describe("Testing POST method in /bank", () => {
     email: string;
     password: string;
   }
+
   interface Login {
     email: string;
     password: string;
   }
+
   let admUser: User = {
     name: "User Test Adm",
     email: "useradm@kenzie.com",
     password: "123456Ab!",
   };
+
   let admLogin: Login = {
     email: "useradm@kenzie.com",
     password: "123456Ab!",
