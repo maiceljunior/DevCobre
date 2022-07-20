@@ -70,32 +70,18 @@ describe("Testing DELETE method in /client/:document", () => {
   });
 
   test("Trying to delete a client", async () => {
-    const responseAdm = await request(app)
-      .post("/adm/ti/create/user")
-      .send(admUser);
-
-    const loginAdm = await request(app).post("/login").send(admLogin);
-    const { token } = loginAdm.body;
-
     const response = await request(app)
       .delete(`/client/${testRes1.body.document}`)
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", `Bearer ${tokenResponse}`);
 
     expect(response.status).toEqual(200);
     expect(response.body).toHaveProperty("message");
   });
 
   test("Trying to delete a client that doesn't exist", async () => {
-    const responseAdm = await request(app)
-      .post("/adm/ti/create/user")
-      .send(admUser);
-
-    const loginAdm = await request(app).post("/login").send(admLogin);
-    const { token } = loginAdm.body;
-
     const response = await request(app)
       .delete(`/client/1`)
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", `Bearer ${tokenResponse}`);
 
     expect(response.status).toEqual(404);
     expect(response.body).toHaveProperty("message");
