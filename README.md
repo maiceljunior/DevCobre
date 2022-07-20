@@ -10,6 +10,45 @@
 </p>
 
 ---
+Para utilizar o DevCobre você precisará:
+
+  ##  Clonar o repositorio
+
+  ## Git clone
+
+    git clone <link abaixo>
+
+  <a href="https://github.com/maiceljunior/DevCobre/tree/develop"> GIT HUB </a>
+
+
+
+Após o clone do repositório sera necessario seguir os seguintes comandos:   
+
+   
+  ## Install
+
+    yarn install
+
+
+  
+
+  ## Docker
+   (caso esteja usando um docker)
+
+    $ sudo docker-compose up --build
+
+  ## Migration
+
+    $ sudo docker exec api yarn typeorm migration:generate src/migrations/client -d src/data-source.ts
+
+  ## Migration Run
+
+    $ sudo docker exec api yarn typeorm migration:run -d src/data-source.ts
+
+
+ 
+---
+---
 
 ### API
 
@@ -50,6 +89,8 @@ Requisições para a API devem seguir os padrões:
   
   
 </p>
+<p>⚠ ⚠ ⚠ Obs: visando que esta aplicação é utilizada em uma empresa, é necessario a criação primeiramente da conta ADM, desta forma não sera possivel criar as demais rotas sem este usuario ADM ⚠ ⚠ ⚠</a></p>
+
 
 ### Login
 
@@ -96,7 +137,7 @@ Requisições para a API devem seguir os padrões:
 }
 ```
 
-<p>Obs: para utilizara rota de login é necessario cadastrar um <a href="#user">User</a></p>
+<p>⚠ ⚠ ⚠ Obs: visando que esta aplicação é utilizada em uma empresa, é necessario a criação primeiramente da conta ADM, desta forma não sera possivel criar as demais rotas sem este usuario ADM ⚠ ⚠ ⚠</a></p>
 
 
 ---
@@ -601,33 +642,46 @@ Requisições para a API devem seguir os padrões:
 
 ### <h2 style = background-color:gray>Post `/debts`</h2>
 
-- `bankId`,`documentClient`,`debtValue`,`debtOrigin`,`ipoc` : number
+- `bankId`,`debtValue`,`debtOrigin`,`ipoc` : number
 
-- `debType`,`dateDebt` : string
+- `debType`,`dateDebt`,`documentClient`, : string (`debType` - "emprestimo","credito")
 
 ```json
 {
-		"documentClient": 89999999999999,
-		"bankId": 14,
-		"debtValue":25141,
-		"debtOrigin":4000,
-		"debtType":"credito",
-	  "ipoc": 25547,
-	  "dateDebt":"2020-01-01"
+		"bankId": 1,
+	 "documentClient": "334556232147",
+    "debtType": "emprestimo",
+    "debtValue": 1000,
+    "ipoc": 166445411,
+    "debtOrigin": 500,
+    "dateDebt": "2020-01-01"
 }
 ```
 
-### Resposta: Status 200 Ok
+### Resposta: Status 201 Created
 
 ```json
 {
-		"documentClient": 89999999999999,
-		"bankId": 14,
-		"debtValue":25141,
-		"debtOrigin":4000,
-		"debtType":"credito",
-	  "ipoc": 25547,
-	  "dateDebt":"2020-01-01"
+	"bank": {
+		"id": 1,
+		"name": "Caixa",
+		"status": true,
+		"bankContact": []
+	},
+	"client": {
+		"document": "334556232147",
+		"name": "Pereira",
+		"type": "Fisico",
+		"clientInfo": []
+	},
+	"dateDebt": "2020-01-01T00:00:00.000Z",
+	"debtOrigin": 500,
+	"debtValue": 1000,
+	"ipoc": "166445411",
+	"debtType": "emprestimo",
+	"id": 1,
+	"registration": "2022-07-20T20:22:53.676Z",
+	"debtStatus": true
 }
 ```
 ###  Resposta: Status 400 Bad Request
@@ -635,7 +689,8 @@ Requisições para a API devem seguir os padrões:
 
 ```json
 {
-	"message": "Ipoc already exists!"
+	"error": "ValidationError",
+	"message": "Document Client required."
 }
 ```
 
@@ -644,7 +699,8 @@ Requisições para a API devem seguir os padrões:
 
 ```json
 {
-	"message": "Client does not exists!"
+	"error": "ValidationError",
+	"message": "Ipoc required."
 }
 ```
 
@@ -653,62 +709,75 @@ Requisições para a API devem seguir os padrões:
 
 ```json
 {
-	"message": "Bank does not exists!"
+	"error": "ValidationError",
+	"message": "Bank ID required."
 }
 ```
+Obs: caso não possua todos os dados no JSON sera dado a resposta de Bad Request
+
 ---
 ### <h2 style = background-color:gray>Get all debts`/debts`</h2>
 
-### Resposta: Status
+### Resposta: Status 200 OK
 
 ```json
 {
-		"id": 4,
-		"ipoc": "25155",
-		"debtValue": "25141.00",
-		"debtOrigin": "4000.00",
-		"debtType": "credito",
-		"registration": "2022-07-19T18:01:59.509Z",
+		"id": 1,
+		"ipoc": "166445411",
+		"debtValue": "1000.00",
+		"debtOrigin": "500.00",
+		"debtType": "emprestimo",
+		"registration": "2022-07-20T20:22:53.676Z",
 		"dateDebt": "2020-01-01T00:00:00.000Z",
 		"debtStatus": true
 	},
 	{
-		"id": 5,
-		"ipoc": "25547",
-		"debtValue": "25141.00",
-		"debtOrigin": "4000.00",
+		"id": 2,
+		"ipoc": "166445711",
+		"debtValue": "2000.00",
+		"debtOrigin": "1100.00",
 		"debtType": "credito",
-		"registration": "2022-07-19T19:03:21.445Z",
-		"dateDebt": "2020-01-01T00:00:00.000Z",
-		"debtStatus": true
-	},
-	{
-		"id": 6,
-		"ipoc": "25549",
-		"debtValue": "25141.00",
-		"debtOrigin": "4000.00",
-		"debtType": "credito",
-		"registration": "2022-07-19T19:06:47.308Z",
-		"dateDebt": "2020-01-01T00:00:00.000Z",
+		"registration": "2022-07-20T20:28:30.621Z",
+		"dateDebt": "2021-01-01T00:00:00.000Z",
 		"debtStatus": true
 	}
 ```
 
 ### <h2 style = background-color:gray>Get `/debts/:id`</h2>
 
-### Resposta: Status
+### Resposta: Status 200 OK
 
 ```json
 {
-		"id": 4,
-		"ipoc": "25155",
-		"debtValue": "25141.00",
-		"debtOrigin": "4000.00",
-		"debtType": "credito",
-		"registration": "2022-07-19T18:01:59.509Z",
-		"dateDebt": "2020-01-01T00:00:00.000Z",
-		"debtStatus": true
+	"id": 2,
+	"ipoc": "166445711",
+	"debtValue": "2000.00",
+	"debtOrigin": "1100.00",
+	"debtType": "credito",
+	"registration": "2022-07-20T20:28:30.621Z",
+	"dateDebt": "2021-01-01T00:00:00.000Z",
+	"debtStatus": true,
+	"client": {
+		"document": "334556232147",
+		"name": "Pereira",
+		"type": "Fisico",
+		"clientInfo": []
+	},
+	"bank": {
+		"id": 1,
+		"name": "Caixa",
+		"status": true,
+		"bankContact": []
 	}
+}
+```
+
+### Resposta: Status 400 Not Found
+
+```json
+{
+  "message": "Debt not found"
+}
 ```
 
 ---
@@ -720,29 +789,145 @@ Requisições para a API devem seguir os padrões:
 
 ---
 
+### UserDebts
+
+
+### <h2 style = background-color:gray>Post `/debts/:userId`</h2>
+
+- `debts` : string
+
+```json
+{
+
+	"debts": ["1", "2"]
+
+}
+```
+
+### Resposta: Status 200 OK
+
+```json
+{
+	"message": "Successfully allocated debts"
+}
+```
+
+### Resposta: Status 404 Not Found
+
+```json
+{
+	"message": "Debt not found!"
+}
+```
+---
+### <h2 style = background-color:gray>Get `/user/debts/me`</h2>
+
+### Resposta: Status 200 OK
+
+```json
+[
+	{
+		"id": 1,
+		"name": "teste",
+		"position": "ADM",
+		"debts": [
+			{
+				"id": 1,
+				"ipoc": "166445411",
+				"debtValue": "1000.00",
+				"debtOrigin": "500.00",
+				"debtType": "emprestimo",
+				"registration": "2022-07-20T20:22:53.676Z",
+				"dateDebt": "2020-01-01T00:00:00.000Z",
+				"debtStatus": true
+			},
+			{
+				"id": 2,
+				"ipoc": "166445711",
+				"debtValue": "2000.00",
+				"debtOrigin": "1100.00",
+				"debtType": "credito",
+				"registration": "2022-07-20T20:28:30.621Z",
+				"dateDebt": "2021-01-01T00:00:00.000Z",
+				"debtStatus": true
+			}
+		]
+	}
+]
+```
 
 
 ### Agreement
+
+
+### <h2 style = background-color:gray>Post `/agreement`</h2>
+
+```json
+{
+	"agreedValue": 2000,
+	"dateAgree": "20-3-21",
+  "status": true,
+	"bank": 2,
+	"client": "334556232147",
+	"user": 8,
+	"formOfPayment": 2
+}
+```
+
+### Resposta: Status
+
+```json
+{}
+```
+
+---
 
 ### <h2 style = background-color:gray>Get `/agreement`</h2>
 
 ### Resposta: Status
 
 ```json
-{}
+[
+	{
+		"id": 1,
+		"agreedvalue": "2000.00",
+		"dateagree": "2022-01-01T00:00:00.000Z",
+		"status": true,
+		"formOfPayment": "a vista",
+		"valueEntry": "2000",
+		"installments": "1x"
+	}
+]
 ```
 
 ---
 
-### <h2 style = background-color:gray>Post `/agreement`</h2>
+### <h2 style = background-color:gray>Get `/agreement/:debtsId`</h2>
 
-### Resposta: Status
+### Resposta: Status 200
 
 ```json
-{}
+{
+	"id": 1,
+	"agreedvalue": "2000.00",
+	"dateagree": "2022-01-01T00:00:00.000Z",
+	"status": true,
+	"formOfPayment": "a vista",
+	"valueEntry": "2000",
+	"installments": "1x"
+}
+```
+
+### Resposta: Status 404 Not Found
+
+```json
+{
+	"message": "Agreement not found!"
+}
 ```
 
 ---
+
 
 ### <h2 style = background-color:gray>Patch `/agreement/:id`</h2>
 
@@ -772,17 +957,22 @@ Requisições para a API devem seguir os padrões:
 
 ### User
 
+<h3 style = color:yellow >Obs: CRUD de usuario só pode ser realizado com usuario ADM ou HR</h3>
+
 ### <h2 style = background-color:gray >Post `/user`</h2>
 
 ### Regras:
 
-- `name`,`email`,`document` : string
+- `name`,`email`,`document`,`address`,`position` : string
 
 ```json
 {
-  "name": "Pedro Paulo",
-  "email": "pedro@mail.com",
-  "password": "123456"
+ 		"telephone": 21331233,
+   	"address":"Rua 1",
+    "email": "tesqwqt@mail.com", 
+   	"name": "Pedro Paulo",
+		"password": "testE123-",
+		"position": "HR"
 }
 ```
 
@@ -790,20 +980,32 @@ Requisições para a API devem seguir os padrões:
 
 ```json
 {
-  "status": true,
-  "name": "Pedro Paulo",
-  "email": "pedro@mail.com",
-  "id": 7,
-  "created_at": "2022-07-16T17:31:13.121Z",
-  "updated_at": "2022-07-16T17:31:13.121Z"
+	"id": 4,
+	"name": "Pedro Paulo",
+	"position": "HR",
+	"infos": {
+		"email": "tesqwqt@mail.com",
+		"telephone": "21331233",
+		"address": "Rua 1"
+	}
 }
 ```
+###  Resposta: Status 400 Bad Request
 
-### Resposta: Status 409 Conflict
 
 ```json
 {
-  "message": "Email already exists"
+	"message": "User already exists!"
+}
+```
+
+###  Resposta: Status 400 Bad Request
+
+
+```json
+{
+	"error": "ValidationError",
+	"message": "The password must contain an uppercase letter, a number and a special character."
 }
 ```
 
@@ -814,15 +1016,28 @@ Requisições para a API devem seguir os padrões:
 ### Resposta: Status 200
 
 ```json
-{
-  "status": true,
-  "id": 7,
-  "name": "Pedro Paulo",
-  "email": "pedro@mail.com",
-  "created_at": "2022-07-16T17:31:13.121Z",
-  "updated_at": "2022-07-16T17:31:13.121Z",
-  "userInfo": []
-}
+[
+	{
+		"id": 1,
+		"name": "Ana",
+		"position": "ADM"
+	},
+	{
+		"id": 2,
+		"name": "Julio",
+		"position": "user"
+	},
+	{
+		"id": 3,
+		"name": "Paula",
+		"position": "HR"
+	},
+	{
+		"id": 4,
+		"name": "Pedro Paulo",
+		"position": "HR"
+	}
+]
 ```
 
 ---
@@ -833,13 +1048,14 @@ Requisições para a API devem seguir os padrões:
 
 ```json
 {
-  "status": true,
-  "id": 7,
-  "name": "Pedro Paulo",
-  "email": "pedro@mail.com",
-  "created_at": "2022-07-16T17:31:13.121Z",
-  "updated_at": "2022-07-16T17:31:13.121Z",
-  "userInfo": []
+	"id": 2,
+	"name": "Julio",
+	"position": "user",
+	"infos": {
+		"email": "test@mail.com",
+		"telephone": 21331233,
+		"address": "Rua 45"
+	}
 }
 ```
 
@@ -852,13 +1068,42 @@ Requisições para a API devem seguir os padrões:
 ```
 
 ---
+### <h2 style = background-color:gray>GET `/user/debts/me` ( dividas alocadas ao usuario)</h2>
 
-### <h2 style = background-color:gray>Patch `/user/:id`</h2>
+### Resposta: Status 200 Update
+
+```json
+[
+	{
+		"id": 1,
+		"name": "teste",
+		"position": "ADM",
+		"debts": []
+	}
+]
+```
+
+### Resposta: Status 404 Not Found
 
 ```json
 {
-  "name": "Pedro Paulo Pietro",
-  "email": "PPP@mail.com"
+  "message": "User not found!"
+}
+```
+
+---
+### <h2 style = background-color:gray>Patch `/user/:id`</h2>
+
+### Regras:
+Obritorio - `name` : string
+
+```json
+{
+    "telephone": 21331233,
+   	"address":"Rua 1",
+    "email": "tesqwqt@mail.com", 
+   	"name": "Pedro Paulo",
+		"position": "HR"
 }
 ```
 
@@ -902,139 +1147,7 @@ Requisições para a API devem seguir os padrões:
 
 ---
 
-<h2>User info</h2>
 
-### <h2 style = background-color:gray> Post `/user/:id/info`</h2>
-
-### Regras:
-
-- `telephone` : number
-- `address` : string
-
-```json
-{
-  "telephone": 999999999,
-  "address": "Rua 1"
-}
-```
-
-### Resposta: Status 201 Created
-
-```json
-{
-  "telephone": 999999999,
-  "address": "Rua 1",
-  "user": {
-    "status": true,
-    "id": 7,
-    "name": "Pedro Paulo Pietro",
-    "email": "PPP@mail.com",
-    "password": "$2a$10$TJDRXDSfJ0oqxr7ClLPsxORwYqvg9CEpJeY/Dqg5pJHzfBWKyj4Fe",
-    "created_at": "2022-07-16T17:31:13.121Z",
-    "updated_at": "2022-07-16T17:36:32.891Z",
-    "userInfo": []
-  },
-  "id": 1
-}
-```
-
----
-
-### <h2 style = background-color:gray>Get `/user/:id/info`</h2>
-
-### Resposta: Status 200
-
-```json
-{
-  "status": true,
-  "id": 7,
-  "name": "Pedro Paulo Pietro",
-  "email": "PPP@mail.com",
-  "password": "$2a$10$TJDRXDSfJ0oqxr7ClLPsxORwYqvg9CEpJeY/Dqg5pJHzfBWKyj4Fe",
-  "created_at": "2022-07-16T17:31:13.121Z",
-  "updated_at": "2022-07-16T17:36:32.891Z",
-  "userInfo": [
-    {
-      "id": 1,
-      "telephone": 999999999,
-      "address": "Rua 1"
-    }
-  ]
-}
-```
-
-### Resposta: Status 404 Not Found
-
-```json
-{
-  "message": "User not found!"
-}
-```
-
----
-
-### <h2 style = background-color:gray>Patch `/user/:id/info/:idInfo`</h2>
-
-```json
-{
-  "telephone": 8888888,
-  "address": "Rua 5"
-}
-```
-
-### Resposta: Status 200 Update
-
-```json
-{
-  "message": "User updated with success"
-}
-```
-
-### Resposta: Status 404 Not Found
-
-```json
-{
-  "message": "User info not found!"
-}
-```
-
----
-
-### Resposta: Status 404 Not Found
-
-```json
-{
-  "message": "User not found!"
-}
-```
-
----
-
-### <h2 style = background-color:gray> Delete `/user/:id/info/:idInfo` </h2>
-
-### Resposta: Status 200
-
-```json
-{
-  "message": "User Info delete with success!"
-}
-```
-
-### Resposta: Status 400 Bad Request
-
-```json
-{
-  "message": "User contact not found!"
-}
-```
-
-### Resposta: Status 404 Not Found
-
-```json
-{
-  "message": "User info not found!"
-}
-```
 
 <p align="center">
  • <a href="#api">Inicio API</a> •
@@ -1173,6 +1286,6 @@ As seguintes ferramentas foram usadas na construção do projeto:
 </table>
 
 <p align="center">
- • <a href="#devcobre">Inicio</a> •
+ • <a href="#install">Inicio</a> •
  
 </p>
