@@ -1,11 +1,11 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class client1658337065959 implements MigrationInterface {
-    name = 'client1658337065959'
+export class firstDeploy1658356409426 implements MigrationInterface {
+    name = 'firstDeploy1658356409426'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`CREATE TABLE "bank_contact" ("id" SERIAL NOT NULL, "telephone" integer, "email" character varying(251), "bankId" integer, CONSTRAINT "PK_560afc59afe23697c93d7d3cedb" PRIMARY KEY ("id"))`);
-        await queryRunner.query(`CREATE TABLE "bank" ("id" SERIAL NOT NULL, "name" character varying(255) NOT NULL, "status" boolean NOT NULL, CONSTRAINT "UQ_11f196da2e68cef1c7e84b4fe94" UNIQUE ("name"), CONSTRAINT "PK_7651eaf705126155142947926e8" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "bank_contact" ("id" SERIAL NOT NULL, "telephone" integer, "email" character varying(250), "bankId" integer, CONSTRAINT "PK_560afc59afe23697c93d7d3cedb" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "bank" ("id" SERIAL NOT NULL, "name" character varying(256) NOT NULL, "status" boolean NOT NULL, CONSTRAINT "UQ_11f196da2e68cef1c7e84b4fe94" UNIQUE ("name"), CONSTRAINT "PK_7651eaf705126155142947926e8" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "client_info" ("id" SERIAL NOT NULL, "telephone" integer, "email" character varying(256), "clientDocument" character varying(20), CONSTRAINT "PK_09bdc12b41c346ad56afee8d6cc" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "client" ("document" character varying(20) NOT NULL, "name" character varying(250) NOT NULL, "type" character varying(16) NOT NULL, CONSTRAINT "PK_463cae6774e9b085ca966d89b4f" PRIMARY KEY ("document"))`);
         await queryRunner.query(`CREATE TABLE "user_info" ("id" SERIAL NOT NULL, "telephone" integer, "address" character varying, "email" character varying(251) NOT NULL, "password" character varying(250) NOT NULL, "status" boolean NOT NULL DEFAULT true, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "userId" integer, CONSTRAINT "PK_273a06d6cdc2085ee1ce7638b24" PRIMARY KEY ("id"))`);
