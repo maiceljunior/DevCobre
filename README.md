@@ -13,29 +13,66 @@
 
 ### API
 
+
+## Métodos 🛠️
+Requisições para a API devem seguir os padrões:
+
+| Método | Descrição |
+|---|---|
+| `GET` | Retorna informações de um ou mais registros. |
+| `POST` | Utilizado para criar um novo registro. |
+| `PATCH` | Atualiza dados de um registro ou altera sua situação. |
+| `DELETE` | Remove um registro do sistema. |
+
+
+
+## Respostas
+
+| Código | Descrição |
+|---|---|
+| `200` | Requisição executada com sucesso (success).|
+| `201` | Envio de dados para criação exectuado com sucesso (created).|
+| `400` | Erros de validação ou os campos informados não existem no sistema.|
+| `404` | Registro pesquisado não encontrado (Not found).|
+| `409` | Conflict.|
+
+---
 ---
 
 <p align="center">
-  <a href="#login">Login</a>•
+  | <a href="#login">Login</a>•
   <a href="#client">Client</a> •
   <a href="#bank">Bank</a> • 
   <a href="#debts">Debts</a> • 
   <a href="#agreement">Agreement</a> • 
   <a href="#user">User</a> • 
-  <a href="#contacthistory">Contact History</a> • 
-  <a href="#formpayment">Form Payment</a> • 
+  <a href="#contacthistory">Contact History</a> |
   
   
 </p>
-
----
-
 
 ### Login
 ### <h2 style = background-color:gray >Post `/login`</h2>
 
 ### Regras:
 - `email`,`password`:string
+
+```json
+{
+	"email": "test@mail.com",
+	"password": "test123-"
+}
+```
+### Resposta: Status 200
+
+```json
+{
+	"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywicG9zaXRpb24iOiJ1c2VyIiwiZW1haWwiOiJ0ZXN0QG1haWwuY29tIiwiaWF0IjoxNjU4MjYxNjg3LCJleHAiOjE2NTgzNDgwODd9.clFa-cBGhLRnzLLdpyYyIsG8ceOa45izasNNwu-q2QQ"
+}
+```
+
+<p>Obs: para utilizara rota de login é necessario cadastrar um <a href="#user">User</a></p>
+
 
 ---
 
@@ -137,7 +174,7 @@
 
 ### <h2 style = background-color:gray>Delete `/client/:document`</h2>
 
-### Resposta: Status 200
+### Resposta: Status 200 OK
 
 ```json
 {
@@ -194,6 +231,7 @@
 
 ---
 
+
 ### <h2 style = background-color:gray>Get `/client/:document/info`</h2>
 
 ### Resposta: Status 200
@@ -223,7 +261,7 @@
 
 ---
 
-### <h2 style = background-color:gray>Patch `/client/:document/info/:id`</h2>
+### <h2 style = background-color:gray>Patch `/client/:document/info/:idContact`</h2>
 
 ```json
 {
@@ -260,7 +298,7 @@
 
 ---
 
-### <h2 style = background-color:gray> Delete `/client/:document/info/:id` </h2>
+### <h2 style = background-color:gray> Delete `/client/:document/info/:idContact` </h2>
 
 ### Resposta: Status 200
 
@@ -286,112 +324,6 @@
 }
 ```
 
-### ClientInfo
-
-### Get `/client/:document/info`
-
-### Resposta: Status 200
-
-```json
-{
-  "document": 5555555555,
-  "name": "Ana Paula",
-  "type": "Fisico",
-  "clientInfo": []
-}
-```
-
----
-
-### Resposta: Status 404 Not Found
-
-```json
-{
-  "message": "Client not found"
-}
-```
-
----
-
-### Post `/client/:id/info`
-
-```json
-{
-  "telephone": 9999999999,
-  "email": "mail1@mail.com"
-}
-```
-
-### Resposta: Status 201 Created
-
-```json
-{
-  "message": "Information entered successfully!"
-}
-```
-
----
-
-### Resposta: Status 404 Not Found
-
-```json
-{
-   "message": "Client already exists"
-}
-```
-
----
-
-### Patch `/client/:document/info/:idContact`
-
-```json
-{
-  "telephone": "mailtest@mail.com",
-  "telephone": 22222222
-}
-```
-
-### Resposta: Status 200 Update
-
-```json
-{
-  "message": "Contact updated with sucess!"
-}
-```
-
----
-
-### Resposta: Status 404 Not Found
-
-```json
-{
- "message": "Client not found!"
-}
-```
-
----
-
-### Delete `/client/:document/info/:idContact`
-
-### Resposta: Status 200
-
-```json
-{
-  "message": "Contact deleted with sucess!"
-}
-```
-
----
-
-### Resposta: Status 404 Not Found
-
-```json
-{
-   "message": "Client not found!"
-}
-```
-
-## =======
 
 <p align="center">
  • <a href="#api">Inicio API</a> •
@@ -642,13 +574,13 @@
 ### Debts
 
 
-### Post `/debts`
+### <h2 style = background-color:gray>Post `/debts`</h2>
 
 - `bankId`,`documentClient`,`debtValue`,`debtOrigin`,`ipoc` : number
 
 - `debType`,`dateDebt` : string
 
-```**json**
+```json
 {
 		"documentClient": 89999999999999,
 		"bankId": 14,
@@ -700,7 +632,7 @@
 }
 ```
 ---
-### Get `/debts`
+### <h2 style = background-color:gray>Get all debts`/debts`</h2>
 
 ### Resposta: Status
 
@@ -737,7 +669,7 @@
 	}
 ```
 
-### Get `/debts/:id`
+### <h2 style = background-color:gray>Get `/debts/:id`</h2>
 
 ### Resposta: Status
 
@@ -767,7 +699,7 @@
 
 ### Agreement
 
-### Get `/agreement`
+### <h2 style = background-color:gray>Get `/agreement`</h2>
 
 ### Resposta: Status
 
@@ -777,7 +709,7 @@
 
 ---
 
-### Post `/agreement`
+### <h2 style = background-color:gray>Post `/agreement`</h2>
 
 ### Resposta: Status
 
@@ -787,7 +719,7 @@
 
 ---
 
-### Patch `/agreement/:id`
+### <h2 style = background-color:gray>Patch `/agreement/:id`</h2>
 
 ### Resposta: Status
 
@@ -797,7 +729,7 @@
 
 ---
 
-### Delete `/agreement/:id`
+### <h2 style = background-color:gray>Delete `/agreement/:id`</h2>
 
 ### Resposta: Status
 
@@ -852,7 +784,7 @@
 
 ---
 
-### <h2 style = background-color:gray>Get `/user` (Listar todos os funcionarios)</h2>
+### <h2 style = background-color:gray>Get all users`/user` </h2>
 
 ### Resposta: Status 200
 
@@ -1088,7 +1020,7 @@
 ### ContactHistory
 
 ---
-### Post `/history`
+### <h2 style = background-color:gray>Post `/history`</h2>
 - `date_contact`,`note`: string
 - `debtId`,`userId`:number
 - `agreement`: boolean
@@ -1119,7 +1051,7 @@
 
 
 
-### Get `/history`
+### <h2 style = background-color:gray>Get `/history`</h2>
 
 ### Resposta: Status
 
@@ -1135,7 +1067,7 @@
 ---
 
 
-### Patch `/history/:id`
+### <h2 style = background-color:gray>Patch `/history/:id`</h2>
  - `note`,`date_contact`: string
  - `agreement`: boolean
 
@@ -1166,7 +1098,7 @@
 
 ---
 
-### Delete `/history/:id`
+### <h2 style = background-color:gray>Delete `/history/:id`</h2>
 
 ### Resposta: Status 200
 ```json
@@ -1188,119 +1120,7 @@
  
 </p>
 
----
 
-### formpayment
-
-
-### Post `/payment`
-
-- `cash_payment`,`installments`,`entry_installments`: boolean
-- `entry`,`installments_times`,`values_installments`,`debtsId`: number
-
-```json
-{
-	
-	"cash_payment":true,
-	"installments":false,
-	"entry_installments":false,
-	"entry":5000,
-	"installments_times":50,
-	"values_installments":0,
-	"debtsId":4
-	
-}
-```
-### Resposta: Status 201 Created
-
-```json
-{
-	"cash_payment": true,
-	"installments": false,
-	"entry_installments": false,
-	"entry": 5000,
-	"installments_times": 50,
-	"values_installments": 0,
-	"debts": {
-		"id": 4,
-		"ipoc": "25155",
-		"debtValue": "25141.00",
-		"debtOrigin": "4000.00",
-		"debtType": "credito",
-		"registration": "2022-07-19T18:01:59.509Z",
-		"dateDebt": "2020-01-01T00:00:00.000Z",
-		"debtStatus": true
-	},
-	"id": 9
-}
-```
-
-### Resposta: Status 400 Bad Request
-
-```json
-{
-	"message": "Select only one payment method!"
-}
-```
-### Resposta: Status 400 Bad Request
-
-```json
-{
-	"error": "ValidationError"
-}
-```
----
-
-### Get `/payment`
-
-### Resposta: Status
-
-```json
-{
-		"id": 8,
-		"cash_payment": true,
-		"installments": false,
-		"entry_installments": false,
-		"entry": "5000.00",
-		"installments_times": 50,
-		"values_installments": "0.00"
-	},
-	{
-		"id": 9,
-		"cash_payment": true,
-		"installments": false,
-		"entry_installments": false,
-		"entry": "5000.00",
-		"installments_times": 50,
-		"values_installments": "0.00"
-	}
-```
-
----
-
-### Get `/payment/:id`
-
-### Resposta: Status
-
-```json
-{
-		"id": 8,
-		"cash_payment": true,
-		"installments": false,
-		"entry_installments": false,
-		"entry": "5000.00",
-		"installments_times": 50,
-		"values_installments": "0.00"
-}
-```
-
----
-
-
-<p align="center">
- • <a href="#api">Inicio API</a> •
- 
-</p>
 
 ---
 
