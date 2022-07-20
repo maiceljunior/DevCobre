@@ -52,6 +52,31 @@ Requisições para a API devem seguir os padrões:
 </p>
 
 ### Login
+
+### <h2 style = background-color:gray >Post `/adm/ti/create/user`</h2>
+
+### Regras:
+
+- `name`,`email`e `password`: string
+
+```json
+{
+	"name":"teste",
+	"email":"testeadm@mail.com",
+	"password":"2132"
+}
+```
+
+### Resposta: Status 201 Created
+
+```json
+{
+	"message":"Adm Created Width Sucess."
+}
+
+```
+
+
 ### <h2 style = background-color:gray >Post `/login`</h2>
 
 ### Regras:
